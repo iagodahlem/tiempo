@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   startTimer: () => dispatch(timerActions.start()),
+  stopTimer: () => dispatch(timerActions.stop()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
