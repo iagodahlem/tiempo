@@ -1,8 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App } from './components'
+import { Provider } from 'react-redux'
 import registerServiceWorker from './registerServiceWorker'
+import configureStore from './store/configureStore'
+import { App } from './components'
 import './index.css'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const store = configureStore()
+
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+
+ReactDOM.render(<Root />, document.getElementById('root'))
 registerServiceWorker()
