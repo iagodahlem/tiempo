@@ -1,6 +1,6 @@
-# pomodoro-web
+# pomodoro
 
-[![Build Status](https://travis-ci.org/pensei/pomodoro-web.svg?branch=master)](https://travis-ci.org/pensei/pomodoro-web)
+[![Build Status](https://travis-ci.org/pensei/pomodoro.svg?branch=master)](https://travis-ci.org/pensei/pomodoro)
 
 > TODO: Write a project description
 
