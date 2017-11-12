@@ -61,8 +61,7 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <h1 className='App__title'>Pomodoro</h1>
-        <p>{format(timer, 'mm:ss')}</p>
+        <h1 className='App__title'>{format(timer, 'mm:ss')}</h1>
         {actionButton}
       </div>
     )
