@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import format from 'date-fns/format'
-
+import { Button } from '../../components'
 import './App.css'
 
 const calculateTimer = (start) => {
@@ -39,11 +39,19 @@ class App extends Component {
   }
 
   renderStartButton() {
-    return <button onClick={this.handleStartTimer}>Start</button>
+    return (
+      <Button onClick={this.handleStartTimer}>
+        Start
+      </Button>
+    )
   }
 
   renderStopButton() {
-    return <button onClick={this.handleStopTimer}>Stop</button>
+    return (
+      <Button onClick={this.handleStopTimer}>
+        Stop
+      </Button>
+    )
   }
 
   render() {
