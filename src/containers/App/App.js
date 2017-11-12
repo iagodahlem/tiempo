@@ -1,41 +1,48 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import format from 'date-fns/format'
 import { Button } from '../../components'
+import * as timerTypes from '../../constants/timerTypes'
 import './App.css'
 
-const calculateTimer = (start) => {
-  // const duration = 1000 * 60 * 25
-  const duration = 1000 * 5
-  let timer = duration
-
-  if (start) {
-    timer = start + duration - Date.now()
-  }
-  return timer
-}
-
 class App extends Component {
-  handleStartTimer = (event) => {
+  static propTypes = {
+    lapse: PropTypes.number.isRequired,
+    running: PropTypes.bool.isRequired,
+    startTimer: PropTypes.func.isRequired,
+    stopTimer: PropTypes.func.isRequired,
+  }
+
+  componentDidMount = () => {
+    this.set(timerTypes.pomodoro)
+  }
+
+  handleStartTimer = () => {
+    this.start()
+  }
+
+  handlePauseTimer = () => {
+    this.pause()
+  }
+
+  handleStopTimer = () => {
+    this.stop()
+  }
+
+  set = (type) => {
+    this.props.setTimer(type)
+  }
+
+  start = () => {
     this.props.startTimer()
-    this.interval = setInterval(this.updateTimer, 1000)
   }
 
-  handleStopTimer = (event) => {
-    this.doStopTimer()
+  pause = () => {
+    this.props.pauseTimer()
   }
 
-  doStopTimer() {
+  stop = () => {
     this.props.stopTimer()
-    clearInterval(this.interval)
-  }
-
-  updateTimer = () => {
-    const timer = calculateTimer(this.props.start)
-    if (timer > 0) {
-      this.forceUpdate()
-    } else {
-      this.doStopTimer()
-    }
   }
 
   renderStartButton() {
@@ -55,15 +62,18 @@ class App extends Component {
   }
 
   render() {
-    const { start } = this.props
-    const timer = calculateTimer(start)
-    const actionButton = start ? this.renderStopButton() : this.renderStartButton()
+    const { lapse, running } = this.props
+    const actionButton = running ? this.renderStopButton() : this.renderStartButton()
 
     return (
       <div className='App'>
-        <h1 className='App__title'>Pomodoro</h1>
-        <p>{format(timer, 'mm:ss')}</p>
+        <h1 className='App__title'>{format(lapse, 'mm:ss:SSS')}</h1>
+
         {actionButton}
+
+        <Button onClick={this.handlePauseTimer} isDisabled={!running}>
+          Pause
+        </Button>
       </div>
     )
   }
