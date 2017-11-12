@@ -25,6 +25,11 @@ const timer = (state = initialState, action) => {
         running: true,
         interval: payload.interval,
       }
+    case types.TIMER_TICK:
+      return {
+        ...state,
+        lapse: payload.lapse,
+      }
     case types.TIMER_PAUSE:
       return {
         ...state,
@@ -38,11 +43,6 @@ const timer = (state = initialState, action) => {
         lapse: state.duration,
         running: false,
         interval: null,
-      }
-    case types.TIMER_TICK:
-      return {
-        ...state,
-        lapse: payload.lapse,
       }
     default:
       return state
