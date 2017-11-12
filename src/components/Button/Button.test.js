@@ -1,17 +1,10 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-
+import ReactDOM from 'react-dom'
 import Button from './Button'
 
-describe('Button', () => {
-  let component, props
-
-  beforeEach(() => {
-    props = {}
-    component = shallow(<Button {...props} />)
-  })
-
-  it('should', () => {
-    expect(component).toMatchSnapshot()
+describe('<Button />', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div')
+    ReactDOM.render(<Button onClick={() => {}}>A button</Button>, div)
   })
 })
