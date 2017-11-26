@@ -11,7 +11,7 @@ class App extends Component {
     running: PropTypes.bool.isRequired,
     setTimer: PropTypes.func.isRequired,
     startTimer: PropTypes.func.isRequired,
-    pauseTmer: PropTypes.func.isRequired,
+    pauseTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
   }
 
