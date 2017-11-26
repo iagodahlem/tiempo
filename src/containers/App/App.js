@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import format from 'date-fns/format'
 import * as timerTypes from '../../constants/timerTypes'
-import { Button } from '../../components'
+import { Button, Header, Timer } from '../../components'
 import './App.css'
 
 class App extends Component {
@@ -68,17 +67,19 @@ class App extends Component {
     const actionButton = running ? this.renderStopButton() : this.renderStartButton()
 
     return (
-      <div className='App'>
-        <h1 className='App__title'>
-          {format(lapse, 'mm:ss')}
-        </h1>
+      <main className='App'>
+        <Header />
 
-        {actionButton}
+        <section className='App__container'>
+          <Timer lapse={lapse} />
 
-        <Button onClick={this.handlePauseTimer} isDisabled={!running}>
-          Pause
-        </Button>
-      </div>
+          {actionButton}
+
+          <Button onClick={this.handlePauseTimer} isDisabled={!running}>
+            Pause
+          </Button>
+        </section>
+      </main>
     )
   }
 }

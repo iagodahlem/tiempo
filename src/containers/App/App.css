@@ -1,11 +1,14 @@
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100%;
+  background: #000;
 }
 
-.App__title {
-  font-size: 2rem;
+.App__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }

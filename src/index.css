@@ -23,7 +23,9 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  line-height: 1.5;
 }
 
 html,
