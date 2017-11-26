@@ -20,7 +20,7 @@ export const start = () => (dispatch, getState) => {
   const duration = fromTimer.getDuration(getState())
 
   const start = currentStart ? Date.now() - (duration - lapse) : Date.now()
-  const interval = setInterval(() => dispatch(tick()), 200)
+  const interval = setInterval(() => dispatch(tick()), 1000)
 
   dispatch({
     type: types.TIMER_START,

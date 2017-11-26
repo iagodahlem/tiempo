@@ -1,3 +1,23 @@
 .Button {
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #000;
+  border: 3px solid #fff;
+  border-radius: 50vh;
+  padding: .6rem 2rem;
+  min-width: 12rem;
+  outline: none;
+  cursor: pointer;
+}
 
+.Button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.Button + .Button {
+  margin-top: 2rem;
 }

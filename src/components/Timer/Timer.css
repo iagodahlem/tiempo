@@ -1,0 +1,15 @@
+.Timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 250px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  margin-bottom: 2.2rem;
+}
+
+.Timer__lapse {
+  font-family: 'Lato', sans-serif;
+  font-size: 6.2rem;
+}
