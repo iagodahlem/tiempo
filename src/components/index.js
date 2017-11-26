@@ -1,9 +1,9 @@
-import App from './App'
+import Button from './Button'
 
 export default {
-  App,
+  Button,
 }
 
 export {
-  App,
+  Button,
 }
