@@ -70,7 +70,7 @@ class App extends Component {
     return (
       <div className='App'>
         <h1 className='App__title'>
-          {format(lapse, 'mm:ss:SSS')}
+          {format(lapse, 'mm:ss')}
         </h1>
 
         {actionButton}
