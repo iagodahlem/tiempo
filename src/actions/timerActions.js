@@ -15,12 +15,12 @@ export const set = (type) => (dispatch, getState) => {
 }
 
 export const start = () => (dispatch, getState) => {
-  const current = fromTimer.getStart(getState())
+  const currentStart = fromTimer.getStart(getState())
   const lapse = fromTimer.getLapse(getState())
   const duration = fromTimer.getDuration(getState())
 
-  const start = current ? Date.now() - (duration - lapse) : Date.now()
-  const interval = setInterval(() => dispatch(tick()))
+  const start = currentStart ? Date.now() - (duration - lapse) : Date.now()
+  const interval = setInterval(() => dispatch(tick()), 200)
 
   dispatch({
     type: types.TIMER_START,
@@ -53,14 +53,20 @@ export const pause = () => (dispatch, getState) => {
   const interval = fromTimer.getInterval(getState())
 
   clearInterval(interval)
-  dispatch({ type: types.TIMER_PAUSE })
+
+  dispatch({
+    type: types.TIMER_PAUSE,
+  })
 }
 
 export const stop = () => (dispatch, getState) => {
   const interval = fromTimer.getInterval(getState())
 
   clearInterval(interval)
-  dispatch({ type: types.TIMER_STOP })
+
+  dispatch({
+    type: types.TIMER_STOP,
+  })
 }
 
 export default {

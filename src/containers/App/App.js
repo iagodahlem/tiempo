@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import format from 'date-fns/format'
-import { Button } from '../../components'
 import * as timerTypes from '../../constants/timerTypes'
+import { Button } from '../../components'
 import './App.css'
 
 class App extends Component {
   static propTypes = {
     lapse: PropTypes.number.isRequired,
     running: PropTypes.bool.isRequired,
+    setTimer: PropTypes.func.isRequired,
     startTimer: PropTypes.func.isRequired,
+    pauseTmer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
   }
 
@@ -67,7 +69,9 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <h1 className='App__title'>{format(lapse, 'mm:ss')}</h1>
+        <h1 className='App__title'>
+          {format(lapse, 'mm:ss:SSS')}
+        </h1>
 
         {actionButton}
 
