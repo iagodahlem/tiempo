@@ -2,19 +2,29 @@
 
 [![Build Status](https://travis-ci.org/pensei/pomodoro.svg?branch=master)](https://travis-ci.org/pensei/pomodoro)
 
-> TODO: Write a project description
-
-## Requirements
-
-> TODO: Describe the requirements
+> Pomodoro app for [web](https://pensei.github.io/pomodoro).
 
 ## Install
 
-> TODO: Describe the installation process
+To install dependencies you will need [yarn](https://yarnpkg.com/en/), so go get it if you don't have it yet, then run:
+
+```sh
+yarn
+```
 
 ## Running
 
-> TODO: Write running instructions
+To start the development server:
+
+```sh
+yarn start
+```
+
+To run all the test suite in watch mode:
+
+```sh
+yarn test
+```
 
 ## Contributing
 
@@ -26,4 +36,4 @@
 
 ## License
 
-> TODO: Describe license
+[MIT License]() © Pensei
