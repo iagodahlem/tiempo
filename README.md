@@ -36,4 +36,4 @@ yarn test
 
 ## License
 
-[MIT License]() © Pensei
+[MIT License](LICENSE) © Pensei
