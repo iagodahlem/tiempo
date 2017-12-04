@@ -7,22 +7,6 @@
   flex: 1;
 }
 
-.Timer__lapse {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 250px;
-  height: 250px;
-  margin-bottom: 5rem;
-  border: 2px solid #fff;
-  border-radius: 50%;
-}
-
-.Timer__text {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 6.2rem;
-}
-
 .Timer__actions {
   display: inline-flex;
   align-items: center;

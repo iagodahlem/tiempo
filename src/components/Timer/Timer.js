@@ -1,17 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '../Button'
-import Format from '../Format'
+import TimerLapse from '../TimerLapse'
 import { Pause, Play, Skip, Stop } from '../../icons'
 import './Timer.css'
 
 const Timer = ({ lapse, running, onStart, onPause, onStop }) => (
   <div className='Timer'>
-    <div className='Timer__lapse'>
-      <time className='Timer__text'>
-        <Format>{lapse}</Format>
-      </time>
-    </div>
+    <TimerLapse lapse={lapse} />
 
     <div className="Timer__actions">
       <Button onClick={onStop} disabled={!running} title='Stop' small noBorder>

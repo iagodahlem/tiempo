@@ -3,6 +3,7 @@ import Footer from './Footer'
 import Format from './Format'
 import Header from './Header'
 import Timer from './Timer'
+import TimerLapse from './TimerLapse'
 
 export default {
   Button,
@@ -10,6 +11,7 @@ export default {
   Format,
   Header,
   Timer,
+  TimerLapse,
 }
 
 export {
@@ -18,4 +20,5 @@ export {
   Format,
   Header,
   Timer,
+  TimerLapse,
 }
