@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Header, Footer, Timer } from '../../components'
 import * as timerTypes from '../../constants/timerTypes'
-import { Header, Timer } from '../../components'
 import './App.css'
 
 class App extends Component {
@@ -63,9 +63,7 @@ class App extends Component {
           />
         </section>
 
-        <footer className='Footer'>
-
-        </footer>
+        <Footer />
       </main>
     )
   }
