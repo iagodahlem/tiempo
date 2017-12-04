@@ -22,11 +22,11 @@
 }
 
 .Button:hover {
-  transform: scale(1.06);
+  transform: scale3d(1.06,1.06,1.06);
 }
 
 .Button:active {
-  transform: scale(.94);
+  transform: scale3d(1,1,1);
 }
 
 .Button:disabled {
@@ -38,7 +38,6 @@
   width: 3.2rem;
   height: 3.2rem;
 }
-
 .Button svg.Play {
   margin-left: 0.6rem;
 }
