@@ -2,8 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Button.css'
 
-const Button = ({ children, onClick, isDisabled }) => (
-  <button className='Button' onClick={onClick} disabled={isDisabled}>
+const mapTruthyClasses = (classes) => Object.entries(classes)
+  .filter(([, value]) => value)
+  .map(([key]) => key)
+  .join(' ')
+
+const Button = ({ children, onClick, disabled, title, small, noBorder }) => (
+  <button
+    className={`Button ${mapTruthyClasses({
+      'Button--small': small,
+      'Button--noBorder': noBorder,
+    })}`}
+    onClick={onClick}
+    disabled={disabled}
+    title={title}
+  >
     {children}
   </button>
 )
@@ -11,7 +24,16 @@ const Button = ({ children, onClick, isDisabled }) => (
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool,
+  disabled: PropTypes.bool,
+  title: PropTypes.string,
+  small: PropTypes.bool,
+  noBorder: PropTypes.bool,
+}
+
+Button.defaultProps = {
+  disabled: false,
+  small: false,
+  noBorder: false,
 }
 
 export default Button
