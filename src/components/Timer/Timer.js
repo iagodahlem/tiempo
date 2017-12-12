@@ -1,33 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Button from '../Button'
+import TimerActions from '../TimerActions'
 import TimerLapse from '../TimerLapse'
-import { Pause, Play, Skip, Stop } from '../../icons'
 import './Timer.css'
 
 const Timer = ({ lapse, running, onStart, onPause, onStop }) => (
   <div className='Timer'>
-    <TimerLapse lapse={lapse} />
-
-    <div className="Timer__actions">
-      <Button onClick={onStop} disabled={!running} title='Stop' small noBorder>
-        <Stop />
-      </Button>
-
-      {
-        running ?
-          <Button onClick={onPause} title='Pause'>
-            <Pause />
-          </Button> :
-          <Button onClick={onStart} title='Start'>
-            <Play />
-          </Button>
-      }
-
-      <Button onClick={() => {}} title='Skip' disabled small noBorder>
-        <Skip />
-      </Button>
-    </div>
+    <TimerLapse
+      lapse={lapse}
+    />
+    <TimerActions
+      running={running}
+      onStart={onStart}
+      onPause={onPause}
+      onStop={onStop}
+    />
   </div>
 )
 
