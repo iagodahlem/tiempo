@@ -1,4 +1,12 @@
 /*
+ * Settings
+ * -------------------------------------------------------------------- */
+
+:root {
+  --fontWeight700: 700;
+}
+
+/*
  * Box Sizing
  * -------------------------------------------------------------------- */
 
@@ -10,6 +18,20 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+}
+
+/*
+ * Tap Highlight
+ * -------------------------------------------------------------------- */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: inherit;
 }
 
 /*

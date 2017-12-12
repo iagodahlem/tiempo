@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Timer from './Timer'
+import TimerActions from './TimerActions'
 
-describe('<Timer />', () => {
+describe('<TimerActions />', () => {
   const props = {
-    lapse: 15000000,
     running: false,
     onStart: () => {},
     onPause: () => {},
@@ -13,6 +12,6 @@ describe('<Timer />', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<Timer {...props} />, div)
+    ReactDOM.render(<TimerActions {...props} />, div)
   })
 })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Header, Footer, Timer } from '../../components'
 import * as timerTypes from '../../constants/timerTypes'
-import { Button, Header, Timer } from '../../components'
 import './App.css'
 
 class App extends Component {
@@ -46,39 +46,24 @@ class App extends Component {
     this.props.stopTimer()
   }
 
-  renderStartButton() {
-    return (
-      <Button onClick={this.handleStartTimer}>
-        Start
-      </Button>
-    )
-  }
-
-  renderStopButton() {
-    return (
-      <Button onClick={this.handleStopTimer}>
-        Stop
-      </Button>
-    )
-  }
-
   render() {
     const { lapse, running } = this.props
-    const actionButton = running ? this.renderStopButton() : this.renderStartButton()
 
     return (
       <main className='App'>
         <Header />
 
         <section className='App__container'>
-          <Timer lapse={lapse} />
-
-          {actionButton}
-
-          <Button onClick={this.handlePauseTimer} isDisabled={!running}>
-            Pause
-          </Button>
+          <Timer
+            lapse={lapse}
+            running={running}
+            onStart={this.handleStartTimer}
+            onPause={this.handlePauseTimer}
+            onStop={this.handleStopTimer}
+          />
         </section>
+
+        <Footer />
       </main>
     )
   }

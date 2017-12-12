@@ -1,22 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import format from 'date-fns/format'
+import TimerActions from '../TimerActions'
+import TimerLapse from '../TimerLapse'
 import './Timer.css'
 
-const Format = ({ date, type = 'mm:ss' }) => (
-  `${format(date, type)}`
-)
-
-const Timer = ({ lapse }) => (
+const Timer = ({ lapse, running, onStart, onPause, onStop }) => (
   <div className='Timer'>
-    <time className='Timer__lapse'>
-      <Format date={lapse} />
-    </time>
+    <TimerLapse
+      lapse={lapse}
+    />
+    <TimerActions
+      running={running}
+      onStart={onStart}
+      onPause={onPause}
+      onStop={onStop}
+    />
   </div>
 )
 
 Timer.propTypes = {
   lapse: PropTypes.number.isRequired,
+  running: PropTypes.bool.isRequired,
+  onStart: PropTypes.func.isRequired,
+  onPause: PropTypes.func.isRequired,
+  onStop: PropTypes.func.isRequired,
 }
 
 export default Timer
