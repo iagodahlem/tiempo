@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Footer, Timer } from '../../components'
-import timerTypes from '../../constants/timerTypes'
 import './App.css'
 
 class App extends Component {
@@ -13,10 +12,11 @@ class App extends Component {
     startTimer: PropTypes.func.isRequired,
     pauseTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
+    skipTimer: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    this.set(timerTypes.byId['pomodoro'])
+    this.set()
   }
 
   handleStartTimer = () => {
@@ -29,6 +29,10 @@ class App extends Component {
 
   handleStopTimer = () => {
     this.stop()
+  }
+
+  handleSkipTimer = () => {
+    this.skip()
   }
 
   set(type) {
@@ -47,6 +51,10 @@ class App extends Component {
     this.props.stopTimer()
   }
 
+  skip() {
+    this.props.skipTimer()
+  }
+
   render() {
     const { name, lapse, running } = this.props
 
@@ -61,6 +69,7 @@ class App extends Component {
             onStart={this.handleStartTimer}
             onPause={this.handlePauseTimer}
             onStop={this.handleStopTimer}
+            onSkip={this.handleSkipTimer}
           />
         </section>
 

@@ -4,7 +4,7 @@ import Button from '../Button'
 import { Pause, Play, Skip, Stop } from '../../icons'
 import './TimerActions.css'
 
-const TimerActions = ({ running, onStart, onPause, onStop }) => (
+const TimerActions = ({ running, onStart, onPause, onStop, onSkip }) => (
   <div className='TimerActions'>
     <Button onClick={onStop} disabled={!running} title='Stop' small noBorder>
       <Stop />
@@ -22,7 +22,7 @@ const TimerActions = ({ running, onStart, onPause, onStop }) => (
         </Button>
     }
 
-    <Button onClick={() => {}} title='Skip' disabled small noBorder>
+    <Button onClick={onSkip} title='Skip' small noBorder>
       <Skip />
     </Button>
   </div>
@@ -33,6 +33,7 @@ TimerActions.propTypes = {
   onStart: PropTypes.func.isRequired,
   onPause: PropTypes.func.isRequired,
   onStop: PropTypes.func.isRequired,
+  onSkip: PropTypes.func.isRequired,
 }
 
 export default TimerActions

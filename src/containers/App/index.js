@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
   startTimer: () => dispatch(timerActions.start()),
   pauseTimer: () => dispatch(timerActions.pause()),
   stopTimer: () => dispatch(timerActions.stop()),
+  skipTimer: () => dispatch(timerActions.skip()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
