@@ -1,22 +1,31 @@
-import * as timers from './timers'
+import { allIds, byId } from '../services/normalizeService'
+import * as times from './times'
 
-export const pomodoro = {
+const pomodoro = {
+  id: 'pomodoro',
   name: 'Pomodoro',
-  duration: timers.TWENTY_FIVE_MINUTES,
+  duration: times.TWENTY_FIVE_MINUTES,
 }
 
-export const short = {
+const shortBreak = {
+  id: 'short-break',
   name: 'Short Break',
-  duration: timers.FIVE_MINUTES,
+  duration: times.FIVE_MINUTES,
 }
 
-export const long = {
+const longBreak = {
+  id: 'long-break',
   name: 'Long Break',
-  duration: timers.FIFTEEN_MINUTES,
+  duration: times.FIFTEEN_MINUTES,
 }
+
+const timerTypes = [
+  pomodoro,
+  shortBreak,
+  longBreak,
+]
 
 export default {
-  pomodoro,
-  short,
-  long,
+  allIds: allIds(timerTypes),
+  byId: byId(timerTypes),
 }

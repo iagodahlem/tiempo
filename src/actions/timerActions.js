@@ -70,10 +70,15 @@ export const stop = () => (dispatch, getState) => {
   })
 }
 
+export const skip = () => (dispatch, getState) => {
+
+}
+
 export default {
   set,
   start,
   tick,
   pause,
   stop,
+  skip,
 }

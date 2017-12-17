@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Footer, Timer } from '../../components'
-import { pomodoro } from '../../constants/timerTypes'
+import timerTypes from '../../constants/timerTypes'
 import './App.css'
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.set(pomodoro)
+    this.set(timerTypes.byId['pomodoro'])
   }
 
   handleStartTimer = () => {
