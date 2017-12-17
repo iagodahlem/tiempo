@@ -11,5 +11,8 @@
 
 .TimerLapse__text {
   font-family: 'Montserrat', sans-serif;
+  width: 15.5rem;
   font-size: 6.2rem;
+  line-height: 1;
+  text-align: center;
 }

@@ -16,7 +16,7 @@
   border-radius: 50%;
   opacity: 1;
   transform: scale3d(1,1,1);
-  transition: opacity .3s ease, transform .3s ease;
+  transition: opacity .15s ease-in-out, transform .15s ease-in-out;
   will-change: transform;
   cursor: pointer;
 }

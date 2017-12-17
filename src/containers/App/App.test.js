@@ -8,6 +8,7 @@ describe('<App />', () => {
       name: 'Pomodoro',
       lapse: 0,
       running: false,
+      sessions: [],
       setTimer: () => {},
       startTimer: () => {},
       pauseTimer: () => {},

@@ -8,6 +8,7 @@ class App extends Component {
     name: PropTypes.string.isRequired,
     lapse: PropTypes.number.isRequired,
     running: PropTypes.bool.isRequired,
+    sessions: PropTypes.array.isRequired,
     setTimer: PropTypes.func.isRequired,
     startTimer: PropTypes.func.isRequired,
     pauseTimer: PropTypes.func.isRequired,
@@ -56,7 +57,7 @@ class App extends Component {
   }
 
   render() {
-    const { name, lapse, running } = this.props
+    const { name, lapse, running, sessions } = this.props
 
     return (
       <main className='App'>
@@ -73,7 +74,7 @@ class App extends Component {
           />
         </section>
 
-        <Footer />
+        <Footer sessions={sessions} />
       </main>
     )
   }

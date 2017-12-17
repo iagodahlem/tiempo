@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
   name: fromTimer.getName(state),
   lapse: fromTimer.getLapse(state),
   running: fromTimer.getRunning(state),
+  sessions: fromTimer.getSessions(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({

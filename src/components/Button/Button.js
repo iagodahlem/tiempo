@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { mapTruthyClasses } from '../../services/stylesService'
 import './Button.css'
-
-const mapTruthyClasses = (classes) => Object.entries(classes)
-  .filter(([, value]) => value)
-  .map(([key]) => key)
-  .join(' ')
 
 const Button = ({ children, onClick, disabled, title, small, noBorder }) => (
   <button

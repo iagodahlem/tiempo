@@ -1,4 +1,21 @@
 .Footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 58px;
+  height: 5.8rem;
+}
+
+.Session {
+  width: .8rem;
+  height: .8rem;
+  margin: .4rem;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: .6;
+  transition: opacity .3s ease;
+}
+
+.Session.isDone {
+  opacity: 1;
 }
