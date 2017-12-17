@@ -1,8 +1,8 @@
 # pomodoro
 
-[![Build Status](https://travis-ci.org/pensei/pomodoro.svg?branch=master)](https://travis-ci.org/pensei/pomodoro)
+[![Build Status](https://travis-ci.org/iagodahlem/pomodoro.svg?branch=master)](https://travis-ci.org/iagodahlem/pomodoro)
 
-> Pomodoro app for [web](https://pensei.github.io/pomodoro).
+> Pomodoro app for [web](https://iagodahlem.github.io/pomodoro).
 
 ## Install
 
@@ -36,4 +36,4 @@ yarn test
 
 ## License
 
-[MIT License](LICENSE) © Pensei
+[MIT License](LICENSE) © Iago Dahlem Lorensini
