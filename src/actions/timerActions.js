@@ -1,13 +1,14 @@
 import * as fromTimer from '../reducers/timerReducer'
 import * as types from '../constants/actionTypes'
 
-export const set = (type) => (dispatch, getState) => {
-  const { duration } = type
+export const set = (timerType) => (dispatch, getState) => {
+  const { name, duration } = timerType
   const lapse = duration
 
   dispatch({
     type: types.TIMER_SET,
     payload: {
+      name,
       lapse,
       duration,
     },

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Footer, Timer } from '../../components'
-import * as timerTypes from '../../constants/timerTypes'
+import { pomodoro } from '../../constants/timerTypes'
 import './App.css'
 
 class App extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     lapse: PropTypes.number.isRequired,
     running: PropTypes.bool.isRequired,
     setTimer: PropTypes.func.isRequired,
@@ -15,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.set(timerTypes.pomodoro)
+    this.set(pomodoro)
   }
 
   handleStartTimer = () => {
@@ -47,11 +48,11 @@ class App extends Component {
   }
 
   render() {
-    const { lapse, running } = this.props
+    const { name, lapse, running } = this.props
 
     return (
       <main className='App'>
-        <Header />
+        <Header title={name} />
 
         <section className='App__container'>
           <Timer

@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes'
 
 const initialState = {
+  name: '',
   start: 0,
   lapse: 0,
   duration: 0,
@@ -15,6 +16,7 @@ const timer = (state = initialState, action) => {
     case types.TIMER_SET:
       return {
         ...state,
+        name: payload.name,
         lapse: payload.lapse,
         duration: payload.duration,
       }
@@ -51,6 +53,7 @@ const timer = (state = initialState, action) => {
 
 export default timer
 
+export const getName = (state) => state.timer.name
 export const getStart = (state) => state.timer.start
 export const getInterval = (state) => state.timer.interval
 export const getLapse = (state) => state.timer.lapse

@@ -5,6 +5,7 @@ describe('timerReducer', () => {
   it('returns the initial state', () => {
     const state = reducer(undefined, {})
     const stateExpected = {
+      name: '',
       start: 0,
       lapse: 0,
       duration: 0,
@@ -17,9 +18,10 @@ describe('timerReducer', () => {
 
   describe(types.TIMER_SET, () => {
     it('returns lapse and duration when setted', () => {
-      const payload = { lapse: 25, duration: 25 }
+      const payload = { name: 'Pomodoro', lapse: 25, duration: 25 }
       const state = reducer(undefined, { type: types.TIMER_SET, payload })
       const stateExpected = {
+        name: 'Pomodoro',
         start: 0,
         lapse: 25,
         duration: 25,
@@ -36,6 +38,7 @@ describe('timerReducer', () => {
       const payload = { start: 25, interval: 1 }
       const state = reducer(undefined, { type: types.TIMER_START, payload })
       const stateExpected = {
+        name: '',
         start: 25,
         lapse: 0,
         duration: 0,

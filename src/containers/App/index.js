@@ -4,6 +4,7 @@ import * as fromTimer from '../../reducers/timerReducer'
 import * as timerActions from '../../actions/timerActions'
 
 const mapStateToProps = (state) => ({
+  name: fromTimer.getName(state),
   lapse: fromTimer.getLapse(state),
   running: fromTimer.getRunning(state),
 })
