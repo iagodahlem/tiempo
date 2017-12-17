@@ -14,7 +14,7 @@ class App extends Component {
     stopTimer: PropTypes.func.isRequired,
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.set(timerTypes.pomodoro)
   }
 
@@ -30,19 +30,19 @@ class App extends Component {
     this.stop()
   }
 
-  set = (type) => {
+  set(type) {
     this.props.setTimer(type)
   }
 
-  start = () => {
+  start() {
     this.props.startTimer()
   }
 
-  pause = () => {
+  pause() {
     this.props.pauseTimer()
   }
 
-  stop = () => {
+  stop() {
     this.props.stopTimer()
   }
 
