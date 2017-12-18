@@ -3,13 +3,14 @@ import timerTypes from '../constants/timerTypes'
 
 describe('typesReducer', () => {
   it('should return the initial state', () => {
-    const state = reducer(undefined, {})
     const stateExpected = timerTypes
+
+    const state = reducer(undefined, {})
 
     expect(state).toEqual(stateExpected)
   })
 
-  describe('getters', () => {
+  describe('selectors', () => {
     const state = {
       allIds: ['1', '2', '3'],
       byId: {
