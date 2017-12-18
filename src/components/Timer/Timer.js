@@ -4,7 +4,7 @@ import TimerActions from '../TimerActions'
 import TimerLapse from '../TimerLapse'
 import './Timer.css'
 
-const Timer = ({ lapse, running, onStart, onPause, onStop }) => (
+const Timer = ({ lapse, running, onStart, onPause, onStop, onSkip }) => (
   <div className='Timer'>
     <TimerLapse
       lapse={lapse}
@@ -14,6 +14,7 @@ const Timer = ({ lapse, running, onStart, onPause, onStop }) => (
       onStart={onStart}
       onPause={onPause}
       onStop={onStop}
+      onSkip={onSkip}
     />
   </div>
 )
@@ -24,6 +25,7 @@ Timer.propTypes = {
   onStart: PropTypes.func.isRequired,
   onPause: PropTypes.func.isRequired,
   onStop: PropTypes.func.isRequired,
+  onSkip: PropTypes.func.isRequired,
 }
 
 export default Timer

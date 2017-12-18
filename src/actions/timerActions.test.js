@@ -7,15 +7,29 @@ describe('timerActions', () => {
   const middlewares = [thunk]
   const mockStore = configureMockStore(middlewares)
 
-  let state = {
-    start: 0,
-    lapse: 0,
-    duration: 0,
-    running: false,
-    interval: null,
-  }
+  let state
 
   beforeEach(() => {
+    state = {
+      entry: { start: 0, type: 'pomodoro' },
+      timer: { lapse: 0, running: false, interval: null },
+      sessions: {
+        allIds: ['1', '2', '3'],
+        byId: {
+          '1': { id: '1', type: 'pomodoro', done: false },
+          '2': { id: '2', type: 'short-break', done: false },
+          '3': { id: '3', type: 'long-break', done: false },
+        },
+      },
+      types: {
+        allIds: ['pomodoro', 'short-break'],
+        byId: {
+          'pomodoro': { id: 'pomodoro', name: 'Pomodoro', duration: 25 },
+          'short-break': { id: 'short-break', name: 'Short Break', duration: 5 },
+        },
+      },
+    }
+
     jest.useFakeTimers()
     Date.now = jest.fn().mockReturnValue(Date.now())
   })
@@ -25,30 +39,23 @@ describe('timerActions', () => {
   })
 
   describe('set', () => {
-    it('sets the timer type correctly', () => {
-      const store = mockStore({ timer: state })
-      const payload = { duration: 100, lapse: 100 }
-
+    it('set the timer type correctly', () => {
+      const store = mockStore(state)
       const expectedActions = [
-        { type: types.TIMER_SET, payload },
+        { type: types.TIMER_SET, payload: { type: 'pomodoro', duration: 25 }}
       ]
 
-      store.dispatch(actions.set({ duration: 100 }))
+      store.dispatch(actions.set())
 
       expect(store.getActions()).toEqual(expectedActions)
     })
   })
 
   describe('start', () => {
-    it('starts the timer correctly', () => {
-      const store = mockStore({ timer: state })
-      const payload = {
-        start: Date.now(),
-        interval: 1,
-      }
-
+    it('start the timer correctly', () => {
+      const store = mockStore(state)
       const expectedActions = [
-        { type: types.TIMER_START, payload },
+        { type: types.TIMER_START, payload: { start: Date.now(), interval: 1 }},
       ]
 
       store.dispatch(actions.start())
@@ -59,32 +66,29 @@ describe('timerActions', () => {
   })
 
   describe('tick', () => {
-    it('ticks the lapse correctly', () => {
-      state.start = Date.now()
-      state.duration = 1000 * 60 * 25
+    it('tick the lapse correctly', () => {
+      state.entry.start = Date.now()
+      state.types.byId['pomodoro'].duration = 1000 * 60 * 25
 
-      const store = mockStore({ timer: state })
-      const payload = {
-        lapse: 1500000,
-      }
-
+      const store = mockStore(state)
       const expectedActions = [
-        { type: types.TIMER_TICK, payload },
+        { type: types.TIMER_TICK, payload: { lapse: 1500000 }},
       ]
 
+      // store.dispatch(actions.set())
       store.dispatch(actions.tick())
 
       expect(store.getActions()).toEqual(expectedActions)
     })
 
-    it('calls the stop when lapse gets to 0', () => {
-      state.start = Date.now()
-      state.duration = 0
+    it('when lapse is 0, call the stop and skip to the next session', () => {
+      state.entry.start = - Date.now()
 
-      const store = mockStore({ timer: state })
-
+      const store = mockStore(state)
       const expectedActions = [
-        { type: types.TIMER_STOP },
+        { type: types.TIMER_STOP, payload: { duration: 25 }},
+        { type: types.TIMER_SKIP, payload: { id: '1' }},
+        { type: types.TIMER_SET, payload: { type: 'pomodoro', duration: 25 }}
       ]
 
       store.dispatch(actions.tick())
@@ -94,9 +98,8 @@ describe('timerActions', () => {
   })
 
   describe('pause', () => {
-    it('pauses the timer correctly', () => {
-      const store = mockStore({ timer: state })
-
+    it('pause the timer correctly', () => {
+      const store = mockStore(state)
       const expectedActions = [
         { type: types.TIMER_PAUSE },
       ]
@@ -109,16 +112,29 @@ describe('timerActions', () => {
   })
 
   describe('stop', () => {
-    it('stops the timer correctly', () => {
-      const store = mockStore({ timer: state })
-
+    it('stop the timer correctly', () => {
+      const store = mockStore(state)
       const expectedActions = [
-        { type: types.TIMER_STOP },
+        { type: types.TIMER_STOP, payload: { duration: 25 }},
       ]
 
       store.dispatch(actions.stop())
 
       expect(clearInterval.mock.calls.length).toBe(1)
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+  })
+
+  describe('skip', () => {
+    it('skip the timer correctly', () => {
+      const store = mockStore(state)
+      const expectedActions = [
+        { type: types.TIMER_SKIP, payload: { id: '1' }},
+        { type: types.TIMER_SET, payload: { type: 'pomodoro', duration: 25 }}
+      ]
+
+      store.dispatch(actions.skip())
+
       expect(store.getActions()).toEqual(expectedActions)
     })
   })

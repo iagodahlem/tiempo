@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Footer, Timer } from '../../components'
-import timerTypes from '../../constants/timerTypes'
 import './App.css'
 
 class App extends Component {
@@ -9,14 +8,16 @@ class App extends Component {
     name: PropTypes.string.isRequired,
     lapse: PropTypes.number.isRequired,
     running: PropTypes.bool.isRequired,
+    sessions: PropTypes.array.isRequired,
     setTimer: PropTypes.func.isRequired,
     startTimer: PropTypes.func.isRequired,
     pauseTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
+    skipTimer: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
-    this.set(timerTypes.byId['pomodoro'])
+    this.set()
   }
 
   handleStartTimer = () => {
@@ -29,6 +30,10 @@ class App extends Component {
 
   handleStopTimer = () => {
     this.stop()
+  }
+
+  handleSkipTimer = () => {
+    this.skip()
   }
 
   set(type) {
@@ -47,8 +52,12 @@ class App extends Component {
     this.props.stopTimer()
   }
 
+  skip() {
+    this.props.skipTimer()
+  }
+
   render() {
-    const { name, lapse, running } = this.props
+    const { name, lapse, running, sessions } = this.props
 
     return (
       <main className='App'>
@@ -61,10 +70,11 @@ class App extends Component {
             onStart={this.handleStartTimer}
             onPause={this.handlePauseTimer}
             onStop={this.handleStopTimer}
+            onSkip={this.handleSkipTimer}
           />
         </section>
 
-        <Footer />
+        <Footer sessions={sessions} />
       </main>
     )
   }
