@@ -1,94 +1,107 @@
-import reducer from './timerReducer'
+import reducer, * as fromReducer from './timerReducer'
 import * as types from '../constants/actionTypes'
 
 describe('timerReducer', () => {
-  it('returns the initial state', () => {
-    const state = reducer(undefined, {})
+  it('should return the initial state', () => {
     const stateExpected = {
-      name: '',
-      start: 0,
       lapse: 0,
-      duration: 0,
       running: false,
       interval: null,
     }
 
+    const state = reducer(undefined, {})
+
     expect(state).toEqual(stateExpected)
   })
 
-  describe(types.TIMER_SET, () => {
-    it('returns lapse and duration when setted', () => {
-      const payload = { name: 'Pomodoro', lapse: 25, duration: 25 }
-      const state = reducer(undefined, { type: types.TIMER_SET, payload })
-      const stateExpected = {
-        name: 'Pomodoro',
-        start: 0,
-        lapse: 25,
-        duration: 25,
-        running: false,
-        interval: null,
-      }
+  it('should handle TIMER_SET', () => {
+    const action = {
+      type: types.TIMER_SET,
+      payload: { duration: 10 },
+    }
+    const stateExpected = { lapse: 10 }
 
-      expect(state).toEqual(stateExpected)
-    })
+    const state = reducer({}, action)
+
+    expect(state).toEqual(stateExpected)
   })
 
-  describe(types.TIMER_START, () => {
-    it('returns start and interval when started', () => {
-      const payload = { start: 25, interval: 1 }
-      const state = reducer(undefined, { type: types.TIMER_START, payload })
-      const stateExpected = {
-        name: '',
-        start: 25,
-        lapse: 0,
-        duration: 0,
-        running: true,
-        interval: 1,
-      }
+  it('should handle TIMER_START', () => {
+    const action = {
+      type: types.TIMER_START,
+      payload: { interval: 1 }
+    }
+    const stateExpected = {
+      running: true,
+      interval: 1,
+    }
 
-      expect(state).toEqual(stateExpected)
-    })
+    const state = reducer({}, action)
+
+    expect(state).toEqual(stateExpected)
   })
 
-  describe(types.TIMER_TICK, () => {
-    it('changes the current lapse at each tick', () => {
-      const payload = { lapse: 24 }
-      const currentState = { lapse: 25 }
-      const state = reducer(currentState, { type: types.TIMER_TICK, payload })
-      const stateExpected = {
-        lapse: 24,
-      }
+  it('should handle TIMER_TICK', () => {
+    const action = {
+      type: types.TIMER_TICK,
+      payload: { lapse: 24 },
+    }
+    const currentState = { lapse: 25 }
+    const stateExpected = { lapse: 24 }
 
-      expect(state).toEqual(stateExpected)
-    })
+    const state = reducer(currentState, action)
+
+    expect(state).toEqual(stateExpected)
   })
 
-  describe(types.TIMER_PAUSE, () => {
-    it('resets running and interval when paused', () => {
-      const currentState = { running: true, interval: 1 }
-      const state = reducer(currentState, { type: types.TIMER_PAUSE })
-      const stateExpected = {
-        running: false,
-        interval: null,
-      }
+  it('should handle TIMER_PAUSE', () => {
+    const action = {
+      type: types.TIMER_PAUSE,
+    }
+    const currentState = { running: true, interval: 1 }
+    const stateExpected = {
+      running: false,
+      interval: null,
+    }
 
-      expect(state).toEqual(stateExpected)
-    })
+    const state = reducer(currentState, action)
+
+    expect(state).toEqual(stateExpected)
   })
 
-  describe(types.TIMER_STOP, () => {
-    it('resets running and interval when stoped', () => {
-      const currentState = { duration: 25 }
-      const state = reducer(currentState, { type: types.TIMER_STOP })
-      const stateExpected = {
-        start: null,
-        lapse: 25,
-        duration: 25,
-        running: false,
-        interval: null,
-      }
+  it('should handle TIMER_STOP', () => {
+    const action = {
+      type: types.TIMER_STOP,
+      payload: { duration: 25 },
+    }
+    const stateExpected = {
+      lapse: 25,
+      running: false,
+      interval: null,
+    }
 
-      expect(state).toEqual(stateExpected)
+    const state = reducer({}, action)
+
+    expect(state).toEqual(stateExpected)
+  })
+
+  describe('selectors', () => {
+    const state = {
+      lapse: 0,
+      running: false,
+      interval: null,
+    }
+
+    it('should get the lapse', () => {
+      expect(fromReducer.getLapse(state)).toBe(0)
+    })
+
+    it('should get the running', () => {
+      expect(fromReducer.getRunning(state)).toBe(false)
+    })
+
+    it('should get the interval', () => {
+      expect(fromReducer.getInterval(state)).toBe(null)
     })
   })
 })
