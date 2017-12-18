@@ -13,6 +13,7 @@ describe('<App />', () => {
       startTimer: () => {},
       pauseTimer: () => {},
       stopTimer: () => {},
+      skipTimer: () => {},
     }
 
     const div = document.createElement('div')

@@ -5,7 +5,7 @@ import Footer from './Footer'
 describe('<Footer />', () => {
   it('renders without crashing', () => {
     const props = {
-      sesions: [],
+      sessions: [],
     }
 
     const footer = document.createElement('footer')

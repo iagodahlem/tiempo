@@ -8,6 +8,7 @@ describe('<TimerActions />', () => {
     onStart: () => {},
     onPause: () => {},
     onStop: () => {},
+    onSkip: () => {},
   }
 
   it('renders without crashing', () => {

@@ -9,6 +9,7 @@ describe('<Timer />', () => {
     onStart: () => {},
     onPause: () => {},
     onStop: () => {},
+    onSkip: () => {},
   }
 
   it('renders without crashing', () => {
