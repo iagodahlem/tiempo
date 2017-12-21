@@ -129,6 +129,7 @@ describe('timerActions', () => {
     it('skip the timer correctly', () => {
       const store = mockStore(state)
       const expectedActions = [
+        { type: types.TIMER_STOP, payload: { duration: 25 }},
         { type: types.TIMER_SKIP, payload: { id: '1' }},
         { type: types.TIMER_SET, payload: { type: 'pomodoro', duration: 25 }}
       ]

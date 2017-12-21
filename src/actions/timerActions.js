@@ -44,7 +44,6 @@ export const tick = () => (dispatch, getState) => {
   const lapse = start + duration - Date.now()
 
   if (lapse <= 0) {
-    dispatch(stop())
     dispatch(skip())
   } else {
     dispatch(tickTimer(lapse))
@@ -82,6 +81,8 @@ export const skip = () => (dispatch, getState) => {
   const sessions = selectors.getSessions(getState())
   const currentSession = selectors.getCurrentSession(getState())
   const isLastSession = sessions.indexOf(currentSession) === sessions.length - 1
+
+  dispatch(stop())
 
   if (isLastSession) {
     dispatch(resetTimer())
