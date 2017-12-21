@@ -4,6 +4,14 @@
 
 > Pomodoro app for [web](https://iagodahlem.github.io/pomodoro).
 
+<a href="//iagodahlem.com/pomodoro">
+  <img
+    width="374px"
+    src="https://res.cloudinary.com/dio9nggt3/image/upload/v1513866937/pomodoro-v1.png"
+    alt="Pomodoro"
+  >
+</a>
+
 ## Install
 
 To install dependencies you will need [yarn](https://yarnpkg.com/en/), so go get it if you don't have it yet, then run:
