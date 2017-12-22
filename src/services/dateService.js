@@ -1,4 +1,5 @@
-import differenceInSeconds from 'date-fns/difference_in_seconds'
+import dateFnsDifferenceInSeconds from 'date-fns/difference_in_seconds'
+import dateFnsFormat from 'date-fns/format'
 
-export const diffSeconds = (start, end) =>
-  differenceInSeconds(start, end)
+export const diffSeconds = dateFnsDifferenceInSeconds
+export const format = dateFnsFormat

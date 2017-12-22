@@ -1,17 +1,16 @@
 import PropTypes from 'prop-types'
-import dateFormat from 'date-fns/format'
-import './Format.css'
+import { format as formatDate } from '../../services/dateService'
 
-const Format = ({ children, format }) => (
-  `${dateFormat(children, format)}`
+const Format = ({ format, children }) => (
+  `${formatDate(children, format)}`
 )
 
 Format.propTypes = {
+  format: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
-  format: PropTypes.string,
 }
 
 Format.defaultProps = {
