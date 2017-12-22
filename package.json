@@ -2,6 +2,12 @@
   "name": "pomodoro",
   "private": true,
   "homepage": "https://iagodahlem.github.io/pomodoro",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start": "lerna run --parallel start",
+    "test": "lerna run --stream test",
+    "build": "lerna run --stream build"
+  },
   "devDependencies": {
     "lerna": "^2.5.1"
   }
