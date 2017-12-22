@@ -8,6 +8,7 @@ cache:
     - node_modules
 
 script:
+  - yarn bootstrap
   - yarn test
   - yarn build
 
@@ -15,6 +16,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: build
+  local_dir: packages/pomodoro-web/build
   on:
     branch: master
