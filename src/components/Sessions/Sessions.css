@@ -1,0 +1,13 @@
+.Session {
+  width: .8rem;
+  height: .8rem;
+  margin: .4rem;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: .6;
+  transition: opacity .3s ease;
+}
+
+.Session.isDone {
+  opacity: 1;
+}

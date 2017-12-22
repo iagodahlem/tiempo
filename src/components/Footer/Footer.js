@@ -1,19 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { mapTruthyClasses } from '../../services/stylesService'
+import Sessions from '../Sessions'
 import './Footer.css'
 
 const Footer = ({ sessions }) => (
   <footer className='Footer'>
-    {sessions.map(({ id, done }) => (
-      <div
-        key={id}
-        className={`Session ${mapTruthyClasses({
-          'isDone': done,
-        })}`}
-      >
-      </div>
-    ))}
+    <Sessions sessions={sessions} />
   </footer>
 )
 
