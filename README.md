@@ -20,20 +20,6 @@ To install dependencies you will need [yarn](https://yarnpkg.com/en/), so go get
 yarn
 ```
 
-## Running
-
-To start the development server:
-
-```sh
-yarn start
-```
-
-To run all the test suite in watch mode:
-
-```sh
-yarn test
-```
-
 ## Contributing
 
 1. Fork it!

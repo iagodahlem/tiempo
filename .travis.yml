@@ -7,14 +7,17 @@ cache:
   directories:
     - node_modules
 
+env:
+  - PACKAGE=packages/pomodoro-web
+
 script:
-  - yarn test
-  - yarn build
+  - cd $PACKAGE && yarn test
+  - cd $PACKAGE && yarn build
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: build
+  local_dir: packages/pomodoro-web/build
   on:
     branch: master
