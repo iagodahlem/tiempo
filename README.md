@@ -1,6 +1,7 @@
 # pomodoro
 
 [![Build Status](https://travis-ci.org/iagodahlem/pomodoro.svg?branch=master)](https://travis-ci.org/iagodahlem/pomodoro)
+[![Lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 > Pomodoro app for [web](https://iagodahlem.github.io/pomodoro).
 
@@ -14,11 +15,35 @@
 
 ## Install
 
+First you need to install the project root dependencies to start using it.
+
 To install dependencies you will need [yarn](https://yarnpkg.com/en/), so go get it if you don't have it yet, then run:
 
 ```sh
 yarn
 ```
+
+After that, you need to bootstrap all packages. This will install all packages dependencies and link them together.
+
+```sh
+yarn bootstrap
+```
+
+## Running
+
+You can start all packages.
+
+```sh
+yarn start
+```
+
+Or run all the tests.
+
+```sh
+yarn test
+```
+
+If you want to run each package individually, get a read in each package README to know how to run it.
 
 ## Contributing
 
