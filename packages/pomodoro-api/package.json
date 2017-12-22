@@ -1,0 +1,11 @@
+{
+  "name": "pomodoro-api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./index"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
