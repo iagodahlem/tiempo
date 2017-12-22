@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Footer, Timer } from '../../components'
 import './App.css'
 
-class App extends PureComponent {
+class App extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     lapse: PropTypes.number.isRequired,
@@ -18,6 +18,26 @@ class App extends PureComponent {
 
   componentDidMount() {
     this.set()
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.name !== this.props.name) {
+      return true
+    }
+
+    if (nextProps.lapse !== this.props.lapse) {
+      return true
+    }
+
+    if (nextProps.running !== this.props.running) {
+      return true
+    }
+
+    if (nextProps.sessions !== this.props.sessions) {
+      return true
+    }
+
+    return false
   }
 
   handleStartTimer = () => {
