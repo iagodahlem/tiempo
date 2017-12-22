@@ -99,12 +99,3 @@ export const skip = () => (dispatch, getState) => {
 
   dispatch(set())
 }
-
-export default {
-  set,
-  start,
-  tick,
-  pause,
-  stop,
-  skip,
-}

@@ -6,8 +6,3 @@ export const byId = (arr) => arr
     ...obj,
     [item.id]: item,
   }), {})
-
-export default {
-  allIds,
-  byId,
-}
