@@ -1,7 +1,6 @@
 {
   "name": "pomodoro",
   "private": true,
-  "homepage": "https://iagodahlem.github.io/pomodoro",
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "start": "lerna run --parallel start",
