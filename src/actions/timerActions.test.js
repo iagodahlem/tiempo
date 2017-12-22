@@ -66,7 +66,20 @@ describe('timerActions', () => {
   })
 
   describe('tick', () => {
-    it('tick the lapse correctly', () => {
+    it('dont ticks the lapse when current lapse is less than one second', () => {
+      state.entry.start = Date.now()
+      state.types.byId['pomodoro'].duration = 1000 * 60 * 25
+
+      const store = mockStore(state)
+      const expectedActions = []
+
+      store.dispatch(actions.tick())
+
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+
+    it('ticks the lapse when passed more than one second', () => {
+      state.timer.lapse = 1600000
       state.entry.start = Date.now()
       state.types.byId['pomodoro'].duration = 1000 * 60 * 25
 
@@ -75,13 +88,12 @@ describe('timerActions', () => {
         { type: types.TIMER_TICK, payload: { lapse: 1500000 }},
       ]
 
-      // store.dispatch(actions.set())
       store.dispatch(actions.tick())
 
       expect(store.getActions()).toEqual(expectedActions)
     })
 
-    it('when lapse is 0, call the stop and skip to the next session', () => {
+    it('stops and skips to the next session when lapse is 0', () => {
       state.entry.start = - Date.now()
 
       const store = mockStore(state)

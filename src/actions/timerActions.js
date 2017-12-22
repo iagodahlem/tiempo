@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes'
 import * as selectors from '../reducers/selectors'
+import { diffSeconds } from '../services/dateService'
 
 export const set = () => (dispatch, getState) => {
   const setTimer = (type, duration) => ({
@@ -30,7 +31,7 @@ export const start = () => (dispatch, getState) => {
   const duration = selectors.getEntryDuration(getState())
 
   const start = currentStart ? Date.now() - (duration - lapse) : Date.now()
-  const interval = setInterval(() => dispatch(tick()), 1000)
+  const interval = setInterval(() => dispatch(tick()), 100)
 
   dispatch(startTimer(start, interval))
 }
@@ -40,14 +41,20 @@ export const tick = () => (dispatch, getState) => {
 
   const start = selectors.getEntryStart(getState())
   const duration = selectors.getEntryDuration(getState())
+  const currentLapse = selectors.getTimerLapse(getState())
 
   const lapse = start + duration - Date.now()
+  const isLessThanOneSecond = diffSeconds(currentLapse, lapse) <= .9
 
   if (lapse <= 0) {
-    dispatch(skip())
-  } else {
-    dispatch(tickTimer(lapse))
+    return dispatch(skip())
   }
+
+  if (isLessThanOneSecond) {
+    return
+  }
+
+  dispatch(tickTimer(lapse))
 }
 
 export const pause = () => (dispatch, getState) => {
