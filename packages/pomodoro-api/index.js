@@ -1,10 +1,11 @@
 const express = require('express')
+const routes = require('./routes')
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8000
 
 const app = express()
 
-app.get('/', (_, res) => res.json('Server is up.'))
+app.use('/', routes)
 
 app.use((req, res, next) => {
   const err = new Error('Not Found')
@@ -14,7 +15,9 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500)
-  res.json('error')
+  res.json({
+    error: { message: err.message, error: err },
+  })
 })
 
 app.listen(PORT, () => {
