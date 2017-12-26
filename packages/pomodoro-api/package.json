@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./index --exec babel-node",
+    "sequelize": "babel-node ./node_modules/.bin/sequelize",
     "db:setup": "yarn db:drop && yarn db:create && yarn db:migrate && yarn db:seed",
-    "db:create": "sequelize db:create",
-    "db:drop": "sequelize db:drop",
-    "db:migrate": "sequelize db:migrate",
-    "db:seed": "sequelize db:seed:all",
-    "db:model:generate": "sequelize model:generate --name",
-    "db:migration:generate": "sequelize migration:generate --name",
-    "db:seed:generate": "sequelize seed:generate --name"
+    "db:drop": "yarn sequelize db:drop",
+    "db:create": "yarn sequelize db:create",
+    "db:migrate": "yarn sequelize db:migrate",
+    "db:seed": "yarn sequelize db:seed:all",
+    "db:model:generate": "yarn sequelize model:generate --name",
+    "db:migration:generate": "yarn sequelize migration:generate --name",
+    "db:seed:generate": "yarn sequelize seed:generate --name"
   },
   "dependencies": {
     "express": "^4.16.2",
