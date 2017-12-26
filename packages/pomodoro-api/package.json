@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./index",
+    "start": "nodemon ./index --exec babel-node",
     "db:setup": "yarn db:drop && yarn db:create && yarn db:migrate && yarn db:seed",
     "db:create": "sequelize db:create",
     "db:drop": "sequelize db:drop",
@@ -20,6 +20,8 @@
     "sequelize": "^4.28.6"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "nodemon": "^1.14.3",
     "sequelize-cli": "^3.2.0"
   }

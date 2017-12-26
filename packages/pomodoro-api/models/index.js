@@ -1,9 +1,11 @@
-const fs = require('fs')
-const path = require('path')
-const Sequelize = require('sequelize')
+import fs from 'fs'
+import path from 'path'
+import Sequelize from 'sequelize'
+import database from '../config/database'
+
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'
-const config = require(__dirname + '/../config/database.js')[env]
+const config = database[env]
 const db = {}
 
 const initSequelize = () => {
@@ -36,4 +38,4 @@ Object.keys(db)
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-module.exports = db
+export default db

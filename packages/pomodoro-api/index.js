@@ -1,6 +1,6 @@
-const express = require('express')
-const http = require('http')
-const routes = require('./routes')
+import express from 'express'
+import http from 'http'
+import routes from './routes'
 
 const app = express()
 
