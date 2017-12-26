@@ -3,12 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./index"
+    "start": "nodemon ./index",
+    "db:setup": "yarn db:drop && yarn db:create && yarn db:migrate && yarn db:seed",
+    "db:create": "sequelize db:create",
+    "db:drop": "sequelize db:drop",
+    "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed:all",
+    "db:model:generate": "sequelize model:generate --name",
+    "db:migration:generate": "sequelize migration:generate --name",
+    "db:seed:generate": "sequelize seed:generate --name"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "pg": "6",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.28.6"
   },
   "devDependencies": {
-    "nodemon": "^1.14.3"
+    "nodemon": "^1.14.3",
+    "sequelize-cli": "^3.2.0"
   }
 }
