@@ -16,7 +16,10 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.json({
-    error: { message: err.message, error: err },
+    error: {
+      status: err.status,
+      message: err.message,
+    },
   })
 })
 
