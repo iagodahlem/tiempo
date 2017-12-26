@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon ./index --exec babel-node",
     "sequelize": "babel-node ./node_modules/.bin/sequelize",
-    "db:setup": "yarn db:drop && yarn db:create && yarn db:migrate && yarn db:seed",
+    "db:setup": "yarn db:create && yarn db:migrate && yarn db:seed",
+    "db:redo": "yarn db:drop && yarn db:setup",
     "db:drop": "yarn sequelize db:drop",
     "db:create": "yarn sequelize db:create",
     "db:migrate": "yarn sequelize db:migrate",
