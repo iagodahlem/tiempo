@@ -1,7 +1,6 @@
 const express = require('express')
+const http = require('http')
 const routes = require('./routes')
-
-const PORT = process.env.PORT || 8000
 
 const app = express()
 
@@ -23,6 +22,10 @@ app.use((err, req, res, next) => {
   })
 })
 
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 8000
+const server = http.createServer(app)
+
+server.listen(PORT)
+server.on('listening', () => {
   console.log(`Server is up and running at localhost://${PORT}`)
 })
