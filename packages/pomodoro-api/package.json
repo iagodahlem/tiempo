@@ -2,6 +2,10 @@
   "name": "pomodoro-api",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "9.3.0",
+    "yarn": "1.3.2"
+  },
   "scripts": {
     "start": "nodemon ./index --exec babel-node",
     "build": "babel ./ -d ./build --ignore node_modules",
@@ -17,23 +21,24 @@
     "db:seed": "yarn sequelize db:seed:all",
     "db:model:generate": "yarn sequelize model:generate --name",
     "db:migration:generate": "yarn sequelize migration:generate --name",
-    "db:seed:generate": "yarn sequelize seed:generate --name"
+    "db:seed:generate": "yarn sequelize seed:generate --name",
+    "postinstall": "yarn build"
   },
   "dependencies": {
-    "express": "^4.16.2",
-    "pg": "6",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^4.28.6"
-  },
-  "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "babel-cli": "^7.0.0-0",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^22.0.4",
     "babel-preset-env": "^1.6.1",
+    "express": "^4.16.2",
+    "pg": "6",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.28.6",
+    "sequelize-cli": "^3.2.0"
+  },
+  "devDependencies": {
     "cross-env": "^5.1.3",
     "jest": "^22.0.4",
-    "nodemon": "^1.14.3",
-    "sequelize-cli": "^3.2.0"
+    "nodemon": "^1.14.3"
   }
 }
