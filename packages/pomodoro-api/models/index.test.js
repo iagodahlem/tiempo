@@ -1,4 +1,4 @@
-import models from './'
+const models =require('./')
 
 describe('models', () => {
   it('returns the Type model', () => {

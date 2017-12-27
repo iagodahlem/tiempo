@@ -1,6 +1,6 @@
-import * as times from '../constants/times'
+const times = require('../constants/times')
 
-export default {
+module.exports = {
   up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('Types', [
       { name: 'Short Break', duration: times.FIVE_MINUTES },
