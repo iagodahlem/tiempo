@@ -1,6 +1,6 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Entries', {
+    return queryInterface.createTable('Globals', {
       id: {
         unique: true,
         allowNull: false,
@@ -8,29 +8,14 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
       },
-      start: {
+      key: {
+        unique: true,
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
-      end: {
-        type: Sequelize.INTEGER,
-      },
-      running: {
+      value: {
         allowNull: false,
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      typeId: {
-        allowNull: false,
-        onDelete: 'CASCADE',
-        references: { model: 'Types', key: 'id' },
-        type: Sequelize.UUID,
-      },
-      userId: {
-        allowNull: false,
-        onDelete: 'CASCADE',
-        references: { model: 'Users', key: 'id' },
-        type: Sequelize.UUID,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -46,6 +31,6 @@ module.exports = {
   },
 
   down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Entries')
+    return queryInterface.dropTable('Globals')
   },
 }
