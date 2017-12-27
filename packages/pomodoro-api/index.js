@@ -1,10 +1,19 @@
 const express = require('express')
 const http = require('http')
 const socket = require('socket.io')
+const logger = require('morgan')
+const bodyParser = require('body-parser')
 const models = require('./models')
 const routes = require('./routes')
 
+const PORT = process.env.PORT || 8000
 const app = express()
+const server = http.createServer(app)
+const io = socket(server)
+
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/', routes)
 
@@ -23,10 +32,6 @@ app.use((err, req, res, next) => {
     },
   })
 })
-
-const PORT = process.env.PORT || 8000
-const server = http.createServer(app)
-const io = socket(server)
 
 models.sequelize.sync().then(() => {
   server.listen(PORT)
