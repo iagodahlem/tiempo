@@ -4,5 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     duration: DataTypes.INTEGER,
   })
 
+  Type.associate = (models) => {
+    models.Type.hasMany(models.Entry)
+  }
+
   return Type
 }
