@@ -1,5 +1,6 @@
 const express = require('express')
 const http = require('http')
+const socket = require('socket.io')
 const models = require('./models')
 const routes = require('./routes')
 
@@ -25,10 +26,19 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 8000
 const server = http.createServer(app)
+const io = socket(server)
 
 models.sequelize.sync().then(() => {
   server.listen(PORT)
   server.on('listening', () => {
     console.log(`Server is up and running at localhost://${PORT}`)
+  })
+})
+
+io.on('connection', (socket) => {
+  console.log('connected')
+
+  socket.emit('start-entry', { entry: {
+    start: Date.now(), running: true }
   })
 })
