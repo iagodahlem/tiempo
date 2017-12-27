@@ -1,5 +1,6 @@
 const express = require('express')
 const http = require('http')
+const models = require('./models')
 const routes = require('./routes')
 
 const app = express()
@@ -25,7 +26,9 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 8000
 const server = http.createServer(app)
 
-server.listen(PORT)
-server.on('listening', () => {
-  console.log(`Server is up and running at localhost://${PORT}`)
+models.sequelize.sync().then(() => {
+  server.listen(PORT)
+  server.on('listening', () => {
+    console.log(`Server is up and running at localhost://${PORT}`)
+  })
 })
