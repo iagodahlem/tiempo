@@ -8,27 +8,35 @@ const env = process.env.NODE_ENV || 'development'
 const config = database[env]
 const db = {}
 
-const sequelize = config.use_env_variable
-  ? new Sequelize(process.env[config.use_env_variable], config)
+const sequelize = config.env
+  ? new Sequelize(process.env[config.env], config)
   : new Sequelize(config.database, config.username, config.password, config)
+
+const isModelFile = (file) => (file.indexOf('.') !== 0)
+  && (file !== basename)
+  && (!file.includes('test'))
+  && (file.slice(-3) === '.js')
+
+const importModel = (file) => {
+  const model = sequelize['import'](path.join(__dirname, file))
+  db[model.name] = model
+}
+
+const associateModel = (model) => {
+  if (!db[model].associate) {
+    return
+  }
+
+  db[model].associate(db)
+}
 
 fs
   .readdirSync(__dirname)
-  .filter(file => (file.indexOf('.') !== 0)
-    && (file !== basename)
-    && (!file.includes('test'))
-    && (file.slice(-3) === '.js'))
-  .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file))
-    db[model.name] = model
-  })
+  .filter(isModelFile)
+  .forEach(importModel)
 
 Object.keys(db)
-  .forEach(modelName => {
-    if (db[modelName].associate) {
-      db[modelName].associate(db)
-    }
-  })
+  .forEach(associateModel)
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
