@@ -1,7 +1,7 @@
 const express = require('express')
-const api = require('./api')
+const v1 = require('./v1')
 const router = express.Router()
 
-router.use('/api', api)
+router.use('/v1', v1)
 
 module.exports = router
