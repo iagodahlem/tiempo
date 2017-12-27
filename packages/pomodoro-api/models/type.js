@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Type.associate = (models) => {
     models.Type.hasMany(models.Entry)
+    models.Type.hasMany(models.Session)
   }
 
   return Type

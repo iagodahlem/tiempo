@@ -1,6 +1,6 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Entries', {
+    return queryInterface.createTable('Sessions', {
       id: {
         unique: true,
         allowNull: false,
@@ -8,14 +8,7 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
       },
-      start: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      end: {
-        type: Sequelize.INTEGER,
-      },
-      running: {
+      done: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
         defaultValue: false,
@@ -34,6 +27,6 @@ module.exports = {
   },
 
   down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Entries')
+    return queryInterface.dropTable('Sessions')
   },
 }

@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Entry.associate = (models) => {
-    models.Entry.belongsTo(models.User, {
+    models.Entry.belongsTo(models.Type, {
       onDelete: 'CASCADE',
       foreignKey: { allowNull: false },
     })
 
-    models.Entry.belongsTo(models.Type, {
+    models.Entry.belongsTo(models.User, {
       onDelete: 'CASCADE',
       foreignKey: { allowNull: false },
     })
