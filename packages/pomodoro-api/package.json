@@ -16,9 +16,9 @@
     "db:create": "sequelize db:create",
     "db:migrate": "sequelize db:migrate",
     "db:seed": "sequelize db:seed:all",
-    "db:model:generate": "sequelize model:generate --name",
-    "db:migration:generate": "sequelize migration:generate --name",
-    "db:seed:generate": "sequelize seed:generate --name"
+    "db:model:create": "sequelize model:generate --name",
+    "db:migration:create": "sequelize migration:generate --name",
+    "db:seed:create": "sequelize seed:generate --name"
   },
   "dependencies": {
     "express": "^4.16.2",
