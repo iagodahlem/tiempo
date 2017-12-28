@@ -44,10 +44,4 @@ models.sequelize.sync().then(() => {
   })
 })
 
-io.on('connection', (socket) => {
-  console.log('connected')
-
-  socket.emit('start-entry', { entry: {
-    start: Date.now(), running: true }
-  })
-})
+sockets(io)
