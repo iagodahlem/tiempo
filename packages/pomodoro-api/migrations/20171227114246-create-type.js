@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      label: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       duration: {
         allowNull: false,
         type: Sequelize.BIGINT,
