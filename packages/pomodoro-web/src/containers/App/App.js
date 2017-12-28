@@ -14,10 +14,15 @@ class App extends Component {
     pauseTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
     skipTimer: PropTypes.func.isRequired,
+    typesIndex: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    name: 'Pomodoro',
   }
 
   componentDidMount() {
-    this.set()
+    this.types().then(() => this.set())
   }
 
   shouldComponentUpdate(nextProps) {
@@ -54,6 +59,10 @@ class App extends Component {
 
   handleSkipTimer = () => {
     this.skip()
+  }
+
+  types() {
+    return this.props.typesIndex()
   }
 
   set(type) {
