@@ -4,14 +4,14 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Session.associate = (models) => {
-    models.Session.belongsTo(models.Type, {
+    models.Entry.belongsTo(models.Type, {
       onDelete: 'CASCADE',
-      foreignKey: { allowNull: false },
+      foreignKey: 'typeId',
     })
 
-    models.Session.belongsTo(models.User, {
+    models.Entry.belongsTo(models.User, {
       onDelete: 'CASCADE',
-      foreignKey: { allowNull: false },
+      foreignKey: 'userId',
     })
   }
 

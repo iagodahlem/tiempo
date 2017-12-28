@@ -10,10 +10,10 @@ module.exports = {
       },
       start: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
       },
       end: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
       },
       running: {
         allowNull: false,
@@ -22,15 +22,23 @@ module.exports = {
       },
       typeId: {
         allowNull: false,
-        onDelete: 'CASCADE',
-        references: { model: 'Types', key: 'id' },
         type: Sequelize.UUID,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Types',
+          key: 'id',
+          as: 'typeId',
+        },
       },
       userId: {
         allowNull: false,
-        onDelete: 'CASCADE',
-        references: { model: 'Users', key: 'id' },
         type: Sequelize.UUID,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId',
+        },
       },
       createdAt: {
         allowNull: false,

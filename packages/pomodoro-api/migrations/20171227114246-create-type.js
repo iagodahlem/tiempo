@@ -14,7 +14,7 @@ module.exports = {
       },
       duration: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
       },
       createdAt: {
         allowNull: false,
