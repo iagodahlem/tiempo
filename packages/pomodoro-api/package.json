@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "nodemon ./index",
-    "serve": "node ./index",
     "test": "jest",
     "db:setup": "yarn db:create && yarn db:migrate && yarn db:seed",
     "db:redo": "yarn db:drop && yarn db:setup",
