@@ -6,7 +6,7 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const models = require('./models')
 const routes = require('./routes')
-const sockets = require('./sockets')
+const connectSocket = require('./sockets')
 
 const app = express()
 
@@ -44,4 +44,4 @@ models.sequelize.sync().then(() => {
   })
 })
 
-sockets(io)
+connectSocket(io)

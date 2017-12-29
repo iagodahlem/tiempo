@@ -1,9 +1,11 @@
 import io from 'socket.io-client'
 
+const API_URL = process.env.REACT_APP_WS_URL
+
 let socket
 
 export const connect = () => {
-  socket = io.connect('http://localhost:8000')
+  socket = io.connect(API_URL)
 }
 
 export const emit = (event, data) => {

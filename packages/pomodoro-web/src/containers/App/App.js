@@ -8,12 +8,14 @@ class App extends Component {
     name: PropTypes.string.isRequired,
     lapse: PropTypes.number.isRequired,
     running: PropTypes.bool.isRequired,
+    paused: PropTypes.bool.isRequired,
     sessions: PropTypes.array.isRequired,
-    setTimer: PropTypes.func.isRequired,
-    startTimer: PropTypes.func.isRequired,
-    pauseTimer: PropTypes.func.isRequired,
-    stopTimer: PropTypes.func.isRequired,
-    skipTimer: PropTypes.func.isRequired,
+    timerSet: PropTypes.func.isRequired,
+    timerStart: PropTypes.func.isRequired,
+    timerGoOn: PropTypes.func.isRequired,
+    timerPause: PropTypes.func.isRequired,
+    timerStop: PropTypes.func.isRequired,
+    timerSkip: PropTypes.func.isRequired,
     typesIndex: PropTypes.func.isRequired,
   }
 
@@ -22,7 +24,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.types().then(() => this.set())
+    Promise.all([
+      this.lastEntry(),
+      this.types(),
+    ])
+    .then(() => this.set())
   }
 
   shouldComponentUpdate(nextProps) {
@@ -61,28 +67,38 @@ class App extends Component {
     this.skip()
   }
 
+  lastEntry() {
+    return this.props.entriesLast()
+  }
+
   types() {
     return this.props.typesIndex()
   }
 
   set(type) {
-    this.props.setTimer(type)
+    this.props.timerSet(type)
   }
 
   start() {
-    this.props.startTimer()
+    const { timerStart, timerGoOn, paused } = this.props
+
+    if (paused) {
+      timerGoOn()
+    } else {
+      timerStart()
+    }
   }
 
   pause() {
-    this.props.pauseTimer()
+    this.props.timerPause()
   }
 
   stop() {
-    this.props.stopTimer()
+    this.props.timerStop()
   }
 
   skip() {
-    this.props.skipTimer()
+    this.props.timerSkip()
   }
 
   render() {

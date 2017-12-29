@@ -1,14 +1,19 @@
 const timer = require('./timerSocket')
 
-const sockets = (io) => {
-  io.on('connection', (socket) => {
-    console.log('connected')
+const sockets = [
+  timer,
+]
 
-    Object.entries(timer(io, socket))
-      .forEach(([event, handler]) => {
-        socket.on(event, handler)
-      })
+const connectSocket = (io) => {
+  io.on('connection', (client) => {
+    console.log('io connected')
+
+    sockets.forEach(socket => socket(io, client))
+
+    client.on('diconnect', () => {
+      console.log('disconnected')
+    })
   })
 }
 
-module.exports = sockets
+module.exports = connectSocket

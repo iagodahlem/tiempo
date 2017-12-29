@@ -1,8 +1,8 @@
-export const allIds = (arr) => arr
-  .map(item => item.id)
+export const allIds = (arr, prop = 'id') => arr
+  .map(item => item[prop])
 
-export const byId = (arr) => arr
+export const byId = (arr, prop = 'id') => arr
   .reduce((obj, item) => ({
     ...obj,
-    [item.id]: item,
+    [item[prop]]: item,
   }), {})

@@ -15,10 +15,8 @@ const index = async () => {
     .map(builder)
 }
 
-const show = async (name) => {
-  const type = await Type.findOne({
-    where: { name },
-  })
+const show = async (where) => {
+  const type = await Type.findOne({ where })
 
   return builder(data(type))
 }

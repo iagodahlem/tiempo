@@ -1,9 +1,13 @@
 const { typesService } = require('../services')
 
 const index = async (req, res) => {
-  const types = await typesService.index()
+  try {
+    const types = await typesService.index()
 
-  res.json(types)
+    res.status(200).send(types)
+  } catch (error) {
+    res.status(400).send(error)
+  }
 }
 
 module.exports = {

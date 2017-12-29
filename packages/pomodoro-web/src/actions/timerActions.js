@@ -1,82 +1,125 @@
 import * as types from '../constants/actionTypes'
 import * as selectors from '../reducers/selectors'
-import { diffSeconds } from '../services/dateService'
+import { emit } from '../services/socketService'
 
 export const set = () => (dispatch, getState) => {
-  const setTimer = (type, duration) => ({
+  const { type } = selectors.getCurrentSession(getState())
+  const { duration } = selectors.getTypeByLabel(getState(), type)
+
+  dispatch({
     type: types.TIMER_SET,
     payload: {
-      type,
-      duration,
+      lapse: duration,
     },
   })
-
-  const { type } = selectors.getCurrentSession(getState())
-  const { duration } = selectors.getType(getState(), type)
-
-  dispatch(setTimer(type, duration))
 }
 
 export const start = () => (dispatch, getState) => {
-  const startTimer = (start, interval) => ({
+  const { type } = selectors.getCurrentSession(getState())
+
+  emit(types.TIMER_START, {
+    type,
+  })
+}
+
+export const onStart = (entry) => (dispatch, getState) => {
+  const interval = setInterval(() => dispatch(tick()), 100)
+
+  dispatch({
     type: types.TIMER_START,
     payload: {
-      start,
+      entry,
       interval,
     },
   })
+}
 
-  const lapse = selectors.getTimerLapse(getState())
-  const currentStart = selectors.getEntryStart(getState())
-  const duration = selectors.getEntryDuration(getState())
+export const goOn = () => (dispatch, getState) => {
+  const { id } = selectors.getEntry(getState())
 
-  const start = currentStart ? Date.now() - (duration - lapse) : Date.now()
+  emit(types.TIMER_GO_ON, {
+    id,
+  })
+}
+
+export const onGoOn = (entry) => (dispatch, getState) => {
+  const state = getState()
+  const duration = selectors.getEntryDuration(state)
+  const lapse = selectors.getTimerLapse(state)
+
+  const start = entry.start - (duration - lapse)
   const interval = setInterval(() => dispatch(tick()), 100)
 
-  dispatch(startTimer(start, interval))
+  dispatch({
+    type: types.TIMER_GO_ON,
+    payload: {
+      entry: { ...entry, start },
+      interval,
+    },
+  })
 }
 
 export const tick = () => (dispatch, getState) => {
-  const tickTimer = (lapse) => ({ type: types.TIMER_TICK, payload: { lapse }})
-
   const start = selectors.getEntryStart(getState())
   const duration = selectors.getEntryDuration(getState())
-  const currentLapse = selectors.getTimerLapse(getState())
 
   const lapse = start + duration - Date.now()
-  const isLessThanOneSecond = diffSeconds(currentLapse, lapse) <= .9
 
-  if (lapse <= 0) {
+  const isLessThanZero = lapse <= 0
+
+  if (isLessThanZero) {
     return dispatch(skip())
   }
 
-  if (isLessThanOneSecond) {
-    return
-  }
-
-  dispatch(tickTimer(lapse))
+  dispatch({
+    type: types.TIMER_TICK,
+    payload: {
+      lapse,
+    },
+  })
 }
 
 export const pause = () => (dispatch, getState) => {
+  const { id } = selectors.getEntry(getState())
+
+  emit(types.TIMER_PAUSE, {
+    id,
+  })
+}
+
+export const onPause = (entry) => (dispatch, getState) => {
   const interval = selectors.getTimerInterval(getState())
 
   clearInterval(interval)
 
   dispatch({
     type: types.TIMER_PAUSE,
+    payload: {
+      entry,
+    },
   })
 }
 
 export const stop = () => (dispatch, getState) => {
-  const interval = selectors.getTimerInterval(getState())
-  const duration = selectors.getEntryDuration(getState())
+  const { id } = selectors.getEntry(getState())
+
+  emit(types.TIMER_STOP, {
+    id,
+  })
+}
+
+export const onStop = (entry) => (dispatch, getState) => {
+  const state = getState()
+  const duration = selectors.getEntryDuration(state)
+  const interval = selectors.getTimerInterval(state)
 
   clearInterval(interval)
 
   dispatch({
     type: types.TIMER_STOP,
     payload: {
-      duration,
+      entry,
+      lapse: duration,
     },
   })
 }
