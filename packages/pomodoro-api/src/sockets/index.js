@@ -6,7 +6,7 @@ const events = [
   timerSocket,
 ]
 
-const connectSocket = (io) => {
+const sockets = (io) => {
   io.on('connection', (socket) => {
     console.log('connected')
 
@@ -18,4 +18,4 @@ const connectSocket = (io) => {
   })
 }
 
-module.exports = connectSocket
+module.exports = sockets

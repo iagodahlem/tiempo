@@ -1,6 +1,7 @@
-const { Entry } = require('../models')
-const typesService = require('./typesService')
-const usersService = require('./usersService')
+const { Entry } = require('../../models')
+const { dataValues } = require('../baseService')
+const typesService = require('../typesService')
+const usersService = require('../usersService')
 
 const loggedUserId = '822149dc-9025-44b9-ba00-c406af47746a'
 
@@ -9,14 +10,12 @@ const builder = (entry) => ({
   start: Number(entry.start),
 })
 
-const data = (entry) => entry.dataValues
-
 const last = async () => {
   const entry = await Entry.findOne({
     order: [['createdAt', 'DESC']],
   })
 
-  return builder(data(entry))
+  return builder(dataValues(entry))
 }
 
 const create = async ({ start = Date.now(), running = true, type, user = loggedUserId }) => {
@@ -29,7 +28,7 @@ const create = async ({ start = Date.now(), running = true, type, user = loggedU
     userId,
   })
 
-  return builder(data(entry))
+  return builder(dataValues(entry))
 }
 
 const update = async (id, { start, end, running }) => {
@@ -40,7 +39,7 @@ const update = async (id, { start, end, running }) => {
     running,
   })
 
-  return builder(data(entry))
+  return builder(dataValues(entry))
 }
 
 module.exports = {

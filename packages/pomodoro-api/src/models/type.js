@@ -7,12 +7,10 @@ module.exports = (sequelize, DataTypes) => {
 
   Type.associate = (models) => {
     models.Type.hasMany(models.Entry, {
-      // as: 'type',
       foreignKey: 'typeId',
     })
 
     models.Type.hasMany(models.Session, {
-      // as: 'type',
       foreignKey: 'typeId',
     })
   }
