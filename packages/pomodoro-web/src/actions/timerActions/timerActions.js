@@ -1,5 +1,5 @@
-import * as types from '../constants/actionTypes'
-import * as selectors from '../reducers/selectors'
+import * as types from '../../constants/actionTypes'
+import * as selectors from '../../selectors'
 
 export const set = () => (dispatch, getState) => {
   const { type } = selectors.getCurrentSession(getState())

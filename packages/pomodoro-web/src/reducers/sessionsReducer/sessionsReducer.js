@@ -1,5 +1,5 @@
-import * as types from '../constants/actionTypes'
-import timerSessions from '../constants/timerSessions'
+import timerSessions from '../../constants/timerSessions'
+import * as types from '../../constants/actionTypes'
 
 const initialState = timerSessions
 

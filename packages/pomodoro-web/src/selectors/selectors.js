@@ -1,8 +1,8 @@
-import * as fromEntry from './entryReducer'
-import * as fromSessions from './sessionsReducer'
-import * as fromSocket from './socketReducer'
-import * as fromTimer from './timerReducer'
-import * as fromTypes from './typesReducer'
+import * as fromEntry from '../reducers/entryReducer'
+import * as fromSessions from '../reducers/sessionsReducer'
+import * as fromSocket from '../reducers/socketReducer'
+import * as fromTimer from '../reducers/timerReducer'
+import * as fromTypes from '../reducers/typesReducer'
 
 export const getEntry = (state) => ({ ...state.entry })
 export const getEntryStart = (state) => fromEntry.getStart(state.entry)

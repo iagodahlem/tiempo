@@ -1,6 +1,6 @@
 import reducer, * as fromReducer from './sessionsReducer'
-import timerSessions from '../constants/timerSessions'
-import * as types from '../constants/actionTypes'
+import timerSessions from '../../constants/timerSessions'
+import * as types from '../../constants/actionTypes'
 
 describe('sessionsReducer', () => {
   it('should return the initial state', () => {

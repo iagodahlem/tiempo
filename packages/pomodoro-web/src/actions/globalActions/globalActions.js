@@ -1,7 +1,7 @@
-import * as events from '../constants/events'
-import * as types from '../constants/actionTypes'
-import * as selectors from '../reducers/selectors'
-import * as timerActions from '../actions/timerActions'
+import * as events from '../../constants/events'
+import * as types from '../../constants/actionTypes'
+import * as timerActions from '../../actions/timerActions'
+import * as selectors from '../../selectors'
 
 export const initialData = () => (dispatch, getState) => {
   const state = getState()
@@ -24,11 +24,7 @@ export const onInitialData = (data) => (dispatch, getState) => {
   dispatch(onInitialSuccess())
   dispatch(timerActions.set())
 
-  // if (entry.running && ) {
-
+  // if (entry.running) {
+  //   dispatch(timerActions.onGoOn(entry))
   // }
-
-  if (entry.running) {
-    dispatch(timerActions.onGoOn(entry))
-  }
 }

@@ -1,5 +1,5 @@
-import * as types from '../constants/actionTypes'
-import * as socketService from '../services/socketService'
+import * as types from '../../constants/actionTypes'
+import * as socketService from '../../services/socketService'
 
 export const connect = () => (dispatch, getState) => {
   const socketConnect = (socket) => ({

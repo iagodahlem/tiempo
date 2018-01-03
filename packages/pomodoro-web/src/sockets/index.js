@@ -6,8 +6,9 @@ const handlers = [
   timerSocket,
 ]
 
-export default (socket, dispatch) => {
-  handlers.forEach(handle => {
-    handle(socket, dispatch)
-  })
+const sockets = (socket, dispatch) => {
+  handlers
+    .forEach(handle => handle(socket, dispatch))
 }
+
+export default sockets

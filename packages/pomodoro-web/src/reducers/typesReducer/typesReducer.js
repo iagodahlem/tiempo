@@ -1,5 +1,5 @@
-import * as types from '../constants/actionTypes'
-import * as normalizeService from '../services/normalizeService'
+import * as types from '../../constants/actionTypes'
+import * as normalizeService from '../../services/normalizeService'
 
 const initialState = {
   byId: {},

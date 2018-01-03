@@ -1,5 +1,5 @@
 import reducer, * as fromReducer from './entryReducer'
-import * as types from '../constants/actionTypes'
+import * as types from '../../constants/actionTypes'
 
 describe('entryReducer', () => {
   it('should return the initial state', () => {

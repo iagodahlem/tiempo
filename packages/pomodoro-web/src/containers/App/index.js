@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as socketActions from '../../actions/socketActions'
 import * as globalActions from '../../actions/globalActions'
 import * as timerActions from '../../actions/timerActions'
-import * as selectors from '../../reducers/selectors'
+import * as selectors from '../../selectors'
 
 const mapStateToProps = (state) => ({
   name: selectors.getEntryName(state),
