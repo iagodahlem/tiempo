@@ -100,7 +100,7 @@ class App extends Component {
   }
 
   render() {
-    const { name, lapse, running, sessions } = this.props
+    const { name, lapse, running, paused, sessions } = this.props
 
     return (
       <main className='App'>
@@ -110,6 +110,7 @@ class App extends Component {
           <Timer
             lapse={lapse}
             running={running}
+            paused={paused}
             onStart={this.handleStartTimer}
             onPause={this.handlePauseTimer}
             onStop={this.handleStopTimer}
