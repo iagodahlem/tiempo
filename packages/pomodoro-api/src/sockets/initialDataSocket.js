@@ -7,15 +7,19 @@ const initialDataSocket = (io, socket) => {
 }
 
 const onInitialData = async (io, socket) => {
-  console.log('onInitialData')
+  console.log('SOCKET initial data')
 
-  const entry = await entriesService.last()
-  const types = await typesService.index()
+  try {
+    const entry = await entriesService.last()
+    const types = await typesService.index()
 
-  io.emit(events.INITIAL_DATA, {
-    entry,
-    types,
-  })
+    io.emit(events.INITIAL_DATA, {
+      entry,
+      types,
+    })
+  } catch (error) {
+    console.log('error', error)
+  }
 }
 
 module.exports = initialDataSocket

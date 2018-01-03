@@ -1,0 +1,6 @@
+{
+  "name": "pomodoro-api",
+  "alias": "pomodoro-api",
+  "dotenv": true,
+  "type": "npm"
+}

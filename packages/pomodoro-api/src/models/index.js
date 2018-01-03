@@ -8,8 +8,8 @@ const env = process.env.NODE_ENV || 'development'
 const config = database[env]
 const db = {}
 
-const sequelize = config.env
-  ? new Sequelize(process.env[config.env], config)
+const sequelize = config.use_env_variable
+  ? new Sequelize(process.env[config.use_env_variable], config)
   : new Sequelize(config.database, config.username, config.password, config)
 
 const isModelFile = (file) => (file.indexOf('.') !== 0)

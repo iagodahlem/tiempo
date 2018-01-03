@@ -10,7 +10,7 @@ const timerSocket = (io, socket) => {
 }
 
 const onStart = async (io, socket, { type }) => {
-  console.log('timer start')
+  console.log('SOCKET timer start')
 
   const entry = await entriesService.create({
     type,
@@ -20,7 +20,7 @@ const onStart = async (io, socket, { type }) => {
 }
 
 const onGoOn = async (io, socket, { id }) => {
-  console.log('timer go on')
+  console.log('SOCKET timer go on')
 
   const entry = await entriesService.update(id, {
     start: Date.now(),
@@ -31,7 +31,7 @@ const onGoOn = async (io, socket, { id }) => {
 }
 
 const onPause = async (io, socket, { id }) => {
-  console.log('timer pause')
+  console.log('SOCKET timer pause')
 
   const entry = await entriesService.update(id, {
     running: false,
@@ -41,7 +41,7 @@ const onPause = async (io, socket, { id }) => {
 }
 
 const onStop = async (io, socket, { id } = {}) => {
-  console.log('timer stop')
+  console.log('SOCKET timer stop')
 
   const entry = await entriesService.update(id, {
     end: Date.now(),

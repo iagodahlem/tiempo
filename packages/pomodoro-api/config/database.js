@@ -6,8 +6,9 @@ module.exports = {
     host: '127.0.0.1',
     port: 5432,
     dialect: 'postgres',
-    operatorsAliases: false,
+    seederStorage: 'sequelize',
     logging: false,
+    operatorsAliases: false,
   },
   test: {
     username: 'pomodoro',
@@ -16,13 +17,18 @@ module.exports = {
     host: '127.0.0.1',
     port: 5432,
     dialect: 'postgres',
-    operatorsAliases: false,
+    seederStorage: 'sequelize',
     logging: false,
+    operatorsAliases: false,
   },
   production: {
-    env: 'DATABASE_URL',
+    'use_env_variable': 'DATABASE_URL',
     dialect: 'postgres',
-    operatorsAliases: false,
+    seederStorage: 'sequelize',
     logging: false,
+    operatorsAliases: false,
+    dialectOptions: {
+      ssl: true,
+    },
   },
 }
