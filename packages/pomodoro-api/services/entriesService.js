@@ -40,7 +40,7 @@ const update = async (id, { start, end, running }) => {
     running,
   })
 
-  return data(entry)
+  return builder(data(entry))
 }
 
 module.exports = {

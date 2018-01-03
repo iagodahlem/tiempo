@@ -1,9 +1,9 @@
 import App from './App'
 import { connect } from 'react-redux'
-import * as selectors from '../../reducers/selectors'
+import * as socketActions from '../../actions/socketActions'
+import * as globalActions from '../../actions/globalActions'
 import * as timerActions from '../../actions/timerActions'
-import * as entriesActions from '../../actions/entriesActions'
-import * as typesActions from '../../actions/typesActions'
+import * as selectors from '../../reducers/selectors'
 
 const mapStateToProps = (state) => ({
   name: selectors.getEntryName(state),
@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
   timerPause: () => dispatch(timerActions.pause()),
   timerStop: () => dispatch(timerActions.stop()),
   timerSkip: () => dispatch(timerActions.skip()),
-  entriesLast: () => dispatch(entriesActions.last()),
-  typesIndex: () => dispatch(typesActions.index()),
+  socketConnect: () => dispatch(socketActions.connect()),
+  initialData: () => dispatch(globalActions.initialData()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

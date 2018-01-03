@@ -1,14 +1,18 @@
 import { combineReducers } from 'redux'
-import entry from './entryReducer'
-import sessions from './sessionsReducer'
-import timer from './timerReducer'
-import types from './typesReducer'
+import entryReducer from './entryReducer'
+import globalReducer from './globalReducer'
+import sessionsReducer from './sessionsReducer'
+import socketReducer from './socketReducer'
+import timerReducer from './timerReducer'
+import typesReducer from './typesReducer'
 
 const rootReducer = combineReducers({
-  entry,
-  sessions,
-  timer,
-  types,
+  entry: entryReducer,
+  global: globalReducer,
+  sessions: sessionsReducer,
+  socket: socketReducer,
+  timer: timerReducer,
+  types: typesReducer,
 })
 
 export default rootReducer

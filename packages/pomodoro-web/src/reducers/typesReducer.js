@@ -4,29 +4,15 @@ import * as normalizeService from '../services/normalizeService'
 const initialState = {
   byId: {},
   allIds: [],
-  isLoading: false,
-  error: null,
 }
 
-const typesReducer = (state = initialState, { type, payload, message }) => {
+const typesReducer = (state = initialState, { type, payload = {} }) => {
   switch (type) {
-    case types.TYPES_INDEX_REQUEST:
+    case types.GLOBAL_SUCCESS:
       return {
         ...state,
-        isLoading: true,
-      }
-    case types.TYPES_INDEX_SUCCESS:
-      return {
-        ...state,
-        byId: normalizeService.byId(payload),
-        allIds: normalizeService.allIds(payload),
-        isLoading: false,
-      }
-    case types.TYPES_INDEX_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: message,
+        byId: normalizeService.byId(payload.types),
+        allIds: normalizeService.allIds(payload.types),
       }
     default:
       return state

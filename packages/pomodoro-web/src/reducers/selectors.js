@@ -1,5 +1,6 @@
 import * as fromEntry from './entryReducer'
 import * as fromSessions from './sessionsReducer'
+import * as fromSocket from './socketReducer'
 import * as fromTimer from './timerReducer'
 import * as fromTypes from './typesReducer'
 
@@ -12,6 +13,8 @@ export const getEntryType = (state) => getType(state, state.entry.typeId)
 export const getSession = (state, id) => fromSessions.getSession(state.sessions, id)
 export const getCurrentSession = (state) => fromSessions.getCurrentSession(state.sessions)
 export const getSessions = (state) => fromSessions.getSessions(state.sessions)
+
+export const getSocket = (state) => fromSocket.getSocket(state.socket)
 
 export const getTimer = (state) => ({ ...state.timer })
 export const getTimerLapse = (state) => fromTimer.getLapse(state.timer)

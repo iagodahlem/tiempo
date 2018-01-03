@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store/configureStore'
-import connectSocket from './sockets'
+import registerServiceWorker from './registerServiceWorker'
 import { App } from './containers'
 import './index.css'
 
@@ -17,4 +16,3 @@ const Root = () => (
 
 ReactDOM.render(<Root />, document.getElementById('root'))
 registerServiceWorker()
-connectSocket(store)

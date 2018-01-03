@@ -1,16 +1,13 @@
-import { connect } from '../services/socketService'
+import initialDataSocket from './initialDataSocket'
 import timerSocket from './timerSocket'
 
-const sockets = [
+const handlers = [
+  initialDataSocket,
   timerSocket,
 ]
 
-const connectSocket = ({ dispatch }) => {
-  connect()
-
-  sockets.forEach(socket => {
-    socket(dispatch)
+export default (socket, dispatch) => {
+  handlers.forEach(handle => {
+    handle(socket, dispatch)
   })
 }
-
-export default connectSocket

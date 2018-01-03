@@ -1,6 +1,5 @@
 import * as types from '../constants/actionTypes'
 import * as selectors from '../reducers/selectors'
-import { emit } from '../services/socketService'
 
 export const set = () => (dispatch, getState) => {
   const { type } = selectors.getCurrentSession(getState())
@@ -15,9 +14,11 @@ export const set = () => (dispatch, getState) => {
 }
 
 export const start = () => (dispatch, getState) => {
-  const { type } = selectors.getCurrentSession(getState())
+  const state = getState()
+  const socket = selectors.getSocket(state)
+  const { type } = selectors.getCurrentSession(state)
 
-  emit(types.TIMER_START, {
+  socket.emit(types.TIMER_START, {
     type,
   })
 }
@@ -35,9 +36,11 @@ export const onStart = (entry) => (dispatch, getState) => {
 }
 
 export const goOn = () => (dispatch, getState) => {
-  const { id } = selectors.getEntry(getState())
+  const state = getState()
+  const socket = selectors.getSocket(state)
+  const { id } = selectors.getEntry(state)
 
-  emit(types.TIMER_GO_ON, {
+  socket.emit(types.TIMER_GO_ON, {
     id,
   })
 }
@@ -80,9 +83,11 @@ export const tick = () => (dispatch, getState) => {
 }
 
 export const pause = () => (dispatch, getState) => {
-  const { id } = selectors.getEntry(getState())
+  const state = getState()
+  const socket = selectors.getSocket(state)
+  const { id } = selectors.getEntry(state)
 
-  emit(types.TIMER_PAUSE, {
+  socket.emit(types.TIMER_PAUSE, {
     id,
   })
 }
@@ -101,9 +106,11 @@ export const onPause = (entry) => (dispatch, getState) => {
 }
 
 export const stop = () => (dispatch, getState) => {
-  const { id } = selectors.getEntry(getState())
+  const state = getState()
+  const socket = selectors.getSocket(state)
+  const { id } = selectors.getEntry(state)
 
-  emit(types.TIMER_STOP, {
+  socket.emit(types.TIMER_STOP, {
     id,
   })
 }

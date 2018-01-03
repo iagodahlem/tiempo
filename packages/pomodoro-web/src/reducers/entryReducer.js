@@ -1,14 +1,12 @@
 import * as types from '../constants/actionTypes'
 
-const initialState = {
-  isLoading: false,
-  error: null,
-}
+const initialState = {}
 
 const entryReducer = (state = initialState, { type, payload = {} }) => {
-  const { entry, message } = payload
+  const { entry } = payload
 
   switch (type) {
+    case types.GLOBAL_SUCCESS:
     case types.TIMER_START:
     case types.TIMER_GO_ON:
     case types.TIMER_PAUSE:
@@ -16,23 +14,6 @@ const entryReducer = (state = initialState, { type, payload = {} }) => {
       return {
         ...state,
         ...entry,
-      }
-    case types.ENTRIES_LAST_REQUEST:
-      return {
-        ...state,
-        isLoading: true,
-      }
-    case types.ENTRIES_LAST_SUCCESS:
-      return {
-        ...state,
-        ...entry,
-        isLoading: false,
-      }
-    case types.ENTRIES_LAST_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: message,
       }
     default:
       return state

@@ -1,17 +1,24 @@
 import io from 'socket.io-client'
+import sockets from '../sockets'
 
-const API_URL = process.env.REACT_APP_WS_URL
+const WS_URL = process.env.REACT_APP_WS_URL
 
-let socket
+export const connect = (dispatch) => {
+  return new Promise((resolve, reject) => {
+    const socket = io(WS_URL)
 
-export const connect = () => {
-  socket = io.connect(API_URL)
-}
+    if (!socket) {
+      reject()
+    }
 
-export const emit = (event, data) => {
-  socket.emit(event, data)
-}
+    socket.on('connect', () => {
+      console.log('connected')
+      sockets(socket, dispatch)
+      resolve(socket)
+    })
 
-export const on = (event, cb) => {
-  socket.on(event, cb)
+    socket.on('disconnect', () => {
+      console.log('disconnected')
+    })
+  })
 }

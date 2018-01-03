@@ -1,16 +1,18 @@
-const timer = require('./timerSocket')
+const initialDataSocket = require('./initialDataSocket')
+const timerSocket = require('./timerSocket')
 
-const sockets = [
-  timer,
+const events = [
+  initialDataSocket,
+  timerSocket,
 ]
 
 const connectSocket = (io) => {
-  io.on('connection', (client) => {
-    console.log('io connected')
+  io.on('connection', (socket) => {
+    console.log('connected')
 
-    sockets.forEach(socket => socket(io, client))
+    events.forEach(event => event(io, socket))
 
-    client.on('diconnect', () => {
+    socket.on('disconnect', () => {
       console.log('disconnected')
     })
   })

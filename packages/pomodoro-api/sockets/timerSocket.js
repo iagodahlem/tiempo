@@ -1,16 +1,12 @@
 const handler = require('./handler')
+const events = require('../constants/events')
 const { entriesService } = require('../services')
 
-const TIMER_START = 'TIMER_START'
-const TIMER_GO_ON = 'TIMER_GO_ON'
-const TIMER_PAUSE = 'TIMER_PAUSE'
-const TIMER_STOP = 'TIMER_STOP'
-
 const timerSocket = (io, socket) => {
-  socket.on(TIMER_START, handler(io, socket, onStart))
-  socket.on(TIMER_GO_ON, handler(io, socket, onGoOn))
-  socket.on(TIMER_PAUSE, handler(io, socket, onPause))
-  socket.on(TIMER_STOP, handler(io, socket, onStop))
+  socket.on(events.TIMER_START, handler(io, socket, onStart))
+  socket.on(events.TIMER_GO_ON, handler(io, socket, onGoOn))
+  socket.on(events.TIMER_PAUSE, handler(io, socket, onPause))
+  socket.on(events.TIMER_STOP, handler(io, socket, onStop))
 }
 
 const onStart = async (io, socket, { type }) => {
@@ -20,7 +16,7 @@ const onStart = async (io, socket, { type }) => {
     type,
   })
 
-  io.emit(TIMER_START, { entry })
+  io.emit(events.TIMER_START, { entry })
 }
 
 const onGoOn = async (io, socket, { id }) => {
@@ -31,7 +27,7 @@ const onGoOn = async (io, socket, { id }) => {
     running: true,
   })
 
-  io.emit(TIMER_GO_ON, { entry })
+  io.emit(events.TIMER_GO_ON, { entry })
 }
 
 const onPause = async (io, socket, { id }) => {
@@ -41,7 +37,7 @@ const onPause = async (io, socket, { id }) => {
     running: false,
   })
 
-  io.emit(TIMER_PAUSE, { entry })
+  io.emit(events.TIMER_PAUSE, { entry })
 }
 
 const onStop = async (io, socket, { id } = {}) => {
@@ -52,7 +48,7 @@ const onStop = async (io, socket, { id } = {}) => {
     running: false,
   })
 
-  io.emit(TIMER_STOP, { entry })
+  io.emit(events.TIMER_STOP, { entry })
 }
 
 module.exports = timerSocket

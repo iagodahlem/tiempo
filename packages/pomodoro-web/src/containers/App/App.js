@@ -16,7 +16,8 @@ class App extends Component {
     timerPause: PropTypes.func.isRequired,
     timerStop: PropTypes.func.isRequired,
     timerSkip: PropTypes.func.isRequired,
-    typesIndex: PropTypes.func.isRequired,
+    socketConnect: PropTypes.func.isRequired,
+    initialData: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -24,11 +25,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Promise.all([
-      this.lastEntry(),
-      this.types(),
-    ])
-    .then(() => this.set())
+    this.connect()
+      .then(() => this.initialData())
   }
 
   shouldComponentUpdate(nextProps) {
@@ -67,12 +65,12 @@ class App extends Component {
     this.skip()
   }
 
-  lastEntry() {
-    return this.props.entriesLast()
+  connect() {
+    return this.props.socketConnect()
   }
 
-  types() {
-    return this.props.typesIndex()
+  initialData() {
+    return this.props.initialData()
   }
 
   set(type) {
