@@ -1,4 +1,5 @@
 const http = require('http')
+const https = require('https')
 const socket = require('socket.io')
 const app = require('./src/app')
 const models = require('./src/models')
@@ -16,3 +17,6 @@ models.sequelize.sync().then(() => {
 })
 
 sockets(io)
+
+// keep alive for Now, pings each 20m
+setInterval(() => https.get('https://pomodoro-api.now.sh/ping'), 1000 * 60 * 20)
