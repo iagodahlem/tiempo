@@ -1,5 +1,35 @@
 # pomodoro-api
 
+All code related to the [api](https://pomodoro-api.now.sh).
+
+## Install
+
+To install dependencies you will need [yarn](https://yarnpkg.com/en/), so go get it if you don't have it yet.
+
+```sh
+yarn
+```
+
+## Running
+
+On the first run, you will need to setup the database.
+
+```sh
+yarn db:setup
+```
+
+To start the development server.
+
+```sh
+yarn start
+```
+
+To run all the test suite.
+
+```sh
+yarn test
+```
+
 ## Database
 
 ```
@@ -46,6 +76,6 @@ sessions
 const index = () => {}
 const show = (id) => {}
 const create = (data) => {}
-const update = (id) => {}
+const update = (id, data) => {}
 const destroy = (id) => {}
 ```
