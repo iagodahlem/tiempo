@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TimerActions from '../TimerActions'
-import TimerFooter from '../TimerFooter'
-import TimerHeader from '../TimerHeader'
-import TimerLapse from '../TimerLapse'
+import TimerActions from './TimerActions'
+import TimerFooter from './TimerFooter'
+import TimerHeader from './TimerHeader'
+import TimerLapse from './TimerLapse'
 import Loader from '../../components/Loader'
 import './Timer.css'
 

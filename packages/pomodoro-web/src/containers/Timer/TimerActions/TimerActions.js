@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button } from '../../components'
-import { Pause, Play, Skip, Stop } from '../../icons'
+import { Button } from '../../../components'
+import { Pause, Play, Skip, Stop } from '../../../icons'
 import './TimerActions.css'
 
 class TimerActions extends Component {

@@ -1,6 +1,6 @@
 import TimerLapse from './TimerLapse'
 import { connect } from 'react-redux'
-import * as selectors from '../../selectors'
+import * as selectors from '../../../selectors'
 
 const mapStateToProps = (state) => ({
   lapse: selectors.getTimerLapse(state),

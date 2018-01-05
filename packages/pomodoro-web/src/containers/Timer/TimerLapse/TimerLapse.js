@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Format } from '../../components'
+import { Format } from '../../../components'
 import './TimerLapse.css'
 
 const TimerLapse = ({ lapse }) => (

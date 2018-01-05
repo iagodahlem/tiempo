@@ -1,7 +1,7 @@
 import TimerActions from './TimerActions'
 import { connect } from 'react-redux'
-import * as timerActions from '../../actions/timerActions'
-import * as selectors from '../../selectors'
+import * as timerActions from '../../../actions/timerActions'
+import * as selectors from '../../../selectors'
 
 const mapStateToProps = (state) => ({
   running: selectors.getEntryRunning(state),

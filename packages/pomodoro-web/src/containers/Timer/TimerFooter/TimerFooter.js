@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Footer } from '../../components'
+import { Footer } from '../../../components'
 import './TimerFooter.css'
 
 const TimerFooter = ({ sessions }) => (
