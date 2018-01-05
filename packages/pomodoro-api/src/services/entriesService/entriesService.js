@@ -6,22 +6,15 @@ const usersService = require('../usersService')
 const builder = (entry) => ({
   ...entry,
   start: Number(entry.start),
+  update: Number(entry.update),
+  runned: Number(entry.runned),
+  end: Number(entry.end),
 })
 
-const last = async () => {
-  try {
-    const entry = await Entry.findOne({
-      order: [['createdAt', 'DESC']],
-    })
+const show = async (id) => {
+  const entry = await Entry.findById(id)
 
-    if (!entry) {
-      return {}
-    }
-
-    return builder(dataValues(entry))
-  } catch (error) {
-    // TODO: thrown something
-  }
+  return builder(dataValues(entry))
 }
 
 const create = async ({ start = Date.now(), running = true, type, user }) => {
@@ -37,19 +30,34 @@ const create = async ({ start = Date.now(), running = true, type, user }) => {
   return builder(dataValues(entry))
 }
 
-const update = async (id, { start, end, running }) => {
+const update = async (id, { update, runned, end, running, paused }) => {
   const entry = await Entry.findById(id)
   const newEntry = await entry.update({
-    start,
+    update,
+    runned,
     end,
     running,
+    paused,
   })
 
-  return builder(dataValues(entry))
+  return builder(dataValues(newEntry))
+}
+
+const last = async () => {
+  try {
+    const entry = await Entry.findOne({
+      order: [['createdAt', 'DESC']],
+    })
+
+    return builder(dataValues(entry))
+  } catch (error) {
+    // TODO: thrown something
+  }
 }
 
 module.exports = {
   last,
+  show,
   create,
   update,
 }

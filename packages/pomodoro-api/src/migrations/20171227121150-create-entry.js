@@ -12,10 +12,21 @@ module.exports = {
         allowNull: false,
         type: Sequelize.BIGINT,
       },
+      update: {
+        type: Sequelize.BIGINT,
+      },
+      runned: {
+        type: Sequelize.BIGINT,
+      },
       end: {
         type: Sequelize.BIGINT,
       },
       running: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      paused: {
         allowNull: false,
         type: Sequelize.BOOLEAN,
         defaultValue: false,

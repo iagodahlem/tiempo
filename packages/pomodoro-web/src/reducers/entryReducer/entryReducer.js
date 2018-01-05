@@ -1,6 +1,12 @@
 import * as types from '../../constants/actionTypes'
 
-const initialState = {}
+const initialState = {
+  start: null,
+  update: null,
+  end: null,
+  running: false,
+  paused: false,
+}
 
 const entryReducer = (state = initialState, { type, payload = {} }) => {
   const { entry } = payload
@@ -23,3 +29,6 @@ const entryReducer = (state = initialState, { type, payload = {} }) => {
 export default entryReducer
 
 export const getStart = (state) => state.start
+export const getUpdate = (state) => state.update
+export const getRunning = (state) => state.running
+export const getPaused = (state) => state.paused

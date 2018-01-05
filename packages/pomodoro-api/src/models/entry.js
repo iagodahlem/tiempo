@@ -1,8 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Entry = sequelize.define('Entry', {
     start: DataTypes.BIGINT,
+    update: DataTypes.BIGINT,
+    runned: DataTypes.BIGINT,
     end: DataTypes.BIGINT,
     running: DataTypes.BOOLEAN,
+    paused: DataTypes.BOOLEAN,
   })
 
   Entry.associate = (models) => {

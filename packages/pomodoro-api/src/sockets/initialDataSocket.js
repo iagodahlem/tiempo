@@ -7,13 +7,11 @@ const initialDataSocket = (io, socket) => {
 }
 
 const onInitialData = async (io, socket) => {
-  console.log('SOCKET initial data')
-
   try {
     const entry = await entriesService.last()
     const types = await typesService.index()
 
-    io.emit(events.INITIAL_DATA, {
+    socket.emit(events.INITIAL_DATA, {
       entry,
       types,
     })

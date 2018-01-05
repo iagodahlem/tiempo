@@ -1,57 +1,40 @@
+import { combineReducers } from 'redux'
 import * as types from '../../constants/actionTypes'
 
-const initialState = {
-  lapse: 0,
-  running: false,
-  paused: false,
-  interval: null,
-}
-
-const timer = (state = initialState, { type, payload = {} }) => {
-  const { lapse, interval } = payload
+const lapseReducer = (state = 0, { type, payload = {} }) => {
+  const { lapse } = payload
 
   switch (type) {
     case types.TIMER_SET:
-      return {
-        ...state,
-        lapse,
-      }
-    case types.TIMER_START:
-    case types.TIMER_GO_ON:
-      return {
-        ...state,
-        running: true,
-        paused: false,
-        interval,
-      }
     case types.TIMER_TICK:
-      return {
-        ...state,
-        lapse,
-      }
-    case types.TIMER_PAUSE:
-      return {
-        ...state,
-        running: false,
-        paused: true,
-        interval: null,
-      }
     case types.TIMER_STOP:
-      return {
-        ...state,
-        lapse,
-        running: false,
-        paused: false,
-        interval: null,
-      }
+      return lapse
     default:
       return state
   }
 }
 
-export default timer
+const intervalReducer = (state = null, { type, payload = {} }) => {
+  const { interval } = payload
+
+  switch (type) {
+    case types.TIMER_START:
+    case types.TIMER_GO_ON:
+      return interval
+    case types.TIMER_PAUSE:
+    case types.TIMER_STOP:
+      return null
+    default:
+      return state
+  }
+}
+
+const timerReducer = combineReducers({
+  lapse: lapseReducer,
+  interval: intervalReducer,
+})
+
+export default timerReducer
 
 export const getLapse = (state) => state.lapse
-export const getRunning = (state) => state.running
-export const getPaused = (state) => state.paused
 export const getInterval = (state) => state.interval

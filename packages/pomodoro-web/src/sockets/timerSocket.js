@@ -10,6 +10,10 @@ const timerSocket = (socket, dispatch) => {
     dispatch(timerActions.onGoOn(entry))
   })
 
+  socket.on(types.TIMER_TICK, ({ now }) => {
+    dispatch(timerActions.onTick(now))
+  })
+
   socket.on(types.TIMER_PAUSE, ({ entry }) => {
     dispatch(timerActions.onPause(entry))
   })

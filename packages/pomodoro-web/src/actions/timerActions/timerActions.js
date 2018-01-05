@@ -2,13 +2,19 @@ import * as types from '../../constants/actionTypes'
 import * as selectors from '../../selectors'
 
 export const set = () => (dispatch, getState) => {
-  const { type } = selectors.getCurrentSession(getState())
-  const { duration } = selectors.getTypeByLabel(getState(), type)
+  const state = getState()
+  const entry = selectors.getEntry(state)
+  const { type } = selectors.getCurrentSession(state)
+  const { duration } = selectors.getTypeByLabel(state, type)
+
+  const lapse = entry && entry.paused
+    ? (duration - entry.runned)
+    : duration
 
   dispatch({
     type: types.TIMER_SET,
     payload: {
-      lapse: duration,
+      lapse,
     },
   })
 }
@@ -24,7 +30,9 @@ export const start = () => (dispatch, getState) => {
 }
 
 export const onStart = (entry) => (dispatch, getState) => {
-  const interval = setInterval(() => dispatch(tick()), 100)
+  const interval = setInterval(() => dispatch(tick()), 1000)
+
+  dispatch(tick())
 
   dispatch({
     type: types.TIMER_START,
@@ -46,28 +54,30 @@ export const goOn = () => (dispatch, getState) => {
 }
 
 export const onGoOn = (entry) => (dispatch, getState) => {
-  const state = getState()
-  const duration = selectors.getEntryDuration(state)
-  const lapse = selectors.getTimerLapse(state)
+  const interval = setInterval(() => dispatch(tick()), 1000)
 
-  const start = entry.start - (duration - lapse)
-  const interval = setInterval(() => dispatch(tick()), 100)
+  dispatch(tick())
 
   dispatch({
     type: types.TIMER_GO_ON,
     payload: {
-      entry: { ...entry, start },
+      entry,
       interval,
     },
   })
 }
 
 export const tick = () => (dispatch, getState) => {
-  const start = selectors.getEntryStart(getState())
-  const duration = selectors.getEntryDuration(getState())
+  const socket = selectors.getSocket(getState())
 
-  const lapse = start + duration - Date.now()
+  socket.emit(types.TIMER_TICK)
+}
 
+export const onTick = (now) => (dispatch, getState) => {
+  const { start, update, duration } = selectors.getEntry(getState())
+  const current = update || start
+
+  const lapse = current + duration - now
   const isLessThanZero = lapse <= 0
 
   if (isLessThanZero) {
@@ -85,10 +95,14 @@ export const tick = () => (dispatch, getState) => {
 export const pause = () => (dispatch, getState) => {
   const state = getState()
   const socket = selectors.getSocket(state)
-  const { id } = selectors.getEntry(state)
+  const lapse = selectors.getTimerLapse(state)
+  const { id, duration } = selectors.getEntry(state)
+
+  const runned = duration - lapse
 
   socket.emit(types.TIMER_PAUSE, {
     id,
+    runned,
   })
 }
 

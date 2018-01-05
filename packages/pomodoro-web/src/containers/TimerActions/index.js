@@ -4,8 +4,8 @@ import * as timerActions from '../../actions/timerActions'
 import * as selectors from '../../selectors'
 
 const mapStateToProps = (state) => ({
-  running: selectors.getTimerRunning(state),
-  paused: selectors.getTimerPaused(state),
+  running: selectors.getEntryRunning(state),
+  paused: selectors.getEntryPaused(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({

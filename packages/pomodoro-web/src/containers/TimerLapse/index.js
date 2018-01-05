@@ -4,7 +4,7 @@ import * as selectors from '../../selectors'
 
 const mapStateToProps = (state) => ({
   lapse: selectors.getTimerLapse(state),
-  paused: selectors.getTimerPaused(state),
+  paused: selectors.getEntryPaused(state),
 })
 
 export default connect(mapStateToProps)(TimerLapse)
