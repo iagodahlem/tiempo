@@ -14,6 +14,14 @@ class Timer extends Component {
     loadInitialData: PropTypes.func.isRequired,
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.isLoading !== this.props.isLoading) {
+      return true
+    }
+
+    return false
+  }
+
   componentDidMount() {
     this.connect()
       .then(() => this.load())
@@ -29,10 +37,9 @@ class Timer extends Component {
 
   render() {
     return (
-      this.props.isLoading
-        ?
+      this.props.isLoading ? (
         <Loader />
-        :
+      ) : (
         <section className='Timer'>
           <TimerHeader />
           <div className='Timer__container'>
@@ -41,6 +48,7 @@ class Timer extends Component {
           </div>
           <TimerFooter />
         </section>
+      )
     )
   }
 }
