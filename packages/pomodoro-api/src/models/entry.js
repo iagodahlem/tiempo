@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       onDelete: 'CASCADE',
     })
+
+    models.Entry.hasMany(models.Session, {
+      foreignKey: 'entryId',
+    })
   }
 
   return Entry

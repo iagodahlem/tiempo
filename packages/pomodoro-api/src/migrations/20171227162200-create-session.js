@@ -13,24 +13,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
-      typeId: {
+      entryId: {
         allowNull: false,
         type: Sequelize.UUID,
         onDelete: 'CASCADE',
         references: {
-          model: 'Types',
+          model: 'Entries',
           key: 'id',
-          as: 'typeId',
-        },
-      },
-      userId: {
-        allowNull: false,
-        type: Sequelize.UUID,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Users',
-          key: 'id',
-          as: 'userId',
+          as: 'entryId',
         },
       },
       createdAt: {
