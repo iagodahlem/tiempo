@@ -1,11 +1,15 @@
 import React from 'react'
-import Timer from '../../containers/Timer'
+import PropTypes from 'prop-types'
 import './App.css'
 
-const App = () => (
+const App = ({ children }) => (
   <main className='App'>
-    <Timer />
+    {children}
   </main>
 )
+
+App.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 export default App
