@@ -1,6 +1,6 @@
 const handler = require('./handler')
 const events = require('../constants/events')
-const { entriesService, typesService } = require('../services')
+const { entriesService, globalsService, typesService } = require('../services')
 
 const initialDataSocket = (io, socket) => {
   socket.on(events.INITIAL_DATA, handler(io, socket, onInitialData))
@@ -9,14 +9,16 @@ const initialDataSocket = (io, socket) => {
 const onInitialData = async (io, socket) => {
   try {
     const entry = await entriesService.last()
+    const globals = await globalsService.index()
     const types = await typesService.index()
 
-    socket.emit(events.INITIAL_DATA, {
+    socket.emit(events.INITIAL_DATA_SUCCESS, {
       entry,
+      globals,
       types,
     })
   } catch (error) {
-    console.log('error', error)
+    socket.emit(events.INITIAL_DATA_FAILURE, error)
   }
 }
 
