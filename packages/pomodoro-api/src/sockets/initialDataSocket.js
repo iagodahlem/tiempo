@@ -9,12 +9,12 @@ const initialDataSocket = (io, socket) => {
 const onRequest = async (io, socket) => {
   try {
     const entry = await entriesService.last()
-    const globals = await globalsService.index()
+    const settings = await globalsService.index()
     const types = await typesService.index()
 
     socket.emit(events.INITIAL_DATA_SUCCESS, {
       entry,
-      globals,
+      settings,
       types,
     })
   } catch (error) {

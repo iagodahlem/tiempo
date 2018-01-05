@@ -5,6 +5,8 @@ export const TYPES_UPDATE = 'TYPES_UPDATE'
 export const GLOBAL_LOADED = 'GLOBAL_LOADED'
 export const GLOBAL_FAILURE = 'GLOBAL_FAILURE'
 
+export const SETTINGS_UPDATE = 'SETTINGS_UPDATE'
+
 export const SOCKET_CONNECT = 'SOCKET_CONNECT'
 
 export const TIMER_SET = 'TIMER_SET'

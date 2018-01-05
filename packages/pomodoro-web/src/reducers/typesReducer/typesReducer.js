@@ -1,4 +1,4 @@
-import * as types from '../../constants/actionTypes'
+import * as actionTypes from '../../constants/actionTypes'
 import * as normalizeService from '../../services/normalizeService'
 
 const initialState = {
@@ -7,12 +7,14 @@ const initialState = {
 }
 
 const typesReducer = (state = initialState, { type, payload = {} }) => {
+  const { types } = payload
+
   switch (type) {
-    case types.TYPES_UPDATE:
+    case actionTypes.TYPES_UPDATE:
       return {
         ...state,
-        byId: normalizeService.byId(payload.types),
-        allIds: normalizeService.allIds(payload.types),
+        byId: normalizeService.byId(types),
+        allIds: normalizeService.allIds(types),
       }
     default:
       return state
