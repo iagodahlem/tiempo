@@ -8,7 +8,7 @@ const initialState = {
 
 const typesReducer = (state = initialState, { type, payload = {} }) => {
   switch (type) {
-    case types.GLOBAL_SUCCESS:
+    case types.TYPES_UPDATE:
       return {
         ...state,
         byId: normalizeService.byId(payload.types),

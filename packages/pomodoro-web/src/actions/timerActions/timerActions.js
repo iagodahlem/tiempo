@@ -1,5 +1,16 @@
 import * as types from '../../constants/actionTypes'
+import * as entryActions from '../entryActions'
 import * as selectors from '../../selectors'
+
+export const init = () => (dispatch, getState) => {
+  const entry = selectors.getEntry(getState())
+
+  if (entry && entry.running) {
+    return dispatch(onGoOn(entry))
+  }
+
+  dispatch(set())
+}
 
 export const set = () => (dispatch, getState) => {
   const state = getState()
@@ -33,11 +44,10 @@ export const onStart = (entry) => (dispatch, getState) => {
   const interval = setInterval(() => dispatch(tick()), 1000)
 
   dispatch(tick())
-
+  dispatch(entryActions.update(entry))
   dispatch({
     type: types.TIMER_START,
     payload: {
-      entry,
       interval,
     },
   })
@@ -57,11 +67,10 @@ export const onGoOn = (entry) => (dispatch, getState) => {
   const interval = setInterval(() => dispatch(tick()), 1000)
 
   dispatch(tick())
-
+  dispatch(entryActions.update(entry))
   dispatch({
     type: types.TIMER_GO_ON,
     payload: {
-      entry,
       interval,
     },
   })
@@ -111,11 +120,9 @@ export const onPause = (entry) => (dispatch, getState) => {
 
   clearInterval(interval)
 
+  dispatch(entryActions.update(entry))
   dispatch({
     type: types.TIMER_PAUSE,
-    payload: {
-      entry,
-    },
   })
 }
 
@@ -131,16 +138,16 @@ export const stop = () => (dispatch, getState) => {
 
 export const onStop = (entry) => (dispatch, getState) => {
   const state = getState()
-  const duration = selectors.getEntryDuration(state)
+  const lapse = selectors.getEntryDuration(state)
   const interval = selectors.getTimerInterval(state)
 
   clearInterval(interval)
 
+  dispatch(entryActions.update(entry))
   dispatch({
     type: types.TIMER_STOP,
     payload: {
-      entry,
-      lapse: duration,
+      lapse,
     },
   })
 }

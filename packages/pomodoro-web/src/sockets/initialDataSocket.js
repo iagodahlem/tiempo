@@ -1,9 +1,13 @@
 import * as events from '../constants/events'
-import * as globalActions from '../actions/globalActions'
+import * as initialDataActions from '../actions/initialDataActions'
 
 const initialDataSocket = (socket, dispatch) => {
-  socket.on(events.INITIAL_DATA, (data) => {
-    dispatch(globalActions.onInitialData(data))
+  socket.on(events.INITIAL_DATA_SUCCESS, (data) => {
+    dispatch(initialDataActions.onSuccess(data))
+  })
+
+  socket.on(events.INITIAL_DATA_FAILURE, (error) => {
+    dispatch(initialDataActions.onFailure(error))
   })
 }
 

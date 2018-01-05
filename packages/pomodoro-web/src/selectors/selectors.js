@@ -1,5 +1,5 @@
 import * as fromEntry from '../reducers/entryReducer'
-import * as fromGlobal from '../reducers/globalReducer'
+import * as fromGlobals from '../reducers/globalsReducer'
 import * as fromSessions from '../reducers/sessionsReducer'
 import * as fromSocket from '../reducers/socketReducer'
 import * as fromTimer from '../reducers/timerReducer'
@@ -15,8 +15,8 @@ export const getEntryName = (state) => getEntryType(state).name
 export const getEntryDuration = (state) => getEntryType(state).duration
 export const getEntryType = (state) => getType(state, state.entry.typeId)
 
-export const getIsLoading = (state) => fromGlobal.getIsLoading(state.global)
-export const getError = (state) => fromGlobal.getError(state.global)
+export const getIsLoading = (state) => fromGlobals.getIsLoading(state.globals)
+export const getError = (state) => fromGlobals.getError(state.globals)
 
 export const getSession = (state, id) => fromSessions.getSession(state.sessions, id)
 export const getCurrentSession = (state) => fromSessions.getCurrentSession(state.sessions)

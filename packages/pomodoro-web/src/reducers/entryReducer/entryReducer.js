@@ -12,11 +12,7 @@ const entryReducer = (state = initialState, { type, payload = {} }) => {
   const { entry } = payload
 
   switch (type) {
-    case types.GLOBAL_SUCCESS:
-    case types.TIMER_START:
-    case types.TIMER_GO_ON:
-    case types.TIMER_PAUSE:
-    case types.TIMER_STOP:
+    case types.ENTRY_UPDATE:
       return {
         ...state,
         ...entry,

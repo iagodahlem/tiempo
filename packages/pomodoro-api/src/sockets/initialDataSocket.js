@@ -3,10 +3,10 @@ const events = require('../constants/events')
 const { entriesService, globalsService, typesService } = require('../services')
 
 const initialDataSocket = (io, socket) => {
-  socket.on(events.INITIAL_DATA, handler(io, socket, onInitialData))
+  socket.on(events.INITIAL_DATA_REQUEST, handler(io, socket, onRequest))
 }
 
-const onInitialData = async (io, socket) => {
+const onRequest = async (io, socket) => {
   try {
     const entry = await entriesService.last()
     const globals = await globalsService.index()
