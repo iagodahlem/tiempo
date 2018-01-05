@@ -5,10 +5,12 @@ import TimerActions from './TimerActions'
 describe('<TimerActions />', () => {
   const props = {
     running: false,
-    onStart: () => {},
-    onPause: () => {},
-    onStop: () => {},
-    onSkip: () => {},
+    paused: false,
+    timerStart: () => {},
+    timerGoOn: () => {},
+    timerPause: () => {},
+    timerStop: () => {},
+    timerSkip: () => {},
   }
 
   it('renders without crashing', () => {

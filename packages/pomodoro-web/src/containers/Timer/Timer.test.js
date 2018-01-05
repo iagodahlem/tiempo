@@ -1,22 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import Timer from './Timer'
 
-describe('<App />', () => {
+console.log('Timer', Timer)
+
+describe('<Timer />', () => {
   it('renders without crashing', () => {
     const props = {
-      name: 'Pomodoro',
-      lapse: 0,
-      running: false,
-      sessions: [],
-      setTimer: () => {},
-      startTimer: () => {},
-      pauseTimer: () => {},
-      stopTimer: () => {},
-      skipTimer: () => {},
+      isLoading: false,
+      connectSocket: () => {},
+      loadInitialData: () => {},
     }
 
     const div = document.createElement('div')
-    ReactDOM.render(<App {...props} />, div)
+    ReactDOM.render(<Timer {...props} />, div)
   })
 })

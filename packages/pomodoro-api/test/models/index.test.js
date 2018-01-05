@@ -1,4 +1,4 @@
-const models =require('../../models')
+const models =require('../../src/models')
 
 describe('models', () => {
   it('returns the Entry model', () => {
