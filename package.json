@@ -1,5 +1,5 @@
 {
-  "name": "pomodoro",
+  "name": "tiempo",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",

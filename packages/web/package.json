@@ -1,8 +1,8 @@
 {
-  "name": "pomodoro-web",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://iagodahlem.github.io/pomodoro",
+  "homepage": "https://iagodahlem.github.io/tiempo",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

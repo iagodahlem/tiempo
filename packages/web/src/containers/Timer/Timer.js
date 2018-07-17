@@ -42,10 +42,12 @@ class Timer extends Component {
       ) : (
         <section className='Timer'>
           <TimerHeader />
+
           <div className='Timer__container'>
             <TimerLapse />
             <TimerActions />
           </div>
+
           <TimerFooter />
         </section>
       )

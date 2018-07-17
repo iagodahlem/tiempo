@@ -1,17 +1,9 @@
-# pomodoro
+# tiempo
 
-[![Build Status](https://travis-ci.org/iagodahlem/pomodoro.svg?branch=master)](https://travis-ci.org/iagodahlem/pomodoro)
+[![Build Status](https://travis-ci.org/iagodahlem/tiempo.svg?branch=master)](https://travis-ci.org/iagodahlem/tiempo)
 [![Lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
-> Pomodoro app for [web](https://iagodahlem.github.io/pomodoro).
-
-<a href="//iagodahlem.com/pomodoro">
-  <img
-    width="374px"
-    src="https://res.cloudinary.com/dio9nggt3/image/upload/v1513866937/pomodoro-v1.png"
-    alt="Pomodoro"
-  >
-</a>
+Pomodoro app for [web](https://iagodahlem.github.io/tiempo).
 
 ## Install
 

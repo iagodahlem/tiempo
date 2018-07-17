@@ -1,6 +1,6 @@
-# pomodoro-web
+# web
 
-All code related to the [web app](https://iagodahlem.github.io/pomodoro).
+All code related to the [web app](https://iagodahlem.github.io/tiempo).
 
 ## Install
 
