@@ -1,0 +1,11 @@
+.Loader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.Loader__title {
+  font-size: 4.6rem;
+}

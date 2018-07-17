@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import registerServiceWorker from './registerServiceWorker'
 import configureStore from './store/configureStore'
-import { App } from './containers'
+import registerServiceWorker from './registerServiceWorker'
+import routes from './routes'
 import './index.css'
 
 const store = configureStore()
 
 const Root = () => (
   <Provider store={store}>
-    <App />
+    {routes}
   </Provider>
 )
 

@@ -18,7 +18,7 @@ To start the development server.
 yarn start
 ```
 
-To run all the test suite in watch mode.
+To run all the test suite.
 
 ```sh
 yarn test
