@@ -1,0 +1,75 @@
+/*
+ * Reset
+ * ==================================================================== */
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+dl, dd, ol, ul,
+form, fieldset, legend,
+figure,
+table, th, td, caption,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+/* ====================================================================
+ * Box Sizing
+ * ==================================================================== */
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* ====================================================================
+ * Selection
+ * ==================================================================== */
+
+::selection {
+  color: var(--colorWhite);
+  background-color: rgba(255,255,255,.2);
+}
+
+/* ====================================================================
+ * Tap Highlight
+ * ==================================================================== */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: inherit;
+}
+
+/* ====================================================================
+ * Page
+ * ==================================================================== */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
