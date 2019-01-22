@@ -15,14 +15,14 @@ const Entry = styled.div`
   margin: .4rem;
   border-radius: 50%;
   background-color: #fff;
-  opacity: ${({ started }) => started ? 1 : .6};
+  opacity: ${({ filled }) => filled ? 1 : .6};
   transition: opacity .3s ease;
 `
 
 const TimerFooter = ({ session }) => (
   <Footer>
     {session.entries.map(entry => (
-      <Entry key={entry.id} started={Boolean(entry.start)} />
+      <Entry key={entry.id} filled={Boolean(entry.start) || Boolean(entry.end)} />
     ))}
   </Footer>
 )

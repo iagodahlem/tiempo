@@ -1,12 +1,13 @@
 import { asValue, asFunction } from 'awilix'
-import { storageService, sessionsRepository } from './infra'
-import { initTimer, startTimer, stopTimer, pauseTimer } from './app'
+import * as infra from './infra'
+import * as app from './app'
 
 export default {
-  storageService: asValue(storageService),
-  sessionsRepository: asFunction(sessionsRepository),
-  initTimer: asFunction(initTimer),
-  startTimer: asFunction(startTimer),
-  stopTimer: asFunction(stopTimer),
-  pauseTimer: asFunction(pauseTimer),
+  storageService: asValue(infra.storageService),
+  sessionsRepository: asFunction(infra.sessionsRepository),
+  initTimer: asFunction(app.initTimer),
+  pauseTimer: asFunction(app.pauseTimer),
+  skipTimer: asFunction(app.skipTimer),
+  startTimer: asFunction(app.startTimer),
+  stopTimer: asFunction(app.stopTimer),
 }

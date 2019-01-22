@@ -1,22 +1,19 @@
 import { Session, Timer } from 'timer/domain'
 
-export default ({ sessionsRepository }) => async (session, timer, { onSuccess, onTick, onError }) => {
+export default () => async ({ session, timer }, { onSuccess, onError }) => {
   try {
-    const entry = Session.getCurrentEntry(session)
-    const startedSession = entry.pause
-      ? Session.resume(session)
-      : Session.start(session)
+    const intervalCallback = (lapse) => {
+      onSuccess({ timer: { lapse } })
+    }
 
-    await sessionsRepository.update(startedSession)
+    const startedSession = Session.start(session)
+    const runningTimer = Timer.tick(startedSession, timer, intervalCallback)
 
-    const currentTimer = Timer.tick(startedSession)
-    const interval = setInterval(() => onTick({ timer: Timer.tick(startedSession) }), 1000)
-
-    onSuccess({
+    return onSuccess({
       session: startedSession,
-      timer: { ...currentTimer, interval },
+      timer: runningTimer,
     })
   } catch (error) {
-    onError(error)
+    return onError(error)
   }
 }
