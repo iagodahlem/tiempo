@@ -1,27 +1,22 @@
 import uuid from 'uuid/v4'
+import * as Type from './Type'
 
-const ONE_SECOND = 1000
-const ONE_MINUTE = ONE_SECOND * 60
-const FIVE_MINUTES = ONE_MINUTE * 5
-const FIFTEEN_MINUTES = ONE_MINUTE * 15
-const TWENTY_FIVE_MINUTES = ONE_MINUTE * 25
-
-const types = {
-  'short-break': { id: 'short-break', name: 'Short Break', duration: FIVE_MINUTES },
-  'long-break': { id: 'long-break', name: 'Long Break', duration: FIFTEEN_MINUTES },
-  'pomodoro': { id: 'pomodoro', name: 'Pomodoro', duration: TWENTY_FIVE_MINUTES },
-}
-
-export const create = ({ id, start = null, end = null, pause = null, type } = {}) => {
+export const create = ({
+  id = uuid(),
+  start = null,
+  end = null,
+  pause = null,
+  type = 'pomodoro',
+} = {}) => {
   const typeId = type
 
   return {
-    id: id || uuid(),
+    id,
     start,
     end,
     pause,
     get type() {
-      return types[typeId]
+      return Type.create(typeId)
     },
   }
 }
@@ -31,15 +26,21 @@ export const start = (entry) => ({
   start: Date.now(),
 })
 
+export const end = (entry) => ({
+  ...entry,
+  start: entry.start || Date.now(),
+  end: Date.now(),
+})
+
 export const stop = (entry) => ({
   ...entry,
   start: null,
   pause: null,
 })
 
-export const pause = (entry, timer) => ({
+export const pause = (entry, lapse) => ({
   ...entry,
-  pause: entry.type.duration - timer.lapse,
+  pause: entry.type.duration - lapse,
 })
 
 export const resume = (entry) => ({

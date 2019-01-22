@@ -3,13 +3,13 @@ import { Timer } from 'timer/domain'
 export default ({ sessionsRepository }) => async ({ onSuccess, onError }) => {
   try {
     const session = await sessionsRepository.getCurrentSession()
-    const timer = Timer.getInitialState(session)
+    const timer = Timer.create(session)
 
-    onSuccess({
+    return onSuccess({
       session,
       timer,
     })
   } catch (error) {
-    onError(error)
+    return onError(error)
   }
 }

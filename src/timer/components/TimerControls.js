@@ -48,7 +48,7 @@ const Button = styled.button`
   }
 `
 
-const TimerControls = ({ status, start, pause, stop }) => (
+const TimerControls = ({ status, start, pause, stop, skip }) => (
   <Container>
     <Button
       size='small'
@@ -69,7 +69,7 @@ const TimerControls = ({ status, start, pause, stop }) => (
       </Button>
     )}
 
-    <Button size='small' design='tertiary'>
+    <Button size='small' design='tertiary' onClick={() => skip()}>
       <Icon icon='skip' />
     </Button>
   </Container>

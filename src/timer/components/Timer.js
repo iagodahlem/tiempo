@@ -31,6 +31,7 @@ class Timer extends Component {
     startTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
     pauseTimer: PropTypes.func.isRequired,
+    skipTimer: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -44,6 +45,7 @@ class Timer extends Component {
       startTimer,
       stopTimer,
       pauseTimer,
+      skipTimer,
     } = this.props
 
     return (
@@ -58,6 +60,7 @@ class Timer extends Component {
             status={session.status}
             start={startTimer}
             pause={pauseTimer}
+            skip={skipTimer}
             stop={stopTimer}
           />
         </Clock>

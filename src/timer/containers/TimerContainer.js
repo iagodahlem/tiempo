@@ -12,6 +12,7 @@ const mapDispatchToProps = {
   startTimer: fromTimer.start,
   stopTimer: fromTimer.stop,
   pauseTimer: fromTimer.pause,
+  skipTimer: fromTimer.skip,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer)
