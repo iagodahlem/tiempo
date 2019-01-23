@@ -1,14 +1,23 @@
 import { Session, Timer } from 'timer/domain'
 
-export default () => async ({ session, timer }, { onSuccess, onError }) => {
+export default ({ sessionsRepository }) => async ({ session, timer }, { onSkip, onError }) => {
   try {
     clearInterval(timer.interval)
     const skippedSession = Session.skip(session)
-    const initialTimer = Timer.create(skippedSession)
+    const isSessionNotEnded = !Session.isEnded(skippedSession)
 
-    return onSuccess({
-      session: skippedSession,
-      timer: initialTimer,
+    if (isSessionNotEnded) {
+      return onSkip({
+        session: skippedSession,
+        timer: Timer.create(skippedSession),
+      })
+    }
+
+    const newSession = await sessionsRepository.create()
+
+    return onSkip({
+      session: newSession,
+      timer: Timer.create(newSession),
     })
   } catch (error) {
     return onError(error)

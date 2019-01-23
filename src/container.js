@@ -1,10 +1,12 @@
 import { createContainer } from 'awilix'
 import timerContainer from 'timer/container'
 
-const container = createContainer()
+export const configureContainer = () => {
+  const container = createContainer()
 
-container.register({
-  ...timerContainer,
-})
+  container.register({
+    ...timerContainer,
+  })
 
-export default container
+  return container
+}

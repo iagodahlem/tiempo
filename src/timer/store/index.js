@@ -1,6 +1,6 @@
 import { Session, Timer } from 'timer/domain'
 
-const actionTypes = {
+export const actionTypes = {
   SET_TIMER: 'SET_TIMER',
   SET_SESSION: 'SET_SESSION',
 }
@@ -23,10 +23,10 @@ export const sessionReducer = (state = Session.create(), { type, payload } = {})
   }
 }
 
-export const init = () => (dispatch, _, container) => {
-  container.initTimer({
-    onSuccess: onSuccess(dispatch),
-    onError: onError(dispatch),
+export const init = () => async (dispatch, _, container) => {
+  return container.initTimer({
+    onInit: (payload) => dispatch(onSuccess(payload)),
+    onError,
   })
 }
 
@@ -36,8 +36,10 @@ export const start = () => (dispatch, getState, container) => {
   const timer = selectTimer(state)
 
   container.startTimer({ session, timer }, {
-    onSuccess: onSuccess(dispatch),
-    onError: onError(dispatch),
+    onStart: (payload) => dispatch(onSuccess(payload)),
+    onTick: (payload) => dispatch(onSuccess(payload)),
+    onSkip: () => dispatch(skip()),
+    onError,
   })
 }
 
@@ -47,8 +49,8 @@ export const stop = () => (dispatch, getState, container) => {
   const timer = selectTimer(state)
 
   container.stopTimer({ session, timer }, {
-    onSuccess: onSuccess(dispatch),
-    onError: onError(dispatch),
+    onStop: (payload) => dispatch(onSuccess(payload)),
+    onError,
   })
 }
 
@@ -58,8 +60,8 @@ export const pause = () => (dispatch, getState, container) => {
   const timer = selectTimer(state)
 
   container.pauseTimer({ session, timer }, {
-    onSuccess: onSuccess(dispatch),
-    onError: onError(dispatch),
+    onPause: (payload) => dispatch(onSuccess(payload)),
+    onError,
   })
 }
 
@@ -69,21 +71,20 @@ export const skip = () => (dispatch, getState, container) => {
   const timer = selectTimer(state)
 
   container.skipTimer({ session, timer }, {
-    onSuccess: onSuccess(dispatch),
-    onError: onError(dispatch),
+    onSkip: (payload) => dispatch(onSuccess(payload)),
+    onError,
   })
 }
 
-const onSuccess = (dispatch) => ({ session = null, timer = null } = {}) => {
-  let actions = []
+const onSuccess = (payload = {}) => {
+  const actions = {
+    session: setSession,
+    timer: setTimer,
+  }
 
-  if (session) actions.push(setSession(session))
-  if (timer) actions.push(setTimer(timer))
-
-  dispatch(actions)
+  return Object.keys(payload)
+    .map(key => actions[key](payload[key]))
 }
-
-const onError = (_) => (error) => console.error(error)
 
 const setTimer = (payload) => ({
   type: actionTypes.SET_TIMER,
@@ -95,10 +96,8 @@ const setSession = (payload) => ({
   payload,
 })
 
-export const selectSession = (state) => state.session
+const onError = (error) => console.error(error)
 
 export const selectTimer = (state) => state.timer
 
-export const selectTitle = (state) => state.timer.title
-
-export const selectLapse = (state) => state.timer.lapse
+export const selectSession = (state) => state.session
