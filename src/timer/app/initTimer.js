@@ -1,11 +1,11 @@
 import { Timer } from 'timer/domain'
 
-export default ({ sessionsRepository }) => async ({ onSuccess, onError }) => {
+export default ({ sessionsRepository }) => async ({ onInit, onError }) => {
   try {
     const session = await sessionsRepository.getCurrentSession()
     const timer = Timer.create(session)
 
-    return onSuccess({
+    return onInit({
       session,
       timer,
     })

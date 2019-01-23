@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.3",
     "why-did-you-update": "^1.0.6"
   },
   "eslintConfig": {

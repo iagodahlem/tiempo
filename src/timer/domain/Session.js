@@ -63,6 +63,9 @@ export const skip = (session) => {
   }
 }
 
+export const isEnded = (session) => session.entries
+  .every(({ end }) => end)
+
 export const getCurrentEntry = (session) => session.entries
   ? session.entries.find(entry => !entry.end)
   : {}

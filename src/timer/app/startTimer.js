@@ -1,15 +1,19 @@
 import { Session, Timer } from 'timer/domain'
 
-export default () => async ({ session, timer }, { onSuccess, onError }) => {
-  try {
-    const intervalCallback = (lapse) => {
-      onSuccess({ timer: { lapse } })
+export default () => async ({ session, timer }, { onStart, onTick, onSkip, onError }) => {
+  const tickCallback = (lapse) => {
+    if (lapse <= 0) {
+      return onSkip()
     }
 
-    const startedSession = Session.start(session)
-    const runningTimer = Timer.tick(startedSession, timer, intervalCallback)
+    return onTick({ timer: { lapse } })
+  }
 
-    return onSuccess({
+  try {
+    const startedSession = Session.start(session)
+    const runningTimer = Timer.tick(startedSession, timer, tickCallback)
+
+    return onStart({
       session: startedSession,
       timer: runningTimer,
     })

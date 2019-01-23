@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Session } from 'timer/domain'
 
 const Footer = styled.footer`
   display: flex;
@@ -19,10 +20,17 @@ const Entry = styled.div`
   transition: opacity .3s ease;
 `
 
+const isFilled = (session, entry) => Boolean(entry.start)
+  || Boolean(entry.end)
+  || Session.getCurrentEntry(session).id === entry.id
+
 const TimerFooter = ({ session }) => (
   <Footer>
     {session.entries.map(entry => (
-      <Entry key={entry.id} filled={Boolean(entry.start) || Boolean(entry.end)} />
+      <Entry
+        key={entry.id}
+        filled={isFilled(session, entry)}
+      />
     ))}
   </Footer>
 )

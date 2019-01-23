@@ -40,14 +40,14 @@ describe('Entry', () => {
   })
 
   it('pauses a Entry', () => {
-    const { pause } = Entry.pause(Entry.create(), 1494999)
+    const { pause, type } = Entry.pause(Entry.create(), 1494999)
 
-    expect(pause).toEqual(5001)
+    expect(pause).toEqual(type.duration - 1494999)
   })
 
   it('resumes a paused Entry', () => {
-    const { pause } = Entry.resume(Entry.pause(Entry.create(), 1494999))
+    const { pause, type } = Entry.resume(Entry.pause(Entry.create(), 1494999))
 
-    expect(pause).toEqual(now - 5001)
+    expect(pause).toEqual(now - (type.duration - 1494999))
   })
 })

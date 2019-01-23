@@ -2,12 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { combineReducers } from 'redux'
 import createStore from './createStore'
-import container from './container'
+import { configureContainer } from './container'
+import { sessionReducer, timerReducer } from 'timer/store'
 import Root from './Root'
 import * as serviceWorker from './serviceWorker'
 import './index.css'
-
-import { sessionReducer, timerReducer } from 'timer/store'
 
 if (process.env.NODE_ENV !== 'production') {
   const { whyDidYouUpdate } = require('why-did-you-update')
@@ -18,6 +17,8 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   timer: timerReducer,
 })
+
+const container = configureContainer()
 
 const store = createStore({
   rootReducer,
