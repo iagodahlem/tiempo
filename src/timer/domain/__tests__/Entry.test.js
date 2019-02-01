@@ -14,9 +14,9 @@ describe('Entry', () => {
 
     expect(entry).toEqual({
       id: 1,
-      start: null,
-      pause: null,
-      end: null,
+      start: 0,
+      pause: 0,
+      end: 0,
       type: Type.create('pomodoro'),
     })
   })
@@ -36,7 +36,7 @@ describe('Entry', () => {
   it('stops a Entry', () => {
     const { start } = Entry.stop(Entry.start(Entry.create()))
 
-    expect(start).toEqual(null)
+    expect(start).toEqual(0)
   })
 
   it('pauses a Entry', () => {

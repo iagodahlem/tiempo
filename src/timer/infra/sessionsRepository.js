@@ -1,34 +1,54 @@
 import { Session } from 'timer/domain'
 
-export default ({ storageService }) => ({
-  async getCurrentSession() {
-    const sessions = storageService.get('sessions')
+export default ({ storageService }) => {
+  const getAll = () => storageService.get('sessions') || []
 
-    if (!sessions) {
-      return this.create()
-    }
+  const getCurrent = () => {
+    const all = getAll()
 
-    return Session.create(sessions[sessions.length - 1])
-  },
+    return all[all.length - 1]
+  }
 
-  async create() {
-    const sessions = storageService.get('sessions') || []
-    const newSession = this.serialize(Session.create())
+  return {
+    async getCurrentSession() {
+      const currentSession = getCurrent()
 
-    storageService.set('sessions', [...sessions, newSession])
+      if (!currentSession) {
+        return this.create()
+      }
 
-    return Session.create(newSession)
-  },
+      return Session.create(currentSession)
+    },
 
-  async update(session) {
+    async create() {
+      const sessions = getAll()
+      const newSession = this.serialize(Session.create())
 
-  },
+      storageService.set('sessions', [...sessions, newSession])
 
-  serialize: ({ id, entries }) => ({
-    id,
-    entries: entries.map(({ entry, type }) => ({
-      entry,
-      type: type.id,
-    }))
-  })
-})
+      return Session.create(newSession)
+    },
+
+    async update(updatedSession) {
+      const sessions = getAll().map(session => session.id !== updatedSession.id
+        ? session
+        : {
+          ...session,
+          ...this.serialize(updatedSession),
+        })
+
+      storageService.set('sessions', sessions)
+
+      return updatedSession
+    },
+
+    serialize: ({ id, status, entries }) => ({
+      id,
+      status,
+      entries: entries.map(({ type, ...entry }) => ({
+        ...entry,
+        type: type.id,
+      }))
+    })
+  }
+}

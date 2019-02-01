@@ -9,10 +9,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   initTimer: fromTimer.init,
-  startTimer: fromTimer.start,
-  stopTimer: fromTimer.stop,
   pauseTimer: fromTimer.pause,
+  playTimer: fromTimer.play,
   skipTimer: fromTimer.skip,
+  stopTimer: fromTimer.stop,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer)
