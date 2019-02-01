@@ -7,7 +7,7 @@ export default {
   sessionsRepository: asFunction(infra.sessionsRepository),
   initTimer: asFunction(app.initTimer),
   pauseTimer: asFunction(app.pauseTimer),
+  playTimer: asFunction(app.playTimer),
   skipTimer: asFunction(app.skipTimer),
-  startTimer: asFunction(app.startTimer),
   stopTimer: asFunction(app.stopTimer),
 }

@@ -1,4 +1,5 @@
 import * as Session from '../Session'
+import * as Type from '../Type'
 
 describe('Session', () => {
   const testCreateEntries = (equal, length) => {
@@ -16,45 +17,56 @@ describe('Session', () => {
   testCreateEntries(['pomodoro', 'short-break', 'pomodoro', 'short-break', 'pomodoro', 'long-break'], 6)
   testCreateEntries(['pomodoro', 'short-break', 'pomodoro', 'short-break', 'pomodoro', 'short-break', 'pomodoro', 'long-break'], 8)
 
-  it('starts a Session', () => {
-    const { status, entries } = Session.start(Session.create())
+  it('plays a Session', () => {
+    const { status, entries } = Session.play(Session.create())
 
     expect(status).toBe(Session.statuses.RUNNING)
     expect(entries[0].start).toBeDefined()
   })
 
   it('stops a Session', () => {
-    const { status, entries } = Session.stop(Session.start(Session.create()))
+    const { status, entries } = Session.stop(Session.play(Session.create()))
 
     expect(status).toBe(Session.statuses.IDLE)
-    expect(entries[0].start).toBe(null)
+    expect(entries[0].start).toBe(0)
+    expect(entries[0].pause).toBe(0)
   })
 
   it('pauses a Session', () => {
-    const { status, entries } = Session.pause(Session.start(Session.create()))
+    const { status, entries } = Session.pause(Session.play(Session.create()))
 
     expect(status).toBe(Session.statuses.PAUSED)
     expect(entries[0].pause).toBeDefined()
   })
 
   it('resumes a paused Session', () => {
-    const { status, entries } = Session.start(Session.start(Session.create()))
+    const { status, entries } = Session.play(Session.play(Session.create()))
 
     expect(status).toBe(Session.statuses.RUNNING)
     expect(entries[0].pause).toBeDefined()
   })
 
   it('skips to the next Entry', () => {
-    const { status, entries } = Session.skip(Session.start(Session.create()))
+    const { status, entries } = Session.skip(Session.play(Session.create()))
 
     expect(status).toBe(Session.statuses.IDLE)
     expect(entries[0].end).toBeDefined()
   })
 
   it('starts the next Entry', () => {
-    const { status, entries } = Session.start(Session.skip(Session.start(Session.create())))
+    const { status, entries } = Session.play(Session.skip(Session.play(Session.create())))
 
     expect(status).toBe(Session.statuses.RUNNING)
     expect(entries[1].start).toBeDefined()
+  })
+
+  it('builds a timer from a IDLE session', () => {
+    const timer = Session.timer(Session.create())
+    const type = Type.create('pomodoro')
+
+    expect(timer).toEqual({
+      title: type.name,
+      lapse: type.duration,
+    })
   })
 })

@@ -26,16 +26,17 @@ export const sessionReducer = (state = Session.create(), { type, payload } = {})
 export const init = () => async (dispatch, _, container) => {
   return container.initTimer({
     onInit: (payload) => dispatch(onSuccess(payload)),
+    onPlay: (payload) => dispatch(play(payload)),
     onError,
   })
 }
 
-export const start = () => (dispatch, getState, container) => {
+export const play = ({ session: optionalSession, timer: optionalTimer } = {}) => (dispatch, getState, container) => {
   const state = getState()
-  const session = selectSession(state)
-  const timer = selectTimer(state)
+  const session = optionalSession || selectSession(state)
+  const timer = optionalTimer || selectTimer(state)
 
-  container.startTimer({ session, timer }, {
+  container.playTimer({ session, timer }, {
     onStart: (payload) => dispatch(onSuccess(payload)),
     onTick: (payload) => dispatch(onSuccess(payload)),
     onSkip: () => dispatch(skip()),

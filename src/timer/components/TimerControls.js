@@ -48,7 +48,7 @@ const Button = styled.button`
   }
 `
 
-const TimerControls = ({ status, start, pause, stop, skip }) => (
+const TimerControls = ({ status, play, pause, stop, skip }) => (
   <Container>
     <Button
       size='small'
@@ -64,7 +64,7 @@ const TimerControls = ({ status, start, pause, stop, skip }) => (
         <Icon icon='pause' width='28' height='28' />
       </Button>
     ):(
-      <Button onClick={() => start()}>
+      <Button onClick={() => play()}>
         <Icon icon='play' width='38' height='38' />
       </Button>
     )}

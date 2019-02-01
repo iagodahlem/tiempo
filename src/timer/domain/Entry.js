@@ -3,9 +3,9 @@ import * as Type from './Type'
 
 export const create = ({
   id = uuid(),
-  start = null,
-  end = null,
-  pause = null,
+  start = 0,
+  pause = 0,
+  end = 0,
   type = 'pomodoro',
 } = {}) => {
   const typeId = type
@@ -26,18 +26,6 @@ export const start = (entry) => ({
   start: Date.now(),
 })
 
-export const end = (entry) => ({
-  ...entry,
-  start: entry.start || Date.now(),
-  end: Date.now(),
-})
-
-export const stop = (entry) => ({
-  ...entry,
-  start: null,
-  pause: null,
-})
-
 export const pause = (entry, lapse) => ({
   ...entry,
   pause: entry.type.duration - lapse,
@@ -47,3 +35,24 @@ export const resume = (entry) => ({
   ...entry,
   pause: Date.now() - entry.pause,
 })
+
+export const goOn = (entry, lapse) => ({
+  ...entry,
+  pause: Date.now() - (entry.type.duration - lapse)
+})
+
+export const stop = (entry) => ({
+  ...entry,
+  start: 0,
+  pause: 0,
+})
+
+export const end = (entry) => ({
+  ...entry,
+  start: entry.start || Date.now(),
+  end: Date.now(),
+})
+
+export const isStarted = (entry) => Boolean(entry.start)
+
+export const isPaused = (entry) => Boolean(entry.pause)

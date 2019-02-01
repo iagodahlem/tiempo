@@ -1,29 +1,20 @@
 import * as Timer from '../Timer'
-import * as Session from '../Session'
-import * as Type from '../Type'
 
 describe('Timer', () => {
-  it('creates a timer based on a new session', () => {
-    const session = Session.create()
-    const timer = Timer.create(session)
-    const type = Type.create('pomodoro')
+  it('creates a timer with default values', () => {
+    const timer = Timer.create()
 
     expect(timer).toEqual({
       interval: null,
-      title: type.name,
-      lapse: type.duration,
+      title: '',
+      lapse: 0,
     })
   })
 
-  it('creates a timer based on a skipped session', () => {
-    const session = Session.skip(Session.start(Session.create()))
-    const timer = Timer.create(session)
-    const type = Type.create('short-break')
+  it('creates a timer', () => {
+    const values = { interval: 16, title: 'Pomodoro', lapse: Date.now() }
+    const timer = Timer.create(values)
 
-    expect(timer).toEqual({
-      interval: null,
-      title: type.name,
-      lapse: type.duration,
-    })
+    expect(timer).toEqual(values)
   })
 })

@@ -20,11 +20,15 @@ length = lengths[1]) => ({
   entries: createEntries(entries, length),
 })
 
-export const start = (session) => {
+export const play = (session, lapse) => {
+  const actions = {
+    [statuses.IDLE]: Entry.start,
+    [statuses.RUNNING]: Entry.goOn,
+    [statuses.PAUSED]: Entry.resume,
+  }
+
   const currentEntry = getCurrentEntry(session)
-  const entry = currentEntry.pause
-    ? Entry.resume(currentEntry)
-    : Entry.start(currentEntry)
+  const entry = actions[session.status](currentEntry, lapse)
 
   return {
     ...session,
@@ -43,8 +47,8 @@ export const stop = (session) => {
   }
 }
 
-export const pause = (session, timer) => {
-  const paused = Entry.pause(getCurrentEntry(session), timer)
+export const pause = (session, lapse) => {
+  const paused = Entry.pause(getCurrentEntry(session), lapse)
 
   return {
     ...session,
@@ -63,8 +67,47 @@ export const skip = (session) => {
   }
 }
 
-export const isEnded = (session) => session.entries
-  .every(({ end }) => end)
+export const timer = (session) => {
+  const entry = getCurrentEntry(session)
+  const title = entry.type.name
+  const duration = entry.type.duration
+
+  if (!entry) {
+    return
+  }
+
+  if (isRunning(session)) {
+    return {
+      title,
+      lapse: (duration + entry.start) - Date.now(),
+    }
+  }
+
+  if (isPaused(session)) {
+    return {
+      title,
+      lapse: duration - entry.pause,
+    }
+  }
+
+  return {
+    title,
+    lapse: duration,
+  }
+}
+
+export const runned = (session) => {
+  const { start, pause, type } = getCurrentEntry(session)
+  const { duration } = type
+
+  return (pause || start) + duration
+}
+
+export const isRunning = (session) => session.status === statuses.RUNNING
+
+export const isPaused = (session) => session.status === statuses.PAUSED
+
+export const isEnded = (session) => session.entries.every(({ end }) => end)
 
 export const getCurrentEntry = (session) => session.entries
   ? session.entries.find(entry => !entry.end)

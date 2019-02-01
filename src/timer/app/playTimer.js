@@ -2,8 +2,8 @@ import { Session, Timer } from 'timer/domain'
 
 export default ({ sessionsRepository }) => async ({ session, timer }, { onStart, onTick, onSkip, onError }) => {
   try {
-    const startedSession = Session.start(session)
-    const runningTimer = Timer.tick(startedSession, timer, tickCallback({ onTick, onSkip }))
+    const startedSession = Session.play(session, timer.lapse)
+    const runningTimer = Timer.tick(timer, Session.runned(startedSession), tickCallback({ onTick, onSkip }))
 
     sessionsRepository.update(startedSession)
 

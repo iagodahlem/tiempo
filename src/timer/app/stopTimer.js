@@ -4,7 +4,7 @@ export default ({ sessionsRepository }) => async ({ session, timer }, { onStop, 
   try {
     clearInterval(timer.interval)
     const stoppedSession = Session.stop(session)
-    const initialTimer = Timer.create(stoppedSession)
+    const initialTimer = Timer.create(Session.timer(stoppedSession))
 
     sessionsRepository.update(stoppedSession)
 

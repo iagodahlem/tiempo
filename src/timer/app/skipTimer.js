@@ -4,14 +4,14 @@ export default ({ sessionsRepository }) => async ({ session, timer }, { onSkip, 
   try {
     clearInterval(timer.interval)
     const skippedSession = Session.skip(session)
-    const isSessionNotEnded = !Session.isEnded(skippedSession)
+    const isNotEnded = !Session.isEnded(skippedSession)
 
-    if (isSessionNotEnded) {
+    if (isNotEnded) {
       sessionsRepository.update(skippedSession)
 
       return onSkip({
         session: skippedSession,
-        timer: Timer.create(skippedSession),
+        timer: Timer.create(Session.timer(skippedSession)),
       })
     }
 
@@ -19,7 +19,7 @@ export default ({ sessionsRepository }) => async ({ session, timer }, { onSkip, 
 
     return onSkip({
       session: newSession,
-      timer: Timer.create(newSession),
+      timer: Timer.create(Session.timer(newSession)),
     })
   } catch (error) {
     return onError(error)

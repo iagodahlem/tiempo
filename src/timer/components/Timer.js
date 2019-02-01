@@ -28,7 +28,7 @@ class Timer extends Component {
     timer: PropTypes.object.isRequired,
     session: PropTypes.object.isRequired,
     initTimer: PropTypes.func.isRequired,
-    startTimer: PropTypes.func.isRequired,
+    playTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
     pauseTimer: PropTypes.func.isRequired,
     skipTimer: PropTypes.func.isRequired,
@@ -42,7 +42,7 @@ class Timer extends Component {
     const {
       timer,
       session,
-      startTimer,
+      playTimer,
       stopTimer,
       pauseTimer,
       skipTimer,
@@ -58,7 +58,7 @@ class Timer extends Component {
           </TimerLapse>
           <TimerControls
             status={session.status}
-            start={startTimer}
+            play={playTimer}
             pause={pauseTimer}
             skip={skipTimer}
             stop={stopTimer}
