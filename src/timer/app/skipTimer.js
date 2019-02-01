@@ -7,6 +7,8 @@ export default ({ sessionsRepository }) => async ({ session, timer }, { onSkip, 
     const isSessionNotEnded = !Session.isEnded(skippedSession)
 
     if (isSessionNotEnded) {
+      sessionsRepository.update(skippedSession)
+
       return onSkip({
         session: skippedSession,
         timer: Timer.create(skippedSession),

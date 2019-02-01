@@ -1,17 +1,11 @@
 import { Session, Timer } from 'timer/domain'
 
-export default () => async ({ session, timer }, { onStart, onTick, onSkip, onError }) => {
-  const tickCallback = (lapse) => {
-    if (lapse <= 0) {
-      return onSkip()
-    }
-
-    return onTick({ timer: { lapse } })
-  }
-
+export default ({ sessionsRepository }) => async ({ session, timer }, { onStart, onTick, onSkip, onError }) => {
   try {
     const startedSession = Session.start(session)
-    const runningTimer = Timer.tick(startedSession, timer, tickCallback)
+    const runningTimer = Timer.tick(startedSession, timer, tickCallback({ onTick, onSkip }))
+
+    sessionsRepository.update(startedSession)
 
     return onStart({
       session: startedSession,
@@ -20,4 +14,12 @@ export default () => async ({ session, timer }, { onStart, onTick, onSkip, onErr
   } catch (error) {
     return onError(error)
   }
+}
+
+const tickCallback = ({ onTick, onSkip }) => (lapse) => {
+  if (lapse <= 0) {
+    return onSkip()
+  }
+
+  return onTick({ timer: { lapse } })
 }
