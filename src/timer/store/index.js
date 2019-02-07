@@ -73,6 +73,7 @@ export const skip = () => (dispatch, getState, container) => {
 
   container.skipTimer({ session, timer }, {
     onSkip: (payload) => dispatch(onSuccess(payload)),
+    onEnded: (payload) => dispatch(onSuccess(payload)),
     onError,
   })
 }
