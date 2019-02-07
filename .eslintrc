@@ -10,7 +10,7 @@
     "semi": ["error", "never"],
     "comma-dangle": ["error", "always-multiline"],
     "consistent-return": [0],
-    "no-use-before-define": ["nofunc"],
+    "no-use-before-define": [0],
     "global-require": "off",
     "import/prefer-default-export": "off",
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
