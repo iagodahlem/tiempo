@@ -28,7 +28,7 @@ describe('playTimer', () => {
         update: jest.fn(),
       }
 
-      await playTimer({ sessionsRepository })(params, callbacks)
+      await playTimer({ sessionsRepository })(callbacks, params)
 
       expect(sessionsRepository.update).toBeCalled()
       expect(callbacks.onStart).toBeCalled()
@@ -49,7 +49,7 @@ describe('playTimer', () => {
         }),
       }
 
-      await playTimer({ sessionsRepository })(params, callbacks)
+      await playTimer({ sessionsRepository })(callbacks, params)
 
       expect(callbacks.onError).toBeCalled()
       expect(callbacks.onStart).not.toBeCalled()

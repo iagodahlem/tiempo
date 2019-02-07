@@ -1,10 +1,16 @@
-import * as fromTimer from '../'
-import { Timer, Session } from 'timer/domain'
+import { Session, Timer } from 'timer/domain'
+import * as fromTimer from '..'
 
 describe('timerStore', () => {
-  const state = {
-    timer: Timer.create(),
-    session: Session.create(),
+  const session = Session.create({ id: '1', entries: [] })
+  const timer = Timer.create()
+  const state = { session, timer }
+  const container = {
+    initTimer: ({ onInit }) => onInit({ session, timer }),
+    playTimer: ({ onStart }) => onStart({ session, timer }),
+    stopTimer: ({ onStop }) => onStop({ session, timer }),
+    pauseTimer: ({ onPause }) => onPause({ session, timer }),
+    skipTimer: ({ onSkip }) => onSkip({ session, timer }),
   }
 
   describe('timerReducer', () => {
@@ -13,13 +19,15 @@ describe('timerStore', () => {
     })
 
     it(`handles ${fromTimer.actionTypes.SET_TIMER}`, () => {
-      expect(fromTimer.timerReducer(state.timer, {
-        type: fromTimer.actionTypes.SET_TIMER,
-        payload: {
-          title: 'Pomodoro',
-          lapse: 25000,
-        },
-      })).toEqual({
+      expect(
+        fromTimer.timerReducer(state.timer, {
+          type: fromTimer.actionTypes.SET_TIMER,
+          payload: {
+            title: 'Pomodoro',
+            lapse: 25000,
+          },
+        })
+      ).toEqual({
         title: 'Pomodoro',
         lapse: 25000,
         interval: null,
@@ -33,14 +41,83 @@ describe('timerStore', () => {
     })
 
     it(`handles ${fromTimer.actionTypes.SET_SESSION}`, () => {
-      expect(fromTimer.sessionReducer(state.session, {
-        type: fromTimer.actionTypes.SET_SESSION,
-        payload: {
-          entries: [],
-        },
-      })).toEqual({
+      expect(
+        fromTimer.sessionReducer(state.session, {
+          type: fromTimer.actionTypes.SET_SESSION,
+          payload: {
+            entries: [],
+          },
+        })
+      ).toEqual({
         entries: [],
       })
+    })
+  })
+
+  describe('actions', () => {
+    it('sets the initial session and timer', async () => {
+      const store = global.mockStore(state, container)
+
+      const expectedActions = [
+        { type: fromTimer.actionTypes.SET_SESSION, payload: session },
+        { type: fromTimer.actionTypes.SET_TIMER, payload: timer },
+      ]
+
+      await store.dispatch(fromTimer.init())
+
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+
+    it('plays the timer and updates the session', async () => {
+      const store = global.mockStore(state, container)
+
+      const expectedActions = [
+        { type: fromTimer.actionTypes.SET_SESSION, payload: session },
+        { type: fromTimer.actionTypes.SET_TIMER, payload: timer },
+      ]
+
+      await store.dispatch(fromTimer.play())
+
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+
+    it('stops the timer and updates the session', async () => {
+      const store = global.mockStore(state, container)
+
+      const expectedActions = [
+        { type: fromTimer.actionTypes.SET_SESSION, payload: session },
+        { type: fromTimer.actionTypes.SET_TIMER, payload: timer },
+      ]
+
+      await store.dispatch(fromTimer.stop())
+
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+
+    it('pauses the timer and updates the session', async () => {
+      const store = global.mockStore(state, container)
+
+      const expectedActions = [
+        { type: fromTimer.actionTypes.SET_SESSION, payload: session },
+        { type: fromTimer.actionTypes.SET_TIMER, payload: timer },
+      ]
+
+      await store.dispatch(fromTimer.pause())
+
+      expect(store.getActions()).toEqual(expectedActions)
+    })
+
+    it('skips the timer and updates the session', async () => {
+      const store = global.mockStore(state, container)
+
+      const expectedActions = [
+        { type: fromTimer.actionTypes.SET_SESSION, payload: session },
+        { type: fromTimer.actionTypes.SET_TIMER, payload: timer },
+      ]
+
+      await store.dispatch(fromTimer.skip())
+
+      expect(store.getActions()).toEqual(expectedActions)
     })
   })
 

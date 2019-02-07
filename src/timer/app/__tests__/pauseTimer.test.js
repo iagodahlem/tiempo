@@ -24,7 +24,7 @@ describe('pauseTimer', () => {
         update: jest.fn(),
       }
 
-      await pauseTimer({ sessionsRepository })(params, callbacks)
+      await pauseTimer({ sessionsRepository })(callbacks, params)
 
       expect(sessionsRepository.update).toBeCalled()
       expect(callbacks.onPause).toBeCalled()
@@ -40,7 +40,7 @@ describe('pauseTimer', () => {
         }),
       }
 
-      await pauseTimer({ sessionsRepository })(params, callbacks)
+      await pauseTimer({ sessionsRepository })(callbacks, params)
 
       expect(callbacks.onError).toBeCalled()
       expect(callbacks.onPause).not.toBeCalled()

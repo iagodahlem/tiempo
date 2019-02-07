@@ -6,11 +6,10 @@ describe('skipTimer', () => {
   let callbacks = {}
   let sessionsRepository = {}
 
-  const sessionToEnd = (session) => ({
+  const sessionToEnd = session => ({
     ...session,
-    entries: session.entries.map((entry, i) =>
-      (session.entries.length - 1) === i ? entry : Entry.end(entry)
-    ),
+    entries: session
+      .entries.map((entry, i) => (session.entries.length - 1 === i ? entry : Entry.end(entry))),
   })
 
   beforeEach(() => {
@@ -32,7 +31,7 @@ describe('skipTimer', () => {
         update: jest.fn(),
       }
 
-      await skipTimer({ sessionsRepository })(params, callbacks)
+      await skipTimer({ sessionsRepository })(callbacks, params)
 
       expect(sessionsRepository.update).toBeCalled()
       expect(callbacks.onSkip).toBeCalled()
@@ -47,7 +46,7 @@ describe('skipTimer', () => {
         create: jest.fn().mockReturnValue(Session.create()),
       }
 
-      await skipTimer({ sessionsRepository })(params, callbacks)
+      await skipTimer({ sessionsRepository })(callbacks, params)
 
       expect(sessionsRepository.create).toBeCalled()
       expect(callbacks.onEnded).toBeCalled()
@@ -63,7 +62,7 @@ describe('skipTimer', () => {
         }),
       }
 
-      await skipTimer({ sessionsRepository })(params, callbacks)
+      await skipTimer({ sessionsRepository })(callbacks, params)
 
       expect(callbacks.onError).toBeCalled()
       expect(callbacks.onSkip).not.toBeCalled()

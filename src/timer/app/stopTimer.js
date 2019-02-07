@@ -1,6 +1,6 @@
 import { Session, Timer } from 'timer/domain'
 
-export default ({ sessionsRepository }) => async ({ session, timer }, { onStop, onError }) => {
+export default ({ sessionsRepository }) => async ({ onStop, onError }, { session, timer }) => {
   try {
     clearInterval(timer.interval)
     const stoppedSession = Session.stop(session)
