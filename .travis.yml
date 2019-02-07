@@ -11,5 +11,5 @@ before_script:
   - yarn
 
 script:
-  - yarn test
+  - yarn coverage
   - yarn build
