@@ -1,21 +1,31 @@
 import * as Session from '../Session'
 import * as Type from '../Type'
 
+const fourLengthTypes = ['pomodoro', 'short-break', 'pomodoro', 'long-break']
+const sixLengthTypes = ['pomodoro', 'short-break', ...fourLengthTypes]
+const eightLengthTypes = ['pomodoro', 'short-break', ...sixLengthTypes]
+
 describe('Session', () => {
-  const testCreateEntries = (equal, length) => {
-    it(`creates an ${length} cycles Session`, () => {
-      const { id, status, entries } = Session.create({ id: 1 }, length)
-      const types = entries.map(entry => entry.type.id)
+  describe('creates a Session', () => {
+    const testCreateEntries = (expectedTypes, length) => {
+      it(`with ${length} Entries`, () => {
+        const { entries } = Session.create({}, length)
+        const currentTypes = entries.map((entry) => entry.type.id)
 
-      expect(id).toEqual(1)
-      expect(status).toEqual(Session.statuses.IDLE)
-      expect(types).toEqual(equal)
+        expect(currentTypes).toEqual(expectedTypes)
+      })
+    }
+
+    testCreateEntries(fourLengthTypes, 4)
+    testCreateEntries(sixLengthTypes, 6)
+    testCreateEntries(eightLengthTypes, 8)
+
+    it('throws an Error when pass incorrect length', () => {
+      expect(() => Session.create({}, 1)).toThrow(
+        'Is not possible to create a session with 1 length.'
+      )
     })
-  }
-
-  testCreateEntries(['pomodoro', 'short-break', 'pomodoro', 'long-break'], 4)
-  testCreateEntries(['pomodoro', 'short-break', 'pomodoro', 'short-break', 'pomodoro', 'long-break'], 6)
-  testCreateEntries(['pomodoro', 'short-break', 'pomodoro', 'short-break', 'pomodoro', 'short-break', 'pomodoro', 'long-break'], 8)
+  })
 
   it('plays a Session', () => {
     const { status, entries } = Session.play(Session.create())

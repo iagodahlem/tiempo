@@ -9,26 +9,24 @@ export const statuses = {
   PAUSED: 'PAUSED',
 }
 
-export const create = ({
-  id = uuid(),
-  status = statuses.IDLE,
-  entries,
-} = {},
-length = lengths[1]) => ({
+export const create = (
+  { id = uuid(), status = statuses.IDLE, entries = null } = {},
+  length = lengths[1]
+) => ({
   id,
   status,
   entries: createEntries(entries, length),
 })
 
 export const play = (session, lapse) => {
-  const actions = {
+  const initActions = {
     [statuses.IDLE]: Entry.start,
     [statuses.RUNNING]: Entry.goOn,
     [statuses.PAUSED]: Entry.resume,
   }
 
   const currentEntry = getCurrentEntry(session)
-  const entry = actions[session.status](currentEntry, lapse)
+  const entry = initActions[session.status](currentEntry, lapse)
 
   return {
     ...session,
@@ -69,30 +67,21 @@ export const skip = (session) => {
 
 export const timer = (session) => {
   const entry = getCurrentEntry(session)
-  const title = entry.type.name
-  const duration = entry.type.duration
 
   if (!entry) {
     return
   }
 
-  if (isRunning(session)) {
-    return {
-      title,
-      lapse: (duration + entry.start) - Date.now(),
-    }
-  }
-
-  if (isPaused(session)) {
-    return {
-      title,
-      lapse: duration - entry.pause,
-    }
+  const { name: title, duration } = entry.type
+  const lapses = {
+    [statuses.IDLE]: () => duration,
+    [statuses.RUNNING]: () => duration + entry.start - Date.now(),
+    [statuses.PAUSED]: () => duration - entry.pause,
   }
 
   return {
     title,
-    lapse: duration,
+    lapse: lapses[session.status](),
   }
 }
 
@@ -103,28 +92,29 @@ export const runned = (session) => {
   return (pause || start) + duration
 }
 
+export const isIdle = (session) => session.status === statuses.IDLE
+
 export const isRunning = (session) => session.status === statuses.RUNNING
 
 export const isPaused = (session) => session.status === statuses.PAUSED
 
-export const isEnded = (session) => session.entries.every(({ end }) => end)
+export const isEnded = (session) => session.entries.every((entry) => Entry.isEnded(entry))
 
-export const getCurrentEntry = (session) => session.entries
-  ? session.entries.find(entry => !entry.end)
-  : {}
+export const getCurrentEntry = (session) =>
+  session.entries ? session.entries.find((entry) => !Entry.isEnded(entry)) : {}
 
 const createEntries = (entries, length) => {
+  if (entries) {
+    return entries.map((entry) => Entry.create(entry))
+  }
+
   if (!lengths.includes(length)) {
     throw new Error(`Is not possible to create a session with ${length} length.`)
   }
 
-  if (entries) {
-    return entries.map(entry => Entry.create(entry))
-  }
-
   return Array.from(new Array(length), (_, i) => {
-    const isLongBreak = i === length - 1
     const isPomodoro = i % 2 === 0
+    const isLongBreak = i === length - 1
 
     if (isLongBreak) {
       return Entry.create({ type: 'long-break' })
@@ -138,5 +128,5 @@ const createEntries = (entries, length) => {
   })
 }
 
-const updateEntry = (session, entryToUpdate) => session.entries
-  .map(entry => entry.id === entryToUpdate.id ? entryToUpdate : entry)
+const updateEntry = (session, entryToUpdate) =>
+  session.entries.map((entry) => (entry.id === entryToUpdate.id ? entryToUpdate : entry))

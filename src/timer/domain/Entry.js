@@ -38,7 +38,7 @@ export const resume = (entry) => ({
 
 export const goOn = (entry, lapse) => ({
   ...entry,
-  pause: Date.now() - (entry.type.duration - lapse)
+  pause: Date.now() - (entry.type.duration - lapse),
 })
 
 export const stop = (entry) => ({
@@ -56,3 +56,5 @@ export const end = (entry) => ({
 export const isStarted = (entry) => Boolean(entry.start)
 
 export const isPaused = (entry) => Boolean(entry.pause)
+
+export const isEnded = (entry) => Boolean(entry.end)
