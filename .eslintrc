@@ -2,10 +2,11 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
-  "plugins": ["react", "jsx-a11y", "import"],
-  "extends": "airbnb",
+  "plugins": ["react", "jsx-a11y", "import", "cypress"],
+  "extends": ["airbnb", "react-app", "plugin:cypress/recommended"],
   "rules": {
     "semi": ["error", "never"],
     "comma-dangle": ["error", "always-multiline"],
