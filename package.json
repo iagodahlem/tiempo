@@ -1,7 +1,7 @@
 {
   "name": "tiempo",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://iagodahlem.com/tiempo",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
