@@ -1,0 +1,12 @@
+{
+  "id": "1",
+  "status": "PAUSED",
+  "entries": [
+    { "id": "1", "start": 0, "pause": 5000, "end": 0, "type": "pomodoro" },
+    { "id": "2", "start": 0, "pause": 0, "end": 0, "type": "short-break" },
+    { "id": "3", "start": 0, "pause": 0, "end": 0, "type": "pomodoro" },
+    { "id": "4", "start": 0, "pause": 0, "end": 0, "type": "short-break" },
+    { "id": "5", "start": 0, "pause": 0, "end": 0, "type": "pomodoro" },
+    { "id": "6", "start": 0, "pause": 0, "end": 0, "type": "long-break" }
+  ]
+}
