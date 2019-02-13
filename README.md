@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/iagodahlem/tiempo.svg?branch=master)](https://travis-ci.org/iagodahlem/tiempo)
 [![Coverage Status](https://codecov.io/gh/iagodahlem/tiempo/branch/master/graph/badge.svg)](https://codecov.io/gh/iagodahlem/tiempo)
+[![Cypress.io Tests](https://img.shields.io/badge/cypress.io-tests-green.svg)](https://cypress.io)
 
 Pomodoro app for the modern [web](https://iagodahlem.com/tiempo).
 

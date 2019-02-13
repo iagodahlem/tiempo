@@ -1,4 +1,4 @@
-export const get = (key) => {
+export const get = key => {
   try {
     const raw = localStorage.getItem(key)
     return JSON.parse(raw)
@@ -18,7 +18,7 @@ export const set = (key, value) => {
   }
 }
 
-export const remove = (key) => {
+export const remove = key => {
   try {
     return localStorage.removeItem(key)
   } catch (error) {
@@ -27,7 +27,7 @@ export const remove = (key) => {
   }
 }
 
-export const has = (key) => {
+export const has = key => {
   try {
     return Boolean(get(key))
   } catch (error) {

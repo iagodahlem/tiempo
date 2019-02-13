@@ -5,11 +5,10 @@ node_js:
 cache:
   yarn: true
   directories:
+    - ~/.cache
     - node_modules
 
-before_script:
-  - yarn
-
 script:
-  - yarn coverage
+  - yarn test:ci
+  - yarn e2e:ci
   - yarn build

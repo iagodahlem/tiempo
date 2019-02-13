@@ -2,9 +2,6 @@ import { initTimer } from 'timer/app'
 import { Session } from 'timer/domain'
 
 describe('initTimer', () => {
-  let onInit
-  let onPlay
-  let onError
   let callbacks = {}
   let sessionsRepository = {}
 

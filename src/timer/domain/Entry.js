@@ -1,12 +1,9 @@
+import PropTypes from 'prop-types'
 import uuid from 'uuid/v4'
 import * as Type from './Type'
 
 export const create = ({
-  id = uuid(),
-  start = 0,
-  pause = 0,
-  end = 0,
-  type = 'pomodoro',
+  id = uuid(), start = 0, pause = 0, end = 0, type = 'pomodoro',
 } = {}) => {
   const typeId = type
 
@@ -21,7 +18,7 @@ export const create = ({
   }
 }
 
-export const start = (entry) => ({
+export const start = entry => ({
   ...entry,
   start: Date.now(),
 })
@@ -31,7 +28,7 @@ export const pause = (entry, lapse) => ({
   pause: entry.type.duration - lapse,
 })
 
-export const resume = (entry) => ({
+export const resume = entry => ({
   ...entry,
   pause: Date.now() - entry.pause,
 })
@@ -41,20 +38,27 @@ export const goOn = (entry, lapse) => ({
   pause: Date.now() - (entry.type.duration - lapse),
 })
 
-export const stop = (entry) => ({
+export const stop = entry => ({
   ...entry,
   start: 0,
   pause: 0,
 })
 
-export const end = (entry) => ({
+export const end = entry => ({
   ...entry,
   start: entry.start || Date.now(),
   end: Date.now(),
 })
 
-export const isStarted = (entry) => Boolean(entry.start)
+export const isStarted = entry => Boolean(entry.start)
 
-export const isPaused = (entry) => Boolean(entry.pause)
+export const isPaused = entry => Boolean(entry.pause)
 
-export const isEnded = (entry) => Boolean(entry.end)
+export const isEnded = entry => Boolean(entry.end)
+
+export const shape = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  start: PropTypes.number.isRequired,
+  pause: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
+})

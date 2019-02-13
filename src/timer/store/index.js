@@ -23,7 +23,7 @@ export const sessionReducer = (state = Session.create(), { type, payload } = {})
   }
 }
 
-export const init = () => async (dispatch, _, container) => container.initTimer({
+export const init = () => (dispatch, _, container) => container.initTimer({
   onInit: payload => dispatch(onSuccess(payload)),
   onPlay: payload => dispatch(play(payload)),
   onError,
@@ -45,7 +45,10 @@ export const play = ({ session: optionalSession, timer: optionalTimer } = {}) =>
       onSkip: () => dispatch(skip()),
       onError,
     },
-    { session, timer }
+    {
+      session,
+      timer,
+    }
   )
 }
 
@@ -59,7 +62,10 @@ export const stop = () => (dispatch, getState, container) => {
       onStop: payload => dispatch(onSuccess(payload)),
       onError,
     },
-    { session, timer }
+    {
+      session,
+      timer,
+    }
   )
 }
 
@@ -73,7 +79,10 @@ export const pause = () => (dispatch, getState, container) => {
       onPause: payload => dispatch(onSuccess(payload)),
       onError,
     },
-    { session, timer }
+    {
+      session,
+      timer,
+    }
   )
 }
 
@@ -88,7 +97,10 @@ export const skip = () => (dispatch, getState, container) => {
       onEnded: payload => dispatch(onSuccess(payload)),
       onError,
     },
-    { session, timer }
+    {
+      session,
+      timer,
+    }
   )
 }
 

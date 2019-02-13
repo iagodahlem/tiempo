@@ -6,8 +6,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "yarn test --coverage && codecov",
-    "eject": "react-scripts eject"
+    "test:ci": "yarn test --coverage && codecov",
+    "e2e": "server-test start http-get://localhost:3000 cy:open",
+    "e2e:ci": "server-test start http-get://localhost:3000 cy:run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "dependencies": {
     "awilix": "^4.0.1",
@@ -27,12 +30,15 @@
   },
   "devDependencies": {
     "codecov": "^3.1.0",
+    "cypress": "^3.1.5",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-cypress": "^2.2.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
+    "start-server-and-test": "^1.7.11",
     "why-did-you-update": "^1.0.6"
   },
   "eslintConfig": {

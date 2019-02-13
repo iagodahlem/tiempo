@@ -1,5 +1,3 @@
 import TimerContainer from './TimerContainer'
 
-export {
-  TimerContainer,
-}
+export { TimerContainer }

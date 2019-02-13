@@ -4,10 +4,4 @@ import playTimer from './playTimer'
 import skipTimer from './skipTimer'
 import stopTimer from './stopTimer'
 
-export {
-  initTimer,
-  pauseTimer,
-  playTimer,
-  skipTimer,
-  stopTimer,
-}
+export { initTimer, pauseTimer, playTimer, skipTimer, stopTimer }

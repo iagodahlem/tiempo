@@ -1,6 +1,7 @@
 import React, { PureComponent as Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Session, Timer as TimerEntity } from 'timer/domain'
 import TimerHeader from './TimerHeader'
 import TimerLapse from './TimerLapse'
 import TimerControls from './TimerControls'
@@ -25,8 +26,8 @@ const Clock = styled.div`
 
 class Timer extends Component {
   static propTypes = {
-    timer: PropTypes.object.isRequired,
-    session: PropTypes.object.isRequired,
+    timer: TimerEntity.shape.isRequired,
+    session: Session.shape.isRequired,
     initTimer: PropTypes.func.isRequired,
     playTimer: PropTypes.func.isRequired,
     stopTimer: PropTypes.func.isRequired,
@@ -35,27 +36,20 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    this.props.initTimer()
+    const { initTimer } = this.props
+
+    initTimer()
   }
 
   render() {
-    const {
-      timer,
-      session,
-      playTimer,
-      stopTimer,
-      pauseTimer,
-      skipTimer,
-    } = this.props
+    const { timer, session, playTimer, stopTimer, pauseTimer, skipTimer } = this.props
 
     return (
       <Container>
         <TimerHeader title={timer.title} />
 
         <Clock>
-          <TimerLapse>
-            {timer.lapse}
-          </TimerLapse>
+          <TimerLapse>{timer.lapse}</TimerLapse>
           <TimerControls
             status={session.status}
             play={playTimer}
