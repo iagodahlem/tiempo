@@ -10,7 +10,7 @@ describe('Session', () => {
     const testCreateEntries = (expectedTypes, length) => {
       it(`with ${length} Entries`, () => {
         const { entries } = Session.create({}, length)
-        const currentTypes = entries.map((entry) => entry.type.id)
+        const currentTypes = entries.map(entry => entry.type.id)
 
         expect(currentTypes).toEqual(expectedTypes)
       })

@@ -11,13 +11,13 @@ const Footer = styled.footer`
 `
 
 const Entry = styled.div`
-  width: .8rem;
-  height: .8rem;
-  margin: .4rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin: 0.4rem;
   border-radius: 50%;
   background-color: #fff;
-  opacity: ${({ filled }) => filled ? 1 : .6};
-  transition: opacity .3s ease;
+  opacity: ${({ filled }) => (filled ? 1 : 0.6)};
+  transition: opacity 0.3s ease;
 `
 
 const isFilled = (session, entry) => Boolean(entry.start)
@@ -27,12 +27,13 @@ const isFilled = (session, entry) => Boolean(entry.start)
 const TimerFooter = ({ session }) => (
   <Footer>
     {session.entries.map(entry => (
-      <Entry
-        key={entry.id}
-        filled={isFilled(session, entry)}
-      />
+      <Entry key={entry.id} filled={isFilled(session, entry)} />
     ))}
   </Footer>
 )
+
+TimerFooter.propTypes = {
+  session: Session.shape.isRequired,
+}
 
 export default TimerFooter

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import format from 'date-fns/format'
 
@@ -26,5 +27,9 @@ const TimerLapse = ({ children }) => (
     <Lapse>{format(children, 'mm:ss')}</Lapse>
   </Container>
 )
+
+TimerLapse.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+}
 
 export default TimerLapse

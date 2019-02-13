@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { Timer } from 'timer/components'
 import * as fromTimer from 'timer/store'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   timer: fromTimer.selectTimer(state),
   session: fromTimer.selectSession(state),
 })
@@ -15,4 +15,7 @@ const mapDispatchToProps = {
   stopTimer: fromTimer.stop,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Timer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Timer)

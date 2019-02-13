@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import uuid from 'uuid/v4'
 import * as Entry from './Entry'
 
@@ -35,7 +36,7 @@ export const play = (session, lapse) => {
   }
 }
 
-export const stop = (session) => {
+export const stop = session => {
   const stopped = Entry.stop(getCurrentEntry(session))
 
   return {
@@ -55,7 +56,7 @@ export const pause = (session, lapse) => {
   }
 }
 
-export const skip = (session) => {
+export const skip = session => {
   const skipped = Entry.end(getCurrentEntry(session))
 
   return {
@@ -65,7 +66,7 @@ export const skip = (session) => {
   }
 }
 
-export const timer = (session) => {
+export const timer = session => {
   const entry = getCurrentEntry(session)
 
   if (!entry) {
@@ -85,27 +86,34 @@ export const timer = (session) => {
   }
 }
 
-export const runned = (session) => {
-  const { start, pause, type } = getCurrentEntry(session)
-  const { duration } = type
+export const runned = session => {
+  const entry = getCurrentEntry(session)
+  const { duration } = entry.type
 
-  return (pause || start) + duration
+  return (entry.pause || entry.start) + duration
 }
 
-export const isIdle = (session) => session.status === statuses.IDLE
+export const isIdle = session => session.status === statuses.IDLE
 
-export const isRunning = (session) => session.status === statuses.RUNNING
+export const isRunning = session => session.status === statuses.RUNNING
 
-export const isPaused = (session) => session.status === statuses.PAUSED
+export const isPaused = session => session.status === statuses.PAUSED
 
-export const isEnded = (session) => session.entries.every((entry) => Entry.isEnded(entry))
+export const isEnded = session => session.entries.every(entry => Entry.isEnded(entry))
 
-export const getCurrentEntry = (session) =>
-  session.entries ? session.entries.find((entry) => !Entry.isEnded(entry)) : {}
+export const getCurrentEntry = session => (session.entries
+  ? session.entries.find(entry => !Entry.isEnded(entry))
+  : {})
+
+export const shape = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  status: PropTypes.oneOf(Object.keys(statuses)).isRequired,
+  entries: PropTypes.arrayOf(Entry.shape).isRequired,
+})
 
 const createEntries = (entries, length) => {
   if (entries) {
-    return entries.map((entry) => Entry.create(entry))
+    return entries.map(entry => Entry.create(entry))
   }
 
   if (!lengths.includes(length)) {
@@ -128,5 +136,5 @@ const createEntries = (entries, length) => {
   })
 }
 
-const updateEntry = (session, entryToUpdate) =>
-  session.entries.map((entry) => (entry.id === entryToUpdate.id ? entryToUpdate : entry))
+const updateEntry = (session, entryToUpdate) => session
+  .entries.map(entry => (entry.id === entryToUpdate.id ? entryToUpdate : entry))

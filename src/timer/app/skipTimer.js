@@ -2,7 +2,7 @@ import { Session, Timer } from 'timer/domain'
 
 export default ({ sessionsRepository }) => async (
   { onSkip, onEnded, onError },
-  { session, timer },
+  { session, timer }
 ) => {
   try {
     clearInterval(timer.interval)

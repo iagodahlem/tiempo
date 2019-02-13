@@ -30,12 +30,12 @@ export default ({ storageService }) => {
     },
 
     async update(updatedSession) {
-      const sessions = getAll().map(session => session.id !== updatedSession.id
+      const sessions = getAll().map(session => (session.id !== updatedSession.id
         ? session
         : {
           ...session,
           ...this.serialize(updatedSession),
-        })
+        }))
 
       storageService.set('sessions', sessions)
 
@@ -48,7 +48,7 @@ export default ({ storageService }) => {
       entries: entries.map(({ type, ...entry }) => ({
         ...entry,
         type: type.id,
-      }))
-    })
+      })),
+    }),
   }
 }

@@ -2,7 +2,7 @@ import { Session, Timer } from 'timer/domain'
 
 export default ({ sessionsRepository }) => async (
   { onStart, onTick, onSkip, onError },
-  { session, timer },
+  { session, timer }
 ) => {
   try {
     const startedSession = Session.play(session, timer.lapse)
@@ -23,7 +23,7 @@ export default ({ sessionsRepository }) => async (
   }
 }
 
-const tickCallback = ({ onTick, onSkip }) => (lapse) => {
+const tickCallback = ({ onTick, onSkip }) => lapse => {
   if (lapse <= 0) {
     return onSkip()
   }

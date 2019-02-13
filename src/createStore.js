@@ -16,7 +16,7 @@ export default ({ rootReducer, container, initialState = {} }) => {
 
   const enhancers = compose(
     applyMiddleware(...middlewares),
-    batchedSubscribe(debounceNotify),
+    batchedSubscribe(debounceNotify)
   )
 
   const store = createStore(rootReducer, initialState, enhancers)
