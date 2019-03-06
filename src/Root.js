@@ -20,7 +20,11 @@ const Root = ({ store }) => (
 )
 
 Root.propTypes = {
-  store: PropTypes.object.isRequired,
+  store: PropTypes.shape({
+    getState: PropTypes.func,
+    dispatch: PropTypes.func,
+    subscribe: PropTypes.func,
+  }).isRequired,
 }
 
 export default Root
