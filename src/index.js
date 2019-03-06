@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import { App } from 'ui/components'
 import { sessionReducer, timerReducer } from 'timer/store'
-import createStore from './createStore'
+import { TimerContainer } from 'timer/containers'
+import { configureStore } from './store'
 import { configureContainer } from './container'
-import Root from './Root'
 import * as serviceWorker from './serviceWorker'
 import './index.css'
 
@@ -20,14 +22,17 @@ const rootReducer = combineReducers({
 
 const container = configureContainer()
 
-const store = createStore({
+const store = configureStore({
   rootReducer,
   container,
 })
 
-ReactDOM.render(<Root store={store} />, document.getElementById('root'))
+ReactDOM.render((
+  <Provider store={store}>
+    <App>
+      <TimerContainer />
+    </App>
+  </Provider>
+), document.getElementById('root'))
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.register()

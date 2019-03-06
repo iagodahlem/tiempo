@@ -7,7 +7,7 @@ import debounce from 'lodash/debounce'
 
 const debounceNotify = debounce(notify => notify())
 
-export default ({ rootReducer, container, initialState = {} }) => {
+export const configureStore = ({ rootReducer, container, initialState = {} }) => {
   const middlewares = [thunk.withExtraArgument(container.cradle), multi]
 
   if (process.env.NODE_ENV !== 'production') {
