@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { combineReducers } from 'redux'
 import { Provider } from 'react-redux'
+import { pomodoroReducer, timerReducer } from 'pomodoro/store'
 import { App } from 'ui/components'
-import { sessionReducer, timerReducer } from 'timer/store'
-import { TimerContainer } from 'timer/containers'
+import { PomodoroPage } from 'pomodoro/pages'
 import { configureStore } from './store'
 import { configureContainer } from './container'
 import * as serviceWorker from './serviceWorker'
@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const rootReducer = combineReducers({
-  session: sessionReducer,
+  pomodoro: pomodoroReducer,
   timer: timerReducer,
 })
 
@@ -30,7 +30,7 @@ const store = configureStore({
 ReactDOM.render((
   <Provider store={store}>
     <App>
-      <TimerContainer />
+      <PomodoroPage />
     </App>
   </Provider>
 ), document.getElementById('root'))

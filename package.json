@@ -6,6 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "test:ci": "yarn test --coverage && codecov",
     "e2e": "server-test start http-get://localhost:3000 cy:open",
     "e2e:ci": "server-test start http-get://localhost:3000 cy:run",

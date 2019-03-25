@@ -9,22 +9,26 @@ const icons = {
   stop: 'M128 128h768v768h-768z',
 }
 
-const As = ({ as: T, ...props }) => <T {...props} />
-
-const StyledIcon = styled(As)`
+const StyledIcon = styled.svg`
   fill: #fff;
 `
 
-const Icon = ({ icon, ...props }) => (
-  <StyledIcon as='svg' viewBox='0 0 1024 1024' {...props}>
-    <path d={icons[icon]} />
-  </StyledIcon>
-)
+class Icon extends React.PureComponent {
+  static propTypes = {
+    icon: PropTypes.oneOf(Object.keys(icons)).isRequired,
+    width: PropTypes.string,
+    height: PropTypes.string,
+  }
 
-Icon.propTypes = {
-  icon: PropTypes.oneOf(Object.keys(icons)),
-  width: PropTypes.string,
-  height: PropTypes.string,
+  render() {
+    const { icon } = this.props
+
+    return (
+      <StyledIcon as='svg' viewBox='0 0 1024 1024' {...this.props}>
+        <path d={icons[icon]} />
+      </StyledIcon>
+    )
+  }
 }
 
 Icon.defaultProps = {
