@@ -5,24 +5,28 @@ const sixLengthTypes = ['pomodoro', 'short-break', ...fourLengthTypes]
 const eightLengthTypes = ['pomodoro', 'short-break', ...sixLengthTypes]
 
 describe('Pomodoro', () => {
-  describe('creates a Pomodoro session', () => {
-    const testCreateEntries = (expectedTypes, length) => {
-      it(`with ${length} Entries`, () => {
-        const { entries } = Pomodoro.create({}, length)
-        const currentTypes = entries.map(entry => entry.type.id)
+  describe('create', () => {
+    describe('when pass a valid length', () => {
+      const testCreateEntries = (expectedTypes, length) => {
+        it(`creates a Pomodoro with ${length} Entries`, () => {
+          const { entries } = Pomodoro.create({}, length)
+          const currentTypes = entries.map(entry => entry.type.id)
 
-        expect(currentTypes).toEqual(expectedTypes)
+          expect(currentTypes).toEqual(expectedTypes)
+        })
+      }
+
+      testCreateEntries(fourLengthTypes, 4)
+      testCreateEntries(sixLengthTypes, 6)
+      testCreateEntries(eightLengthTypes, 8)
+    })
+
+    describe('when pass invalid length', () => {
+      it('throws an Error', () => {
+        expect(() => Pomodoro.create({}, 1)).toThrow(
+          'Is not possible to create a Pomodoro session with 1 length.'
+        )
       })
-    }
-
-    testCreateEntries(fourLengthTypes, 4)
-    testCreateEntries(sixLengthTypes, 6)
-    testCreateEntries(eightLengthTypes, 8)
-
-    it('throws an Error when pass incorrect length', () => {
-      expect(() => Pomodoro.create({}, 1)).toThrow(
-        'Is not possible to create a Pomodoro session with 1 length.'
-      )
     })
   })
 
@@ -77,5 +81,40 @@ describe('Pomodoro', () => {
       title: type.name,
       lapse: type.duration,
     })
+  })
+
+  it('returns true when Pomodoro is IDLE', () => {
+    const pomodoro = Pomodoro.create()
+
+    expect(Pomodoro.isIdle(pomodoro)).toBeTruthy()
+  })
+
+  it('returns true when Pomodoro is RUNNING', () => {
+    const pomodoro = Pomodoro.play(Pomodoro.create())
+
+    expect(Pomodoro.isRunning(pomodoro)).toBeTruthy()
+  })
+
+  it('returns true when Pomodoro is PAUSED', () => {
+    const pomodoro = Pomodoro.pause(Pomodoro.create())
+
+    expect(Pomodoro.isPaused(pomodoro)).toBeTruthy()
+  })
+
+  it('returns true when Pomodoro is ENDED', () => {
+    const length = 4
+    let pomodoro = Pomodoro.create({}, length)
+
+    for (let i = 0; i < length; i += 1) {
+      pomodoro = Pomodoro.skip(pomodoro)
+    }
+
+    expect(Pomodoro.isEnded(pomodoro)).toBeTruthy()
+  })
+
+  it('gets the current entry', () => {
+    const pomodoro = Pomodoro.play(Pomodoro.skip(Pomodoro.create()))
+
+    expect(pomodoro.entries[1]).toEqual(Pomodoro.getCurrentEntry(pomodoro))
   })
 })

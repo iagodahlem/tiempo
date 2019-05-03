@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { Pomodoro } from 'pomodoro/domain'
+import { Pomodoro, Entry } from 'pomodoro/domain'
 import * as fromPomodoro from 'pomodoro/store'
 
 const Footer = styled.footer`
@@ -12,24 +12,24 @@ const Footer = styled.footer`
   height: 5.8rem;
 `
 
-const Entry = styled.div`
+const Bullet = styled.div`
   width: 0.8rem;
   height: 0.8rem;
   margin: 0.4rem;
   border-radius: 50%;
   background-color: #fff;
-  opacity: ${({ filled }) => (filled ? 1 : 0.6)};
+  opacity: ${({ isFilled }) => (isFilled ? 1 : 0.6)};
   transition: opacity 0.3s ease;
 `
 
-const isFilled = (pomodoro, entry) => Boolean(entry.start)
-  || Boolean(entry.end)
-  || Pomodoro.getCurrentEntry(pomodoro).id === entry.id
+const isCurrentOrCompleted = (pomodoro, entry) => Pomodoro.getCurrentEntry(pomodoro).id === entry.id
+  || Entry.isStarted(entry)
+  || Entry.isEnded(entry)
 
 const PomodoroFooter = ({ pomodoro }) => (
   <Footer>
     {pomodoro.entries.map(entry => (
-      <Entry key={entry.id} filled={isFilled(pomodoro, entry)} />
+      <Bullet key={entry.id} isFilled={isCurrentOrCompleted(pomodoro, entry)} />
     ))}
   </Footer>
 )

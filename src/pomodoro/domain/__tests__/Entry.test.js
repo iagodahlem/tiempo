@@ -50,4 +50,22 @@ describe('Entry', () => {
 
     expect(pause).toEqual(now - (type.duration - 1494999))
   })
+
+  it('returns true when Entry is started', () => {
+    const entry = Entry.start(Entry.create())
+
+    expect(Entry.isStarted(entry)).toBeTruthy()
+  })
+
+  it('returns true when Entry is paused', () => {
+    const entry = Entry.pause(Entry.start(Entry.create()), 1)
+
+    expect(Entry.isPaused(entry)).toBeTruthy()
+  })
+
+  it('returns true when Entry is ended', () => {
+    const entry = Entry.end(Entry.start(Entry.create()))
+
+    expect(Entry.isEnded(entry)).toBeTruthy()
+  })
 })

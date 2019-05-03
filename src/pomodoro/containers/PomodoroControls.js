@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { Icon } from 'ui/components'
+import { Icon } from '@common/components'
 import * as fromPomodoro from 'pomodoro/store'
 
 const Container = styled.div`
