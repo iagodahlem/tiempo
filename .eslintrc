@@ -8,7 +8,7 @@
   "plugins": ["react", "jsx-a11y", "import", "cypress"],
   "extends": ["airbnb", "react-app", "plugin:cypress/recommended"],
   "rules": {
-    "arrow-parens": ["error", "as-needed"],
+    "arrow-parens": ["error", "always"],
     "semi": ["error", "never"],
     "comma-dangle": ["error", "always-multiline"],
     "consistent-return": [0],

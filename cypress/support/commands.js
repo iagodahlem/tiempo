@@ -25,9 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('seedAndVisit', path => {
-  cy.fixture(path).then(session => {
+  cy.fixture(path).then(pomodoro => {
     const onBeforeLoad = contentWindow => {
-      contentWindow.localStorage.setItem('sessions', JSON.stringify([session]))
+      contentWindow.localStorage.setItem('pomodoro', JSON.stringify(pomodoro))
     }
 
     cy.visit('/', {

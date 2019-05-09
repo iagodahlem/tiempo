@@ -1,13 +1,13 @@
 describe('pomodoro initialization', () => {
   context('first load', () => {
-    it('creates and starts a new session', () => {
+    it('creates and starts a new Pomodoro session', () => {
       cy.visit('/')
       cy.contains('Pomodoro')
       cy.contains('25:00')
     })
   })
 
-  context('skipped session', () => {
+  context('skipped Pomodoro session', () => {
     it('starts pointing to the next entry', () => {
       cy.seedAndVisit('pomodoro/skipped')
       cy.contains('Short Break')
@@ -15,7 +15,7 @@ describe('pomodoro initialization', () => {
     })
   })
 
-  context('running session for 5 seconds', () => {
+  context('running Pomodoro session for 5 seconds', () => {
     beforeEach(() => {
       const now = new Date(2019, 2, 12).getTime()
 
@@ -35,7 +35,7 @@ describe('pomodoro initialization', () => {
     })
   })
 
-  context('paused session after running for 5 seconds', () => {
+  context('paused Pomodoro session after running for 5 seconds', () => {
     it('starts with 5 seconds less', () => {
       cy.seedAndVisit('pomodoro/paused')
       cy.contains('24:55')

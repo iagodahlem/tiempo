@@ -1,11 +1,13 @@
 import { createContainer } from 'awilix'
-import timerContainer from 'timer/container'
+import commonContainer from '@common/container'
+import pomodoroContainer from 'pomodoro/container'
 
 export const configureContainer = () => {
   const container = createContainer()
 
   container.register({
-    ...timerContainer,
+    ...commonContainer,
+    ...pomodoroContainer,
   })
 
   return container
