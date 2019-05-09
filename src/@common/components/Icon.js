@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -13,7 +13,7 @@ const StyledIcon = styled.svg`
   fill: #fff;
 `
 
-class Icon extends React.PureComponent {
+class Icon extends PureComponent {
   static propTypes = {
     icon: PropTypes.oneOf(Object.keys(icons)).isRequired,
     width: PropTypes.string,
