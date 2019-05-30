@@ -129,5 +129,9 @@ describe('timerStore', () => {
     it('gets the pomodoro from the state', () => {
       expect(fromTimer.getPomodoro(state)).toEqual(state.pomodoro)
     })
+
+    it('gets formatted lapse from the state', () => {
+      expect(fromTimer.getFormattedLapse(state)).toEqual('00:00')
+    })
   })
 })

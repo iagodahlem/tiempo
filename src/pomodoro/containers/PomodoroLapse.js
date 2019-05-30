@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import format from 'date-fns/format'
 import * as fromPomodoro from 'pomodoro/store'
 
 const Container = styled.div`
@@ -26,16 +25,16 @@ const Lapse = styled.time`
 
 const PomodoroLapse = ({ lapse }) => (
   <Container>
-    <Lapse>{format(lapse, 'mm:ss')}</Lapse>
+    <Lapse>{lapse}</Lapse>
   </Container>
 )
 
 PomodoroLapse.propTypes = {
-  lapse: PropTypes.number.isRequired,
+  lapse: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
-  lapse: fromPomodoro.getLapse(state),
+  lapse: fromPomodoro.getFormattedLapse(state),
 })
 
 export default connect(mapStateToProps)(PomodoroLapse)
