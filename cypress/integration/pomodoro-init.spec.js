@@ -9,7 +9,7 @@ describe('pomodoro initialization', () => {
 
   context('skipped Pomodoro session', () => {
     it('starts pointing to the next entry', () => {
-      cy.seedAndVisit('pomodoro/skipped')
+      cy.seedAndVisit('pomodoro/pomodoro-skipped')
       cy.contains('Short Break')
       cy.contains('5:00')
     })
@@ -20,7 +20,7 @@ describe('pomodoro initialization', () => {
       const now = new Date(2019, 2, 12).getTime()
 
       cy.clock(now)
-      cy.seedAndVisit('pomodoro/running')
+      cy.seedAndVisit('pomodoro/pomodoro-running')
       cy.tick(1000)
     })
 
@@ -37,7 +37,7 @@ describe('pomodoro initialization', () => {
 
   context('paused Pomodoro session after running for 5 seconds', () => {
     it('starts with 5 seconds less', () => {
-      cy.seedAndVisit('pomodoro/paused')
+      cy.seedAndVisit('pomodoro/pomodoro-paused')
       cy.contains('24:55')
     })
   })
