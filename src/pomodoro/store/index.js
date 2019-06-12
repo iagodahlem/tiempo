@@ -1,4 +1,5 @@
 import { Pomodoro, Timer } from 'pomodoro/domain'
+import format from 'date-fns/format'
 
 export const actionTypes = {
   SET_POMODORO: 'SET_POMODORO',
@@ -134,3 +135,5 @@ export const getTimer = state => state.timer
 export const getTitle = state => getTimer(state).title
 
 export const getLapse = state => getTimer(state).lapse
+
+export const getFormattedLapse = state => format(getLapse(state), 'mm:ss') 

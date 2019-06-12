@@ -8,6 +8,7 @@ import {
   PomodoroLapse,
   PomodoroControls,
   PomodoroFooter,
+  PomodoroTitle,
 } from 'pomodoro/containers'
 
 const Section = styled.section`
@@ -41,6 +42,7 @@ class PomodoroPage extends PureComponent {
   render() {
     return (
       <Section>
+        <PomodoroTitle />
         <PomodoroHeader />
 
         <Clock>

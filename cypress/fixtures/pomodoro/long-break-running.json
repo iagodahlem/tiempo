@@ -1,0 +1,12 @@
+{
+  "id": "1",
+  "status": "RUNNING",
+  "entries": [
+    { "id": "1", "start": 1549993501224, "pause": 0, "end": 1549993501224, "type": "pomodoro" },
+    { "id": "2", "start": 1549993501224, "pause": 0, "end": 1549993501224, "type": "short-break" },
+    { "id": "3", "start": 1549993501224, "pause": 0, "end": 1549993501224, "type": "pomodoro" },
+    { "id": "4", "start": 1549993501224, "pause": 0, "end": 1549993501224, "type": "short-break" },
+    { "id": "5", "start": 1549993501224, "pause": 0, "end": 1549993501224, "type": "pomodoro" },
+    { "id": "6", "start": 1549993501224, "pause": 0, "end": 0, "type": "long-break" }
+  ]
+}
