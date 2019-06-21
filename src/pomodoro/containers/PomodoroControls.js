@@ -74,40 +74,68 @@ class PomodoroControl extends React.PureComponent {
   }
 }
 
-const PomodoroControls = ({ status, play, pause, stop, skip }) => (
-  <Container>
-    <PomodoroControl
-      icon='stop'
-      size='small'
-      design='tertiary'
-      onClick={stop}
-      disabled={Boolean(status === 'IDLE')}
-    />
+class PomodoroControls extends React.PureComponent {
 
-    {status === 'RUNNING' ? (
-      <PomodoroControl
-        icon='pause'
-        onClick={pause}
-        width='28'
-        height='28'
-      />
-    ) : (
-      <PomodoroControl
-        icon='play'
-        onClick={play}
-        width='38'
-        height='38'
-      />
-    )}
+  constructor (props) {
+    super(props)
+    this.handleKeyboard = this.handleKeyboard.bind(this)
+  }
 
-    <PomodoroControl
-      icon='skip'
-      size='small'
-      design='tertiary'
-      onClick={skip}
-    />
-  </Container>
-)
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyboard)
+  }
+
+  handleKeyboard = event => {
+    const { status, play, pause, stop, skip } = this.props
+    switch(event.keyCode){
+      case 13:
+      case 32: status === 'RUNNING' ? pause() : play() ; break;
+      case 39: skip(); break;
+      case 27: stop() ; break;
+      default: return false;
+    }
+  }
+
+  render() {
+    const { status, play, pause, stop, skip } = this.props
+
+    return(
+      <Container>
+        <PomodoroControl
+          icon='stop'
+          size='small'
+          design='tertiary'
+          onClick={stop}
+          disabled={Boolean(status === 'IDLE')}
+        />
+
+        {status === 'RUNNING' ? (
+          <PomodoroControl
+            icon='pause'
+            onClick={pause}
+            width='28'
+            height='28'
+          />
+        ) : (
+          <PomodoroControl
+            icon='play'
+            onClick={play}
+            width='38'
+            height='38'
+          />
+        )}
+
+        <PomodoroControl
+          icon='skip'
+          size='small'
+          design='tertiary'
+          onClick={skip}
+        />
+      </Container>
+    )
+  }
+
+}
 
 PomodoroControls.propTypes = {
   status: PropTypes.string.isRequired,
