@@ -74,68 +74,78 @@ class PomodoroControl extends React.PureComponent {
   }
 }
 
-class PomodoroControls extends React.PureComponent {
 
-  constructor (props) {
-    super(props)
-    this.handleKeyboard = this.handleKeyboard.bind(this)
-  }
-
+class PomodoroShortcuts extends React.PureComponent {
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyboard)
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyboard)
+  }
+
   handleKeyboard = event => {
     const { status, play, pause, stop, skip } = this.props
-    switch(event.keyCode){
-      case 13:
-      case 32: status === 'RUNNING' ? pause() : play() ; break;
-      case 39: skip(); break;
-      case 27: stop() ; break;
-      default: return false;
+
+    switch (event.code) {
+      case "Enter":
+      case "Space":
+        return status === 'RUNNING' ? pause() : play()
+      case "ArrowRight":
+        return skip()
+      case "Escape":
+        return stop()
+      default:
+        return false
     }
   }
 
   render() {
-    const { status, play, pause, stop, skip } = this.props
-
-    return(
-      <Container>
-        <PomodoroControl
-          icon='stop'
-          size='small'
-          design='tertiary'
-          onClick={stop}
-          disabled={Boolean(status === 'IDLE')}
-        />
-
-        {status === 'RUNNING' ? (
-          <PomodoroControl
-            icon='pause'
-            onClick={pause}
-            width='28'
-            height='28'
-          />
-        ) : (
-          <PomodoroControl
-            icon='play'
-            onClick={play}
-            width='38'
-            height='38'
-          />
-        )}
-
-        <PomodoroControl
-          icon='skip'
-          size='small'
-          design='tertiary'
-          onClick={skip}
-        />
-      </Container>
-    )
+    return (<div></div>)
   }
 
 }
+
+const PomodoroControls = ({ status, play, pause, stop, skip }) =>
+  <Container>
+    <PomodoroShortcuts
+      status={status}
+      play={play}
+      pause={pause}
+      stop={stop}
+      skip={skip}
+    />
+    <PomodoroControl
+      icon='stop'
+      size='small'
+      design='tertiary'
+      onClick={stop}
+      disabled={Boolean(status === 'IDLE')}
+    />
+
+    {status === 'RUNNING' ? (
+      <PomodoroControl
+        icon='pause'
+        onClick={pause}
+        width='28'
+        height='28'
+      />
+    ) : (
+        <PomodoroControl
+          icon='play'
+          onClick={play}
+          width='38'
+          height='38'
+        />
+      )}
+
+    <PomodoroControl
+      icon='skip'
+      size='small'
+      design='tertiary'
+      onClick={skip}
+    />
+  </Container>
 
 PomodoroControls.propTypes = {
   status: PropTypes.string.isRequired,
