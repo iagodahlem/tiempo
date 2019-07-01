@@ -77,7 +77,7 @@ class PomodoroControl extends React.PureComponent {
 
 class PomodoroShortcuts extends React.PureComponent {
   componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyboard)
+    document.addEventListener('keydown', this.handleKeyboard)
   }
 
   componentWillUnmount() {
@@ -101,7 +101,7 @@ class PomodoroShortcuts extends React.PureComponent {
   }
 
   render() {
-    return (<div></div>)
+    return null
   }
 
 }
@@ -122,23 +122,23 @@ const PomodoroControls = ({ status, play, pause, stop, skip }) =>
       onClick={stop}
       disabled={Boolean(status === 'IDLE')}
     />
-
-    {status === 'RUNNING' ? (
-      <PomodoroControl
-        icon='pause'
-        onClick={pause}
-        width='28'
-        height='28'
-      />
-    ) : (
+    {
+      status === 'RUNNING' ? (
+        <PomodoroControl
+          icon='pause'
+          onClick={pause}
+          width='28'
+          height='28'
+        />
+      ) : (
         <PomodoroControl
           icon='play'
           onClick={play}
           width='38'
           height='38'
         />
-      )}
-
+      )
+    }
     <PomodoroControl
       icon='skip'
       size='small'
