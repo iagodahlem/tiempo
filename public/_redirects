@@ -1,1 +1,4 @@
+# Redirect default Netlify subdomain to primary domain
+https://tiempo.netlify.com/* https://tiempo.iagodahlem.com/:splat 301!
+
 /*  /index.html  200
