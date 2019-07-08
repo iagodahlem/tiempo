@@ -41,4 +41,42 @@ describe('pomodoro initialization', () => {
       cy.contains('24:55')
     })
   })
+
+  context('Skips timer', () => {
+    it('Press skip button', () => {
+      cy.visit('/')
+      cy.get('.skip').click()
+      cy.title().should('include', 'Short Break')
+    })
+  })
+
+  context('Plays timer', () => {
+    it('Press play button', () => {
+      cy.visit('/')
+      cy.get('.skip').click()
+      cy.get('time').invoke('text').should('not.include', '25:00')
+    })
+  })
+
+  context('Stop timer', () => {
+    it('Press stop button', () => {
+      cy.visit('/')
+      cy.get('.play').click()
+      cy.wait(1000)
+      cy.get('.stop').click()
+      cy.get('time').invoke('text').should('include', '25:00')
+    })
+  })
+
+  context('Pause timer', () => {
+    it('Press pause timer', () => {
+      cy.visit('/')
+      cy.get('.play').click()
+      cy.wait(1000)
+      cy.get('.pause').click()
+      cy.wait(2000)
+      cy.get('time').invoke('text').should('match', /24:5[89]/)
+    })
+  })
+
 })

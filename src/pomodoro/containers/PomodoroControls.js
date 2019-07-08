@@ -78,6 +78,7 @@ const PomodoroControls = ({ status, play, pause, stop, skip }) => (
   <Container>
     <PomodoroControl
       icon='stop'
+      className='stop'
       size='small'
       design='tertiary'
       onClick={stop}
@@ -87,6 +88,7 @@ const PomodoroControls = ({ status, play, pause, stop, skip }) => (
     {status === 'RUNNING' ? (
       <PomodoroControl
         icon='pause'
+        className='pause'
         onClick={pause}
         width='28'
         height='28'
@@ -94,6 +96,7 @@ const PomodoroControls = ({ status, play, pause, stop, skip }) => (
     ) : (
       <PomodoroControl
         icon='play'
+        className='play'
         onClick={play}
         width='38'
         height='38'
@@ -102,6 +105,7 @@ const PomodoroControls = ({ status, play, pause, stop, skip }) => (
 
     <PomodoroControl
       icon='skip'
+      className='skip'
       size='small'
       design='tertiary'
       onClick={skip}
