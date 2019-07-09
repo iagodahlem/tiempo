@@ -44,3 +44,4 @@ yarn test
 ## License
 
 [MIT License](http://iagodahlem.mit-license.org/) © Iago Dahlem
+

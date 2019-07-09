@@ -7,5 +7,5 @@ const mockStore = (state, container) => {
   const middlewares = [thunk.withExtraArgument(container), multi]
   return configureMockStore(middlewares)(state)
 }
-
 global.mockStore = mockStore
+
