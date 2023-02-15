@@ -4,7 +4,7 @@
 [![Coverage Status](https://codecov.io/gh/iagodahlem/tiempo/branch/master/graph/badge.svg)](https://codecov.io/gh/iagodahlem/tiempo)
 [![Cypress.io Tests](https://img.shields.io/badge/cypress.io-tests-green.svg)](https://cypress.io)
 
-Pomodoro app for the modern web. Click [here](https://tiempo.iagodahlem.com/) to try it out on browser.
+Pomodoro app for the modern web. Click [here to access it live](https://tiempo.iagodahlem.com/).
 Clock takes you through a full pomodoro cycle of three 25 minute work sessions with 5 minute breaks in between and a 15 minute long break at the end. 
 
 
@@ -54,15 +54,15 @@ To download the latest version of **Node**, click [here](https://nodejs.org/en/d
 
 ## Running
 
-You can issue 
+You can run this command 
 ```
 git clone https://github.com/iagodahlem/tiempo.git
 ```
-to copy the directory onto your local machine and can then issue the start command for the developpment server.
+to clone the repository on your local machine and run the start command to spin up the development server.
 
 <br />
 
-To start the development server, you can issue the command
+To start the development server, you can run the command
 
 ```
 yarn start
@@ -82,9 +82,9 @@ Under the [src/pomodoro/app](src/pomodoro/app) folder exists the different funct
 
 Under the [src/pomodoro/containers](src/pomodoro/containers) folder exists the controls for keyboard and mouse input as well as the header, footer, and other sections of the app.
 
-The cypress folder contains tests and supporting documents for tests. 
+The [cypress folder](cypress) contains tests and supporting documents for tests. 
 
-This code is written using the Redux library and documentation and support can be found [here](https://redux.js.org).
+This code is written using the Redux library and documentation and support can be found [on the official Redux support page](https://redux.js.org).
 
 
 ## Contributing
